@@ -23,12 +23,13 @@ import 'package:tourstravels/Singleton/SingletonAbisiniya.dart';
 
 import '../../Booking_Screens/Rnd_PassengerDetailsVC.dart';
 import 'BackwardJouneySeatmapVC.dart';
+import 'Rnd_trp_fourth_flight_seatmap.dart';
 void main() {
-  runApp(const Round_Trip_SeatMapVC());
+  runApp(const Round_Trip_Third_SeatMapVC());
 }
 
-class Round_Trip_SeatMapVC extends StatelessWidget {
-  const Round_Trip_SeatMapVC({super.key});
+class Round_Trip_Third_SeatMapVC extends StatelessWidget {
+  const Round_Trip_Third_SeatMapVC({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -226,12 +227,24 @@ class _BusLayoutState extends State<BusLayout> {
   var travelerIdArray = [];
   String travelerTypestr = '';
   var travelerTypeArray = [];
+  //Seat variables
+  String firstSeat = '';
+  String secondSeat = '';
 
 
 
   late final  segmentDataArray;
   _retrieveValues() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    //Retrived seats from first seatmap
+    firstSeat = prefs.getString('selected_firstseatkey') ?? '';
+    print('third firstseatnumber..');
+    secondSeat = prefs.getString('selected_secondseatkey') ?? '';
+    print(firstSeat);
+    print(secondSeat);
+
+
 
     CurrencyCodestr = prefs.getString('currency_code_dropdownvaluekey') ?? '';
 
@@ -356,10 +369,19 @@ class _BusLayoutState extends State<BusLayout> {
       }
     });
 
+    // seatmap_convert_travelerPricingsArray[0]['fareDetailsBySegment']![0]["additionalServices"] = {
+    //   "chargeableSeatNumber": selectedseat
+    // };
     seatmap_convert_travelerPricingsArray[0]['fareDetailsBySegment']![0]["additionalServices"] = {
-      "chargeableSeatNumber": selectedseat
+      "chargeableSeatNumber": firstSeat
     };
-    print('round trip convert_travelerPricingsArray....');
+    seatmap_convert_travelerPricingsArray[0]['fareDetailsBySegment']![1]["additionalServices"] = {
+      "chargeableSeatNumber": secondSeat
+    };
+    seatmap_convert_travelerPricingsArray[0]['fareDetailsBySegment']![2]["additionalServices"] = {
+      "chargeableSeatNumber": secondSeat
+    };
+    print('third flight round trip convert_travelerPricingsArray....');
     print(seatmap_convert_travelerPricingsArray);
 
     prefs.setString('travelerPricingskey', travelerPricings);
@@ -700,7 +722,7 @@ class _BusLayoutState extends State<BusLayout> {
         String type = decksData['type'];
         print('type....');
         print(type);
-        if (seatID == '1'){
+        if (seatID == '3'){
           var decksArray = decksData['decks'];
           // print('decksArray array data...');
           // print(decksArray);
@@ -1272,7 +1294,7 @@ class _BusLayoutState extends State<BusLayout> {
     // print('seatid cnt');
     // print(seatID_cnt.length + 1);
 
-    if(seatID_cnt.length == 1) {
+    if(seatID_cnt.length == 3) {
       continuebtn_txt = 'Continue';
 
 
@@ -1510,7 +1532,7 @@ class _BusLayoutState extends State<BusLayout> {
 
                                                           _postData_seatmap_Price();
                                                           SharedPreferences prefs = await SharedPreferences.getInstance();
-                                                          prefs.setString('selected_firstseatkey', selectedseat);
+                                                          prefs.setString('selected_thirdseatkey', selectedseat);
 
                                                           // if(seatID_cnt.length == 1) {
                                                           //   _postData_seatmap_Price();
@@ -1820,10 +1842,9 @@ class _BusLayoutState extends State<BusLayout> {
                         //       builder: (context) => ConnectedFlight_firstSegment()),
                         // );
 
-                        prefs.setString('selected_firstseatkey', (selectedseat));
-                        print('selected seat value1...');
+                        prefs.setString('selected_thirdseatkey', (selectedseat));
+                        print('connected selected seat value1...');
                         print(selectedseat);
-
                         if(selectedseat == ''){
 
                           final snackBar = SnackBar(
@@ -1833,8 +1854,17 @@ class _BusLayoutState extends State<BusLayout> {
                         } else {
                           print('seatID_cnt length.');
                           print(seatID_cnt.length);
-                          if(seatID_cnt.length == 1) {
+                          if(seatID_cnt.length == 3) {
                             //continuebtn_txt = 'Continue';
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Round_trip_Multiple_passengerlistVC()),
+                            );
+
+                          } else {
+                            //continuebtn_txt = 'Next';
 
                             prefs.setString('selected_firstseatkey', (selectedseat));
                             print('selected seat value0...');
@@ -1843,33 +1873,10 @@ class _BusLayoutState extends State<BusLayout> {
                             Navigator.push (
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Round_trip_Multiple_passengerlistVC()),
+                                  builder: (context) => Rnd_trp_fourth_flight_journey_seatmap()),
                             );
 
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //       builder: (context) => Backward_journey_seatmap()),
-                            // );
-
-                          } else {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Backward_journey_seatmap()),
-                            );
-                            //continuebtn_txt = 'Next';
-
-                            // prefs.setString('selected_firstseatkey', (selectedseat));
-                            // print('selected seat value0...');
-                            // print(selectedseat);
-                            //
-                            // Navigator.push (
-                            //   context,
-                            //   MaterialPageRoute(
-                            //       builder: (context) => Round_trip_Multiple_passengerlistVC()),
-                            // );
-
+                            //Rnd_trp_fourth_flight_journey_seatmap
                           }
                         }
 

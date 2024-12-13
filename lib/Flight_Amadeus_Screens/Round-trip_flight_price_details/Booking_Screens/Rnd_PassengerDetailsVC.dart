@@ -162,6 +162,9 @@ class _SOFState extends State<Round_trip_Multiple_passengerlistVC> {
   //Retrived seats:
   String firstSeatnumber = '';
   String secondSeatnumber = '';
+  String thirdSeatnumber = '';
+  String fourthSeatnumber = '';
+
 
 
 
@@ -425,11 +428,14 @@ class _SOFState extends State<Round_trip_Multiple_passengerlistVC> {
       //selected_secondseatkey
       firstSeatnumber = prefs.getString('selected_firstseatkey') ?? '';
       secondSeatnumber = prefs.getString('selected_secondseatkey') ?? '';
-      print('seatnumber retrived....');
+      thirdSeatnumber = prefs.getString('selected_thirdseatkey') ?? '';
+      fourthSeatnumber = prefs.getString('selected_fourthseatkey') ?? '';
+
+      print('back seatnumber retrived....');
       print(firstSeatnumber);
       print(secondSeatnumber);
-
-
+      print(thirdSeatnumber);
+      print(fourthSeatnumber);
       print('order price screen seat');
       print(selectedseat);
       convert_travelerPricingsArray[0]['fareDetailsBySegment']![0]["additionalServices"] = {

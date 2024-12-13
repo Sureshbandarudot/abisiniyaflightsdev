@@ -28,6 +28,7 @@ import 'package:tourstravels/My_Apartments/ViewApartmentVC.dart';
 import 'package:tourstravels/Singleton/SingletonAbisiniya.dart';
 
 import '../../Booking_Screens/Rnd_PassengerDetailsVC.dart';
+import 'Rnd_trp_third_flight_seatmap.dart';
 
 
 
@@ -2184,6 +2185,7 @@ class _BusLayoutState extends State<BusLayout> {
                         print('connected selected seat value1...');
                         print(selectedseat);
 
+
                         if(selectedseat == ''){
 
                           final snackBar = SnackBar(
@@ -2208,11 +2210,11 @@ class _BusLayoutState extends State<BusLayout> {
                             print('connected selected seat value0...');
                             print(selectedseat);
 
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //       builder: (context) => Round_trip_Multiple_passengerlistVC()),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Round_Trip_Third_SeatMapVC()),
+                            );
 
                           }
                         }
