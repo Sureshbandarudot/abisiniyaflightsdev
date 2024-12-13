@@ -159,6 +159,10 @@ class _SOFState extends State<Round_trip_Multiple_passengerlistVC> {
   List validatingAirlineCodestrArray = [];
   final baseDioSingleton = BaseSingleton();
 
+  //Retrived seats:
+  String firstSeatnumber = '';
+  String secondSeatnumber = '';
+
 
 
 
@@ -417,12 +421,24 @@ class _SOFState extends State<Round_trip_Multiple_passengerlistVC> {
       print('convert_Currency_PriceArray....');
       print(convert_Currency_PriceArray);
       selectedseat = prefs.getString('selectedseatkey') ?? '';
+
+      //selected_secondseatkey
+      firstSeatnumber = prefs.getString('selected_firstseatkey') ?? '';
+      secondSeatnumber = prefs.getString('selected_secondseatkey') ?? '';
+      print('seatnumber retrived....');
+      print(firstSeatnumber);
+      print(secondSeatnumber);
+
+
       print('order price screen seat');
       print(selectedseat);
       convert_travelerPricingsArray[0]['fareDetailsBySegment']![0]["additionalServices"] = {
-        "chargeableSeatNumber": selectedseat
+        "chargeableSeatNumber": firstSeatnumber
       };
-      print('seat number...');
+      convert_travelerPricingsArray[0]['fareDetailsBySegment']![1]["additionalServices"] = {
+        "chargeableSeatNumber": secondSeatnumber
+      };
+      print('order seat number...');
       print(convert_travelerPricingsArray);
 
     } else {

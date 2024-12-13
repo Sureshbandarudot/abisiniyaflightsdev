@@ -179,10 +179,16 @@ class _BusLayoutState extends State<BusLayout> {
   var travelerIdArray = [];
   String travelerTypestr = '';
   var travelerTypeArray = [];
+  //Seat variables
+  String firstSeat = '';
   late final  segmentDataArray;
   _retrieveValues() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
+    //Retrived seats from first seatmap
+    firstSeat = prefs.getString('selected_firstseatkey') ?? '';
+    print('firstseatnumber..');
+    print(firstSeat);
     CurrencyCodestr = prefs.getString('currency_code_dropdownvaluekey') ?? '';
 
     flight_ID = prefs.getString('flightid_key') ?? '';
@@ -195,6 +201,7 @@ class _BusLayoutState extends State<BusLayout> {
     // print('flight_ID...');
     // print(flight_ID);
     sourcestr = prefs.getString('source_key') ?? '';
+
     lastTicketing_Datestr = prefs.getString('lastTicketing_Datekey') ?? '';
     lastTicketingDate_Timestr = prefs.getString('lastTicketingDate_Timekey') ?? '';
     numberOfBookableSeatsstr = prefs.getString('numberOfBookableSeatskey') ?? '';
@@ -859,11 +866,17 @@ class _BusLayoutState extends State<BusLayout> {
     } else {
       print('This string does not contain other string.');
       print('with seat number...');
+      print('retrived seats in round-trip...');
+      print(firstSeat);
       print(selectedseat);
       seatmap_convert_travelerPricingsArray[0]['fareDetailsBySegment']![0]["additionalServices"] = {
+        "chargeableSeatNumber": firstSeat
+      };
+      seatmap_convert_travelerPricingsArray[0]['fareDetailsBySegment']![1]["additionalServices"] = {
         "chargeableSeatNumber": selectedseat
       };
     }
+
     print('seatmap convert_travelerPricingsArray...');
     print(convert_travelerPricingsArray);
     // print(selectedseat);
@@ -1880,7 +1893,7 @@ class _BusLayoutState extends State<BusLayout> {
 
 
                                                       onTap: (){
-                                                        setState(() {
+                                                        setState(() async {
                                                           print('values....');
                                                           print(seatLabelList[i * cols + j]);
 
@@ -1889,6 +1902,10 @@ class _BusLayoutState extends State<BusLayout> {
                                                           print('selected seat...');
                                                           print(selectedseat);
                                                           _postData_seatmap_Price();
+                                                          SharedPreferences prefs = await SharedPreferences.getInstance();
+                                                          prefs.setString('selected_secondseatkey', selectedseat);
+
+
                                                           // isSelected = seatnumberListtempArray.contains(seatLabelList[i * cols + j].toString());
 
                                                           // isSelected = seatnumberListtempArray.contains(seatLabelList[rows * cols + cols].toString());
@@ -2163,7 +2180,7 @@ class _BusLayoutState extends State<BusLayout> {
                         // }
                         SharedPreferences prefs = await SharedPreferences.getInstance();
 
-                        prefs.setString('selectedseatkey', (selectedseat));
+                        prefs.setString('selected_secondseatkey', (selectedseat));
                         print('connected selected seat value1...');
                         print(selectedseat);
 
@@ -2187,7 +2204,7 @@ class _BusLayoutState extends State<BusLayout> {
                             //continuebtn_txt = 'Next';
                             SharedPreferences prefs = await SharedPreferences.getInstance();
 
-                            prefs.setString('selectedseatkey', (selectedseat));
+                            prefs.setString('selected_secondseatkey', (selectedseat));
                             print('connected selected seat value0...');
                             print(selectedseat);
 

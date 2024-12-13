@@ -1498,7 +1498,7 @@ class _BusLayoutState extends State<BusLayout> {
                                                         // isSelected = selectedSeats.contains(seatAvailabilityStatus[rows * cols + cols]);
                                                         // print('selected value');
                                                         // print(isSelected);
-                                                        setState(() {
+                                                        setState(() async {
                                                           // print('values....');
                                                           // print(seatLabelList[i * cols + j]);
                                                           selectedseat = seatLabelList[i * cols + j];
@@ -1507,7 +1507,22 @@ class _BusLayoutState extends State<BusLayout> {
                                                           print('seat avl sts....');
                                                           print(seatAvailabilityStatus);
 
+
                                                           _postData_seatmap_Price();
+                                                          SharedPreferences prefs = await SharedPreferences.getInstance();
+                                                          prefs.setString('selected_firstseatkey', selectedseat);
+
+                                                          // if(seatID_cnt.length == 1) {
+                                                          //   _postData_seatmap_Price();
+                                                          //   continuebtn_txt = 'Continue';
+                                                          // } else{
+                                                          //   continuebtn_txt = 'Next';
+                                                          //   SharedPreferences prefs = await SharedPreferences.getInstance();
+                                                          //   prefs.setString('selected_firstseatkey', selectedseat);
+                                                          //
+                                                          // }
+                                                          //
+
                                                           // isSelected = seatnumberListtempArray.contains(seatLabelList[i * cols + j].toString());
                                                           // isSelected = seatnumberListtempArray.contains(seatLabelList[rows * cols + cols].toString());
                                                           //
@@ -1805,7 +1820,7 @@ class _BusLayoutState extends State<BusLayout> {
                         //       builder: (context) => ConnectedFlight_firstSegment()),
                         // );
 
-                        prefs.setString('selectedseatkey', (selectedseat));
+                        prefs.setString('selected_firstseatkey', (selectedseat));
                         print('selected seat value1...');
                         print(selectedseat);
 
@@ -1830,7 +1845,7 @@ class _BusLayoutState extends State<BusLayout> {
                           } else {
                             //continuebtn_txt = 'Next';
 
-                            prefs.setString('selectedseatkey', (selectedseat));
+                            prefs.setString('selected_firstseatkey', (selectedseat));
                             print('selected seat value0...');
                             print(selectedseat);
 
@@ -1885,6 +1900,8 @@ class _BusLayoutState extends State<BusLayout> {
                         prefs.setString('order_travelerPricing_seatpricekey', convert_travelerPricingJson);
                         String Currency_Price = jsonEncode(Currency_Price_Array_with_seat.first);
                         prefs.setString('Currency_seat_price_key', Currency_Price);
+                        print('first seat price....');
+                        print(Currency_Price);
                         //Convert_segmentArray
                         //prefs.setString('Segmentkey', Convert_segmentArray.toString());
                         // print('----------order_travelerPricingkey');
