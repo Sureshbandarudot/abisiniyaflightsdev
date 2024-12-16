@@ -379,7 +379,7 @@ class _BusLayoutState extends State<BusLayout> {
       "chargeableSeatNumber": secondSeat
     };
     seatmap_convert_travelerPricingsArray[0]['fareDetailsBySegment']![2]["additionalServices"] = {
-      "chargeableSeatNumber": secondSeat
+      "chargeableSeatNumber": selectedseat
     };
     print('third flight round trip convert_travelerPricingsArray....');
     print(seatmap_convert_travelerPricingsArray);
@@ -1346,7 +1346,7 @@ class _BusLayoutState extends State<BusLayout> {
             // );
           },
         ),
-        title: Text('Onward Seat Selection',textAlign: TextAlign.center,
+        title: Text('Return 3rd flight Seat Selection',textAlign: TextAlign.center,
             style: TextStyle(color:Colors.white,fontFamily: 'Baloo', fontWeight: FontWeight.w900,fontSize: 20)),
       ),
 

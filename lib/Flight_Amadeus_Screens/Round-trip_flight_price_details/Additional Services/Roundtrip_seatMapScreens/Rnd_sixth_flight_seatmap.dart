@@ -28,6 +28,7 @@ import 'package:tourstravels/My_Apartments/ViewApartmentVC.dart';
 import 'package:tourstravels/Singleton/SingletonAbisiniya.dart';
 
 import '../../Booking_Screens/Rnd_PassengerDetailsVC.dart';
+import 'Rnd_fifth_flight_seatmap.dart';
 import 'Rnd_trp_third_flight_seatmap.dart';
 
 
@@ -36,11 +37,11 @@ import 'Rnd_trp_third_flight_seatmap.dart';
 
 
 void main() {
-  runApp(const Backward_journey_seatmap());
+  runApp(const Rnd_trp_fifth_flight_journey_seatmap());
 }
 
-class Backward_journey_seatmap extends StatelessWidget {
-  const Backward_journey_seatmap({super.key});
+class Rnd_trp_fifth_flight_journey_seatmap extends StatelessWidget {
+  const Rnd_trp_fifth_flight_journey_seatmap({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -182,14 +183,33 @@ class _BusLayoutState extends State<BusLayout> {
   var travelerTypeArray = [];
   //Seat variables
   String firstSeat = '';
+  String secondSeat = '';
+  String thirdSeat = '';
+  String fourthSeat = '';
+  String fifthSeat = '';
+  String sixththSeat = '';
+
+
+
+
   late final  segmentDataArray;
   _retrieveValues() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     //Retrived seats from first seatmap
     firstSeat = prefs.getString('selected_firstseatkey') ?? '';
-    print('firstseatnumber..');
+    print('third firstseatnumber..');
+    secondSeat = prefs.getString('selected_secondseatkey') ?? '';
+    thirdSeat = prefs.getString('selected_thirdseatkey') ?? '';
+    fourthSeat = prefs.getString('selected_fourthseatkey') ?? '';
+    fifthSeat = prefs.getString('selected_fifthseatkey') ?? '';
+
+
+
+    print('fourth seatmap seats..');
     print(firstSeat);
+    print(secondSeat);
+    print(thirdSeat);
     CurrencyCodestr = prefs.getString('currency_code_dropdownvaluekey') ?? '';
 
     flight_ID = prefs.getString('flightid_key') ?? '';
@@ -580,7 +600,7 @@ class _BusLayoutState extends State<BusLayout> {
         String type = decksData['type'];
         print('type....');
         print(type);
-        if (seatID == '2'){
+        if (seatID == '6'){
           var decksArray = decksData['decks'];
           // print('decksArray array data...');
           // print(decksArray);
@@ -869,11 +889,26 @@ class _BusLayoutState extends State<BusLayout> {
       print('with seat number...');
       print('retrived seats in round-trip...');
       print(firstSeat);
+      print(secondSeat);
+      print(thirdSeat);
       print(selectedseat);
+
       seatmap_convert_travelerPricingsArray[0]['fareDetailsBySegment']![0]["additionalServices"] = {
         "chargeableSeatNumber": firstSeat
       };
       seatmap_convert_travelerPricingsArray[0]['fareDetailsBySegment']![1]["additionalServices"] = {
+        "chargeableSeatNumber": secondSeat
+      };
+      seatmap_convert_travelerPricingsArray[0]['fareDetailsBySegment']![2]["additionalServices"] = {
+        "chargeableSeatNumber": thirdSeat
+      };
+      seatmap_convert_travelerPricingsArray[0]['fareDetailsBySegment']![3]["additionalServices"] = {
+        "chargeableSeatNumber": fourthSeat
+      };
+      seatmap_convert_travelerPricingsArray[0]['fareDetailsBySegment']![4]["additionalServices"] = {
+        "chargeableSeatNumber": fifthSeat
+      };
+      seatmap_convert_travelerPricingsArray[0]['fareDetailsBySegment']![5]["additionalServices"] = {
         "chargeableSeatNumber": selectedseat
       };
     }
@@ -932,7 +967,7 @@ class _BusLayoutState extends State<BusLayout> {
               // "lastTicketingDateTime": "2024-09-12",
               // "numberOfBookableSeats": 9,
 
-               "itineraries": Convert_ItineraryArray,
+              "itineraries": Convert_ItineraryArray,
               //
               // "itineraries": [
               //   {
@@ -1679,7 +1714,7 @@ class _BusLayoutState extends State<BusLayout> {
     print('seatid cnt');
     print(seatID_cnt.length + 1);
 
-    if(seatID_cnt.length ==  2) {
+    if(seatID_cnt.length ==  6) {
       continuebtn_txt = 'Continue';
 
     } else{
@@ -1723,7 +1758,7 @@ class _BusLayoutState extends State<BusLayout> {
             // );
           },
         ),
-        title: Text('Return 2nd Flight seat',textAlign: TextAlign.center,
+        title: Text('Return 6th flight journey seat',textAlign: TextAlign.center,
             style: TextStyle(color:Colors.white,fontFamily: 'Baloo', fontWeight: FontWeight.w900,fontSize: 20)),
       ),
 
@@ -1904,7 +1939,7 @@ class _BusLayoutState extends State<BusLayout> {
                                                           print(selectedseat);
                                                           _postData_seatmap_Price();
                                                           SharedPreferences prefs = await SharedPreferences.getInstance();
-                                                          prefs.setString('selected_secondseatkey', selectedseat);
+                                                          prefs.setString('selected_fourthseatkey', selectedseat);
 
 
                                                           // isSelected = seatnumberListtempArray.contains(seatLabelList[i * cols + j].toString());
@@ -2181,7 +2216,8 @@ class _BusLayoutState extends State<BusLayout> {
                         // }
                         SharedPreferences prefs = await SharedPreferences.getInstance();
 
-                        prefs.setString('selected_secondseatkey', (selectedseat));
+
+                        prefs.setString('selected_fourthseatkey', (selectedseat));
                         print('connected selected seat value1...');
                         print(selectedseat);
 
@@ -2193,7 +2229,7 @@ class _BusLayoutState extends State<BusLayout> {
                           );
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         } else {
-                          if(seatID_cnt.length == 2) {
+                          if(seatID_cnt.length == 6) {
                             //continuebtn_txt = 'Continue';
 
                             Navigator.push(
@@ -2206,14 +2242,14 @@ class _BusLayoutState extends State<BusLayout> {
                             //continuebtn_txt = 'Next';
                             SharedPreferences prefs = await SharedPreferences.getInstance();
 
-                            prefs.setString('selected_secondseatkey', (selectedseat));
+                            prefs.setString('selected_fourthseatkey', (selectedseat));
                             print('connected selected seat value0...');
                             print(selectedseat);
 
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Round_Trip_Third_SeatMapVC()),
+                                  builder: (context) => Round_Trip_Fifth_flight_SeatMapVC()),
                             );
 
                           }

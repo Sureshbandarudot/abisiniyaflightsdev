@@ -28,6 +28,7 @@ import 'package:tourstravels/My_Apartments/ViewApartmentVC.dart';
 import 'package:tourstravels/Singleton/SingletonAbisiniya.dart';
 
 import '../../Booking_Screens/Rnd_PassengerDetailsVC.dart';
+import 'Rnd_fifth_flight_seatmap.dart';
 import 'Rnd_trp_third_flight_seatmap.dart';
 
 
@@ -1740,7 +1741,7 @@ class _BusLayoutState extends State<BusLayout> {
             // );
           },
         ),
-        title: Text('Backward journey seat',textAlign: TextAlign.center,
+        title: Text('Return 4th flight seat',textAlign: TextAlign.center,
             style: TextStyle(color:Colors.white,fontFamily: 'Baloo', fontWeight: FontWeight.w900,fontSize: 20)),
       ),
 
@@ -2224,14 +2225,14 @@ class _BusLayoutState extends State<BusLayout> {
                             //continuebtn_txt = 'Next';
                             SharedPreferences prefs = await SharedPreferences.getInstance();
 
-                            prefs.setString('selected_secondseatkey', (selectedseat));
+                            prefs.setString('selected_fourthseatkey', (selectedseat));
                             print('connected selected seat value0...');
                             print(selectedseat);
 
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Round_Trip_Third_SeatMapVC()),
+                                  builder: (context) => Round_Trip_Fifth_flight_SeatMapVC()),
                             );
 
                           }

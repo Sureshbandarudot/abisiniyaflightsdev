@@ -1324,7 +1324,7 @@ class _BusLayoutState extends State<BusLayout> {
             // );
           },
         ),
-        title: Text('Onward Seat Selection',textAlign: TextAlign.center,
+        title: Text('Return 1st  Seat Selection',textAlign: TextAlign.center,
             style: TextStyle(color:Colors.white,fontFamily: 'Baloo', fontWeight: FontWeight.w900,fontSize: 20)),
       ),
 
