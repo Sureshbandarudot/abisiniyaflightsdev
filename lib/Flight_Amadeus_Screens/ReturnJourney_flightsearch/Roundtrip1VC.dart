@@ -619,6 +619,42 @@ class _userDashboardState extends State<Flight_Round_Trip> {
     print('infant_cnt...');
     print(infant_cnt);
 
+
+  //   int adultsCount = 3;  // Example adult count
+  //   int childrenCount = 2;  // Example children count
+  //   int infantsCount = 1;  // Example infant count
+  //
+  //   List<Map<String, dynamic>> travelers = []; // List to hold traveler data
+  //
+  //   // Add adults
+  //   for (int i = 1; i <= adultsCount; i++) {
+  //     travelers.add({
+  //       'id': i,
+  //       'travelerType': 'ADULT'
+  //     });
+  //   }
+  //
+  //   // Add children
+  //   for (int i = 1; i <= childrenCount; i++) {
+  //     travelers.add({
+  //       'id': adultsCount + i,
+  //       'travelerType': 'CHILD'
+  //     });
+  //   }
+  //
+  //   // Add infants (HELD_INFANT)
+  //   for (int i = 1; i <= infantsCount; i++) {
+  //     travelers.add({
+  //       'id': adultsCount + childrenCount + i,
+  //       'travelerType': 'HELD_INFANT',
+  //       'associatedAdultId': i // This assumes infants are associated with the ith adult
+  //     });
+  //   }
+  //
+  //   // Print the travelers list
+  //   print(travelers);
+  // }
+
     //for (var i = 1; i <= Aduld_cnt; i++) {
     //Passengerlist
     print('i value...');
@@ -1023,7 +1059,7 @@ class _userDashboardState extends State<Flight_Round_Trip> {
         }
       ];
 
-    } else if(Aduld_cnt == 1 && children_cnt == 2 && infant_cnt == 1) {
+    } else if(Aduld_cnt == 2 && children_cnt == 1 && infant_cnt == 1) {
       print('2 adult,2 child and 1 infant');
       travelersArray = <Map<String, dynamic>>[
         {
@@ -1048,16 +1084,16 @@ class _userDashboardState extends State<Flight_Round_Trip> {
             "STANDARD"
           ]
         },
+        // {
+        //   "id": "4",
+        //   "travelerType": 'CHILD',
+        //   "fareOptions": [
+        //     "STANDARD"
+        //   ],
+        //   // "associatedAdultId": "1"
+        // },
         {
           "id": "4",
-          "travelerType": 'CHILD',
-          "fareOptions": [
-            "STANDARD"
-          ],
-          // "associatedAdultId": "1"
-        },
-        {
-          "id": "5",
           "travelerType": 'HELD_INFANT',
           "fareOptions": [
             "STANDARD"

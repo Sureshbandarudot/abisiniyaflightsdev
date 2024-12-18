@@ -1866,7 +1866,7 @@ class _BusLayoutState extends State<BusLayout> {
                           } else {
                             //continuebtn_txt = 'Next';
 
-                            prefs.setString('selected_firstseatkey', (selectedseat));
+                            prefs.setString('selected_thirdseatkey', (selectedseat));
                             print('selected seat value0...');
                             print(selectedseat);
 

@@ -164,6 +164,8 @@ class _SOFState extends State<Round_trip_Multiple_passengerlistVC> {
   String secondSeatnumber = '';
   String thirdSeatnumber = '';
   String fourthSeatnumber = '';
+  String fifthSeatnumber = '';
+  String sixthSeatnumber = '';
 
 
 
@@ -430,12 +432,20 @@ class _SOFState extends State<Round_trip_Multiple_passengerlistVC> {
       secondSeatnumber = prefs.getString('selected_secondseatkey') ?? '';
       thirdSeatnumber = prefs.getString('selected_thirdseatkey') ?? '';
       fourthSeatnumber = prefs.getString('selected_fourthseatkey') ?? '';
+      fifthSeatnumber = prefs.getString('selected_fifthseatkey') ?? '';
+      sixthSeatnumber = prefs.getString('selected_sixthseatkey') ?? '';
+
+
+
+
 
       print('back seatnumber retrived....');
       print(firstSeatnumber);
       print(secondSeatnumber);
       print(thirdSeatnumber);
       print(fourthSeatnumber);
+      print(fifthSeatnumber);
+      print(sixthSeatnumber);
       print('order price screen seat');
       print(selectedseat);
       convert_travelerPricingsArray[0]['fareDetailsBySegment']![0]["additionalServices"] = {
@@ -443,6 +453,18 @@ class _SOFState extends State<Round_trip_Multiple_passengerlistVC> {
       };
       convert_travelerPricingsArray[0]['fareDetailsBySegment']![1]["additionalServices"] = {
         "chargeableSeatNumber": secondSeatnumber
+      };
+      convert_travelerPricingsArray[0]['fareDetailsBySegment']![2]["additionalServices"] = {
+        "chargeableSeatNumber": thirdSeatnumber
+      };
+      convert_travelerPricingsArray[0]['fareDetailsBySegment']![3]["additionalServices"] = {
+        "chargeableSeatNumber": fourthSeatnumber
+      };
+      convert_travelerPricingsArray[0]['fareDetailsBySegment']![4]["additionalServices"] = {
+        "chargeableSeatNumber": fifthSeatnumber
+      };
+      convert_travelerPricingsArray[0]['fareDetailsBySegment']![5]["additionalServices"] = {
+        "chargeableSeatNumber": sixthSeatnumber
       };
       print('order seat number...');
       print(convert_travelerPricingsArray);

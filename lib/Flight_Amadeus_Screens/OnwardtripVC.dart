@@ -528,6 +528,45 @@ class _userDashboardState extends State<FlightOnWardTrip> {
         print('infant_cnt...');
         print(infant_cnt);
 
+
+      //   int adultsCount = 3;  // Example adult count
+      //   int childrenCount = 2;  // Example children count
+      //   int infantsCount = 1;  // Example infant count
+      //
+      //   List<Map<String, dynamic>> travelers = []; // List to hold traveler data
+      //
+      //   // Add adults
+      //   for (int i = 1; i <= adultsCount; i++) {
+      //     travelers.add({
+      //       'id': i,
+      //       'travelerType': 'ADULT'
+      //     });
+      //   }
+      //
+      //   // Add children
+      //   for (int i = 1; i <= childrenCount; i++) {
+      //     travelers.add({
+      //       'id': adultsCount + i,
+      //       'travelerType': 'CHILD'
+      //     });
+      //   }
+      //
+      //   // Add infants (HELD_INFANT)
+      //   for (int i = 1; i <= infantsCount; i++) {
+      //     travelers.add({
+      //       'id': adultsCount + childrenCount + i,
+      //       'travelerType': 'HELD_INFANT',
+      //       'associatedAdultId': i // This assumes infants are associated with the ith adult
+      //     });
+      //   }
+      //
+      //   // Print the travelers list
+      //   print(travelers);
+      // }
+
+
+
+
         //for (var i = 1; i <= Aduld_cnt; i++) {
           //Passengerlist
           print('i value...');

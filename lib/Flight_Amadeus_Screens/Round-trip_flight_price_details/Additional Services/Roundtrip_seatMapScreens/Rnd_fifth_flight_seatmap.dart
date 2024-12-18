@@ -23,6 +23,7 @@ import 'package:tourstravels/Singleton/SingletonAbisiniya.dart';
 
 import '../../Booking_Screens/Rnd_PassengerDetailsVC.dart';
 import 'BackwardJouneySeatmapVC.dart';
+import 'Rnd_sixth_flight_seatmap.dart';
 import 'Rnd_trp_fourth_flight_seatmap.dart';
 void main() {
   runApp(const Round_Trip_Fifth_flight_SeatMapVC());
@@ -1850,7 +1851,7 @@ class _BusLayoutState extends State<BusLayout> {
                         //       builder: (context) => ConnectedFlight_firstSegment()),
                         // );
 
-                        prefs.setString('selected_thirdseatkey', (selectedseat));
+                        prefs.setString('selected_fifthseatkey', (selectedseat));
                         print('connected selected seat value1...');
                         print(selectedseat);
                         if(selectedseat == ''){
@@ -1874,24 +1875,20 @@ class _BusLayoutState extends State<BusLayout> {
                           } else {
                             //continuebtn_txt = 'Next';
 
-                            prefs.setString('selected_firstseatkey', (selectedseat));
+                            prefs.setString('selected_fifthseatkey', (selectedseat));
                             print('selected seat value0...');
                             print(selectedseat);
 
                             Navigator.push (
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Rnd_trp_fourth_flight_journey_seatmap()),
+                                  builder: (context) => Rnd_trp_sixth_flight_journey_seatmap()),
                             );
-
                             //Rnd_trp_fourth_flight_journey_seatmap
                           }
                         }
-
                         prefs.setString('totalpriceSignvalueskey', (totalpriceSignvalues));
                         prefs.setString('pricekey', (totalpricevalues));
-
-
                         String SegmentData = jsonEncode(Convert_segmentArray);
                         prefs.setString('segmentlistkey', SegmentData);
                         prefs.setString('flight_offer_Array_key', (flight_offer_Array.toString()));

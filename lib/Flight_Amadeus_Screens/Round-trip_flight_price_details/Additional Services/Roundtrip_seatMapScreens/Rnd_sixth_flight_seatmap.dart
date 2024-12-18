@@ -37,11 +37,11 @@ import 'Rnd_trp_third_flight_seatmap.dart';
 
 
 void main() {
-  runApp(const Rnd_trp_fifth_flight_journey_seatmap());
+  runApp(const Rnd_trp_sixth_flight_journey_seatmap());
 }
 
-class Rnd_trp_fifth_flight_journey_seatmap extends StatelessWidget {
-  const Rnd_trp_fifth_flight_journey_seatmap({super.key});
+class Rnd_trp_sixth_flight_journey_seatmap extends StatelessWidget {
+  const Rnd_trp_sixth_flight_journey_seatmap({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -1939,7 +1939,7 @@ class _BusLayoutState extends State<BusLayout> {
                                                           print(selectedseat);
                                                           _postData_seatmap_Price();
                                                           SharedPreferences prefs = await SharedPreferences.getInstance();
-                                                          prefs.setString('selected_fourthseatkey', selectedseat);
+                                                          prefs.setString('selected_sixthseatkey', selectedseat);
 
 
                                                           // isSelected = seatnumberListtempArray.contains(seatLabelList[i * cols + j].toString());
@@ -2217,7 +2217,7 @@ class _BusLayoutState extends State<BusLayout> {
                         SharedPreferences prefs = await SharedPreferences.getInstance();
 
 
-                        prefs.setString('selected_fourthseatkey', (selectedseat));
+                        prefs.setString('selected_sixthseatkey', (selectedseat));
                         print('connected selected seat value1...');
                         print(selectedseat);
 
@@ -2242,7 +2242,7 @@ class _BusLayoutState extends State<BusLayout> {
                             //continuebtn_txt = 'Next';
                             SharedPreferences prefs = await SharedPreferences.getInstance();
 
-                            prefs.setString('selected_fourthseatkey', (selectedseat));
+                            prefs.setString('selected_sixthseatkey', (selectedseat));
                             print('connected selected seat value0...');
                             print(selectedseat);
 
