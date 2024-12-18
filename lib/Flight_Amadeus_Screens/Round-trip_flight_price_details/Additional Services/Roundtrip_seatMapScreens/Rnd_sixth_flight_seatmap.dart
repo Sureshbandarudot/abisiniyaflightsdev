@@ -1751,11 +1751,11 @@ class _BusLayoutState extends State<BusLayout> {
             // SharedPreferences prefs = await SharedPreferences.getInstance();
             // prefs.setString('logoutkey', ('LogoutDashboard'));
             // prefs.setString('Property_type', ('Apartment'));
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //       builder: (context) => ServiceDashboardScreen()),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Round_Trip_Fifth_flight_SeatMapVC()),
+            );
           },
         ),
         title: Text('Return 6th flight journey seat',textAlign: TextAlign.center,

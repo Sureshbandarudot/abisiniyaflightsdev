@@ -379,7 +379,7 @@ class _BusLayoutState extends State<BusLayout> {
           });
           return AlertDialog(
             title: Text('Seat ${seatnumberListtempArray.toList()}'),
-            content: Text(totalpriceSignvalues),
+           // content: Text(totalpriceSignvalues),
 
           );
         });
@@ -1717,11 +1717,11 @@ class _BusLayoutState extends State<BusLayout> {
             // SharedPreferences prefs = await SharedPreferences.getInstance();
             // prefs.setString('logoutkey', ('LogoutDashboard'));
             // prefs.setString('Property_type', ('Apartment'));
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //       builder: (context) => ServiceDashboardScreen()),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ConnectedFlight_firstSegment()),
+            );
           },
         ),
         title: Text('Connected Third Flight',textAlign: TextAlign.center,

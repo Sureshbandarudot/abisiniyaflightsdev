@@ -30,6 +30,7 @@ import 'package:tourstravels/Singleton/SingletonAbisiniya.dart';
 import '../../Oneway_journey_update_PassengerslistVC.dart';
 import '../../OnwardJourney_newpassengerdetailsVC.dart';
 import '../../OnwardJourney_price_DetailsVC.dart';
+import '../seatMapVC.dart';
 import 'ConnectedThirdFlight.dart';
 
 
@@ -362,7 +363,7 @@ class _BusLayoutState extends State<BusLayout> {
           });
           return AlertDialog(
             title: Text('Seat ${seatnumberListtempArray.toList()}'),
-            content: Text(totalpriceSignvalues),
+           // content: Text(totalpriceSignvalues),
 
           );
         });
@@ -1687,11 +1688,11 @@ class _BusLayoutState extends State<BusLayout> {
             // SharedPreferences prefs = await SharedPreferences.getInstance();
             // prefs.setString('logoutkey', ('LogoutDashboard'));
             // prefs.setString('Property_type', ('Apartment'));
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //       builder: (context) => ServiceDashboardScreen()),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => SeatMapVC()),
+            );
           },
         ),
         title: Text('Connected Socond Flight',textAlign: TextAlign.center,

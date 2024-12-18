@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -386,6 +387,9 @@ class _HomePageState extends State<RndtrpDestinationCityVC> {
           leading: new Icon(Icons.search),
           title: new TextField(
             controller: RndtrpDestinationcontroller,
+            inputFormatters: <TextInputFormatter>[
+              UpperCaseTextFormatter()
+            ],
             decoration: new InputDecoration(
                 hintText: 'Search', border: InputBorder.none),
             onChanged: onSearchTextChanged,
@@ -451,4 +455,18 @@ class _HomePageState extends State<RndtrpDestinationCityVC> {
 
     setState(() {});
   }
+}
+
+class UpperCaseTextFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    return TextEditingValue(
+      text: capitalize(newValue.text),
+      selection: newValue.selection,
+    );
+  }
+}
+String capitalize(String value) {
+  if(value.trim().isEmpty) return "";
+  return "${value[0].toUpperCase()}${value.substring(1).toLowerCase()}";
 }

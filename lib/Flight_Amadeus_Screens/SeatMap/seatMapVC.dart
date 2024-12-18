@@ -27,6 +27,7 @@ import 'package:tourstravels/My_Apartments/ViewApartmentVC.dart';
 
 import 'package:tourstravels/Singleton/SingletonAbisiniya.dart';
 
+import '../AddOnsVC.dart';
 import '../Oneway_journey_update_PassengerslistVC.dart';
 import '../OnwardJourney_newpassengerdetailsVC.dart';
 import '../OnwardJourney_price_DetailsVC.dart';
@@ -487,7 +488,7 @@ class _BusLayoutState extends State<BusLayout> {
         });
         return AlertDialog(
           title: Text('Seat ${seatnumberListtempArray.toList()}'),
-          content: Text(totalpriceSignvalues),
+         // content: Text(totalpriceSignvalues),
         );
       });
   }
@@ -1518,11 +1519,11 @@ class _BusLayoutState extends State<BusLayout> {
             // SharedPreferences prefs = await SharedPreferences.getInstance();
             // prefs.setString('logoutkey', ('LogoutDashboard'));
             // prefs.setString('Property_type', ('Apartment'));
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //       builder: (context) => ServiceDashboardScreen()),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Add_OnsVC()),
+            );
           },
         ),
         title: Text('Seat Selection',textAlign: TextAlign.center,

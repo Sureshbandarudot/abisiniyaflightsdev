@@ -1339,11 +1339,11 @@ class _BusLayoutState extends State<BusLayout> {
             // SharedPreferences prefs = await SharedPreferences.getInstance();
             // prefs.setString('logoutkey', ('LogoutDashboard'));
             // prefs.setString('Property_type', ('Apartment'));
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //       builder: (context) => ServiceDashboardScreen()),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Backward_journey_seatmap()),
+            );
           },
         ),
         title: Text('Return 3rd flight Seat Selection',textAlign: TextAlign.center,

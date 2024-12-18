@@ -421,6 +421,9 @@ class _HomePageState extends State<RndtrpOriginCityVC> {
           leading: new Icon(Icons.search),
           title: new TextField(
             controller: Rndtrpcontroller,
+            inputFormatters: <TextInputFormatter>[
+              UpperCaseTextFormatter()
+            ],
             decoration: new InputDecoration(
                 hintText: 'Bangalore', border: InputBorder.none),
             onChanged: onSearchTextChanged,

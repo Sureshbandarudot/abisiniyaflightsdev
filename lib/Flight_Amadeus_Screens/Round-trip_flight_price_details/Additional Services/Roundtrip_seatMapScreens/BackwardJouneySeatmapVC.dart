@@ -28,6 +28,7 @@ import 'package:tourstravels/My_Apartments/ViewApartmentVC.dart';
 import 'package:tourstravels/Singleton/SingletonAbisiniya.dart';
 
 import '../../Booking_Screens/Rnd_PassengerDetailsVC.dart';
+import 'Rnd_seatMapVC.dart';
 import 'Rnd_trp_third_flight_seatmap.dart';
 
 
@@ -1716,11 +1717,11 @@ class _BusLayoutState extends State<BusLayout> {
             // SharedPreferences prefs = await SharedPreferences.getInstance();
             // prefs.setString('logoutkey', ('LogoutDashboard'));
             // prefs.setString('Property_type', ('Apartment'));
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //       builder: (context) => ServiceDashboardScreen()),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Round_Trip_SeatMapVC()),
+            );
           },
         ),
         title: Text('Return 2nd Flight seat',textAlign: TextAlign.center,
