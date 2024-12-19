@@ -1255,7 +1255,7 @@ class _userDashboardState extends State<Add_OnsVC> {
   Without_seatmap_showAlertDialog(BuildContext context) {
     // set up the buttons
     Widget cancelButton = TextButton(
-      child: Text("Cancel",style: TextStyle(fontWeight: FontWeight.w900,fontSize: 20,color: Colors.green),),
+      child: Text("Skip",style: TextStyle(fontWeight: FontWeight.w900,fontSize: 20,color: Colors.green),),
       onPressed:  () {
         Navigator.of(context, rootNavigator: true).pop();
       },
@@ -1289,7 +1289,7 @@ class _userDashboardState extends State<Add_OnsVC> {
             SizedBox(
               height: 20,
             ),
-            Text('Do you want book flight ticket without Seatmap?',style: (TextStyle(fontWeight: FontWeight.w800,fontSize: 20,color: Colors.green)),),
+            Text('Do you want book flight ticket without Seat?',style: (TextStyle(fontWeight: FontWeight.w800,fontSize: 20,color: Colors.green)),),
 
           ],
         ),

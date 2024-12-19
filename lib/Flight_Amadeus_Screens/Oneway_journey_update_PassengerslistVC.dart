@@ -2537,6 +2537,16 @@ class _SOFState extends State<Multiple_passengerlistVC> {
             //     }
             //   }
             // ]
+            "automatedProcess": [
+              {
+                "code": "IMMEDIATE",
+                "queue": {
+                  "number": "1",
+                  "category": "1"
+                },
+                "officeId": "JNBZA2195"
+              }
+            ]
           }
         }
 

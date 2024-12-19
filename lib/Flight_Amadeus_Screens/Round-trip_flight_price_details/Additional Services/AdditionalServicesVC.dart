@@ -18,6 +18,7 @@ import 'package:tourstravels/My_Apartments/ViewApartmentVC.dart';
 
 import 'package:tourstravels/Singleton/SingletonAbisiniya.dart';
 
+import '../Booking_Screens/Rnd_PassengerDetailsVC.dart';
 import 'Roundtrip_seatMapScreens/Rnd_seatMapVC.dart';
 
 
@@ -1252,7 +1253,7 @@ class _userDashboardState extends State<Round_Trip_Add_OnsVC> {
   Without_seatmap_showAlertDialog(BuildContext context) {
     // set up the buttons
     Widget cancelButton = TextButton(
-      child: Text("Cancel",style: TextStyle(fontWeight: FontWeight.w900,fontSize: 20,color: Colors.green),),
+      child: Text("Skip",style: TextStyle(fontWeight: FontWeight.w900,fontSize: 20,color: Colors.green),),
       onPressed:  () {
         Navigator.of(context, rootNavigator: true).pop();
       },
@@ -1264,11 +1265,11 @@ class _userDashboardState extends State<Round_Trip_Add_OnsVC> {
         prefs.setString('seatmapkey', 'Without seatmap');
 
 
-        // Navigator.of(context, rootNavigator: true).pop();
-        // await Navigator.of(context)
-        //     .push(new MaterialPageRoute(builder: (context) => Multiple_passengerlistVC()));
+        Navigator.of(context, rootNavigator: true).pop();
+        await Navigator.of(context)
+            .push(new MaterialPageRoute(builder: (context) => Round_trip_Multiple_passengerlistVC()));
         setState((){
-          //Navigator.pop(context);
+          Navigator.pop(context);
         });
       },
     );
@@ -1286,7 +1287,7 @@ class _userDashboardState extends State<Round_Trip_Add_OnsVC> {
             SizedBox(
               height: 20,
             ),
-            Text('Do you want book flight ticket without Seatmap?',style: (TextStyle(fontWeight: FontWeight.w800,fontSize: 20,color: Colors.green)),),
+            Text('Do you want book flight ticket without Seat?',style: (TextStyle(fontWeight: FontWeight.w800,fontSize: 20,color: Colors.green)),),
 
           ],
         ),
@@ -1996,7 +1997,7 @@ class _userDashboardState extends State<Round_Trip_Add_OnsVC> {
                                                           children: [
                                                             Align(
                                                                 alignment: Alignment.centerRight,
-                                                                child: Text('Add',style: (TextStyle(fontSize: 20,fontWeight: FontWeight.w600,color: Colors.green)),)
+                                                                child: Text('Add Baggage',style: (TextStyle(fontSize: 20,fontWeight: FontWeight.w600,color: Colors.green)),)
                                                             ),
 
                                                           ],
@@ -2443,7 +2444,7 @@ class _userDashboardState extends State<Round_Trip_Add_OnsVC> {
                                                         // );
                                                       } else {
                                                         final snackBar = SnackBar(
-                                                          content: Text('Selected Chargeable Baggage'),
+                                                          content: Text('Selected without seat'),
                                                         );
                                                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                                         print('navigate to booking...');

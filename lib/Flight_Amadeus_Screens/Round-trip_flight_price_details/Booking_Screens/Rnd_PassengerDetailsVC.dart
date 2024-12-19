@@ -2607,6 +2607,16 @@ class _SOFState extends State<Round_trip_Multiple_passengerlistVC> {
           //     }
           //   }
           // ]
+          "automatedProcess": [
+            {
+              "code": "IMMEDIATE",
+              "queue": {
+                "number": "1",
+                "category": "2"
+              },
+              "officeId": "JNBZA2195"
+            }
+          ]
         }
       }
 
