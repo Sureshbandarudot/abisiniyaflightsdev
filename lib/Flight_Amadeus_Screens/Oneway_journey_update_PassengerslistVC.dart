@@ -2541,8 +2541,8 @@ class _SOFState extends State<Multiple_passengerlistVC> {
               {
                 "code": "IMMEDIATE",
                 "queue": {
-                  "number": "1",
-                  "category": "1"
+                  "number": 3,
+                  "category": "20"
                 },
                 "officeId": "JNBZA2195"
               }

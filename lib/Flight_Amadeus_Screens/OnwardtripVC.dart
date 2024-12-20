@@ -38,9 +38,12 @@ class _userDashboardState extends State<FlightOnWardTrip> {
   String totalpricevalues = '';
   String totalpriceSignvalues = '';
   List travelersArray = [];
+  List<Map<String, dynamic>> travelers = []; // List to hold traveler data
+
   var travelerIdArray = [];
   var segmentValuesAray = [];
   var segmentValuesAraycnt = [];
+
 //Ama client-id
   String amaClientRef = '';
 
@@ -53,14 +56,9 @@ class _userDashboardState extends State<FlightOnWardTrip> {
   var grand_totalPricevaluesArray = [];
 
 
-
   var totalPricevaluesArray = [];
   List flight_offerResponse = [];
   var flight_offerResponse_mutable = [];
-
-
-
-
 
 
   var API = '';
@@ -80,7 +78,8 @@ class _userDashboardState extends State<FlightOnWardTrip> {
   String stsId = '';
   int VehicleId = 0;
   var controller = ScrollController();
-  late Future<List<DashboardApart>> BookingDashboardUsers ;
+  late Future<List<DashboardApart>> BookingDashboardUsers;
+
   int count = 15;
   int Passengers_cnt = 0;
 
@@ -99,7 +98,6 @@ class _userDashboardState extends State<FlightOnWardTrip> {
   String cabintrvalue = '';
   String Travel_class_str = '';
   String failurestr = '';
-
 
 
   var cabintrvalue_Array = [];
@@ -124,9 +122,6 @@ class _userDashboardState extends State<FlightOnWardTrip> {
   var travelerPricingslistArray = [];
 
 
-
-
-
   var FlightEmptyArray = [];
   var flightstatusstr = '';
   var Departuretextstr = '';
@@ -145,17 +140,6 @@ class _userDashboardState extends State<FlightOnWardTrip> {
   var validatingAirlineCodesArrayList = [];
 
 
-
-
-
-
-
-
-
-
-
-
-
   //List<Map<String, dynamic>> mapList = [];
   // Map<String, dynamic> travellers = {};
   String sourcevalue = '';
@@ -165,9 +149,6 @@ class _userDashboardState extends State<FlightOnWardTrip> {
   List Connectflightcnt_dep = [];
   List Connectflightcnt_Arrival = [];
   String Connectedflightstr = '';
-
-
-
 
 
   //Inside widget string values
@@ -196,10 +177,6 @@ class _userDashboardState extends State<FlightOnWardTrip> {
   int infant_cnt = 0;
 
 
-
-
-
-
   _retrieveValues() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -225,8 +202,10 @@ class _userDashboardState extends State<FlightOnWardTrip> {
       // print(Retrived_Oneway_iatacodestr);
       // print(Retrived_Oneway_Citynamestr);
 
-      RetrivedOneway_Oneway_Destinationiatacodestr = prefs.getString('Oneway_Destinationiatacodekey') ?? '';
-      RetrivedOnew_Oneway_DestinationCitynamestr = prefs.getString('Oneway_DestinationCitynamekey') ?? '';
+      RetrivedOneway_Oneway_Destinationiatacodestr =
+          prefs.getString('Oneway_Destinationiatacodekey') ?? '';
+      RetrivedOnew_Oneway_DestinationCitynamestr =
+          prefs.getString('Oneway_DestinationCitynamekey') ?? '';
 
       //Passengerlist
       Aduld_cnt = prefs.getInt('Adult_countkey') ?? 0;
@@ -255,11 +234,8 @@ class _userDashboardState extends State<FlightOnWardTrip> {
       // print(RetrivedOnew_Oneway_DestinationCitynamestr);
 
 
-
     });
   }
-
-
 
 
 //@override
@@ -299,47 +275,47 @@ class _userDashboardState extends State<FlightOnWardTrip> {
 
 
     List<dynamic> datalistArray = [];
-  //   for (var i = 1; i <= 2; i++) {
-  //     print('i value...');
-  //     print(i);
-  //     if(i == 1) {
-  //         travelersArray = <Map<String, dynamic>>[
-  //           {
-  //             "id": "1",
-  //             "travelerType": 'ADULT',
-  //             "fareOptions": [
-  //               "STANDARD"
-  //             ],
-  //           },
-  //         ];
-  //     } else {
-  //       travelersArray = <Map<String, dynamic>>[
-  // {
-  //   "id": "1",
-  //   "travelerType": 'ADULT',
-  //   "fareOptions": [
-  //   "STANDARD"
-  //   ]
-  //
-  //           },
-  //
-  //         {
-  //           "id": "2",
-  //           "travelerType": 'ADULT',
-  //           "fareOptions": [
-  //             "STANDARD"
-  //           ]
-  //         }
-  //
-  //       ];
-  //     }
-  //
-  //     print('travelersArray....');
-  //     print(travelersArray);
-  //     // traveller_datalistArray.add(travelersArray.first);
-  //     // print('data list arrray......');
-  //     // print(traveller_datalistArray);
-  //   }
+    //   for (var i = 1; i <= 2; i++) {
+    //     print('i value...');
+    //     print(i);
+    //     if(i == 1) {
+    //         travelersArray = <Map<String, dynamic>>[
+    //           {
+    //             "id": "1",
+    //             "travelerType": 'ADULT',
+    //             "fareOptions": [
+    //               "STANDARD"
+    //             ],
+    //           },
+    //         ];
+    //     } else {
+    //       travelersArray = <Map<String, dynamic>>[
+    // {
+    //   "id": "1",
+    //   "travelerType": 'ADULT',
+    //   "fareOptions": [
+    //   "STANDARD"
+    //   ]
+    //
+    //           },
+    //
+    //         {
+    //           "id": "2",
+    //           "travelerType": 'ADULT',
+    //           "fareOptions": [
+    //             "STANDARD"
+    //           ]
+    //         }
+    //
+    //       ];
+    //     }
+    //
+    //     print('travelersArray....');
+    //     print(travelersArray);
+    //     // traveller_datalistArray.add(travelersArray.first);
+    //     // print('data list arrray......');
+    //     // print(traveller_datalistArray);
+    //   }
     //
     // // for (var i=1; i<=2; i++) {
     // //   travelersArray = <Map<String, dynamic>>[
@@ -474,7 +450,6 @@ class _userDashboardState extends State<FlightOnWardTrip> {
     String baseUrl = 'https://staging.abisiniya.com/api/v1/amadeus/airlinelist';
     http.Response response = await http.get(Uri.parse(baseUrl));
     if (response.statusCode == 200) {
-
       var jsonData = json.decode(response.body);
       // print('Airport list.....');
       var data = jsonData['data'];
@@ -487,9 +462,9 @@ class _userDashboardState extends State<FlightOnWardTrip> {
   }
 
 
- // _postData() async{
-    //Future<dynamic> _postData(dynamic body) async {
-      Future<void> _postData() async {
+  // _postData() async{
+  //Future<dynamic> _postData(dynamic body) async {
+  Future<void> _postData() async {
 //         var uuid = Uuid();
 //
 //         amaClientRef = uuid.v4();  // Generates a random UUID
@@ -515,54 +490,56 @@ class _userDashboardState extends State<FlightOnWardTrip> {
 //
 
 
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Aduld_cnt = prefs.getInt('Adult_countkey') ?? 0;
+    print('adult cnt...');
+    print(Aduld_cnt);
+    children_cnt = prefs.getInt('_childrenscounterKey') ?? 0;
+    print('children_cnt...');
+    print(children_cnt);
 
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        Aduld_cnt = prefs.getInt('Adult_countkey') ?? 0;
-        print('adult cnt...');
-        print(Aduld_cnt);
-        children_cnt = prefs.getInt('_childrenscounterKey') ?? 0;
-        print('children_cnt...');
-        print(children_cnt);
-
-        infant_cnt = prefs.getInt('_infantcounter') ?? 0;
-        print('infant_cnt...');
-        print(infant_cnt);
+    infant_cnt = prefs.getInt('_infantcounter') ?? 0;
+    print('infant_cnt...');
+    print(infant_cnt);
 
 
-      //   int adultsCount = 3;  // Example adult count
-      //   int childrenCount = 2;  // Example children count
-      //   int infantsCount = 1;  // Example infant count
-      //
-      //   List<Map<String, dynamic>> travelers = []; // List to hold traveler data
-      //
-      //   // Add adults
-      //   for (int i = 1; i <= adultsCount; i++) {
-      //     travelers.add({
-      //       'id': i,
-      //       'travelerType': 'ADULT'
-      //     });
-      //   }
-      //
-      //   // Add children
-      //   for (int i = 1; i <= childrenCount; i++) {
-      //     travelers.add({
-      //       'id': adultsCount + i,
-      //       'travelerType': 'CHILD'
-      //     });
-      //   }
-      //
-      //   // Add infants (HELD_INFANT)
-      //   for (int i = 1; i <= infantsCount; i++) {
-      //     travelers.add({
-      //       'id': adultsCount + childrenCount + i,
-      //       'travelerType': 'HELD_INFANT',
-      //       'associatedAdultId': i // This assumes infants are associated with the ith adult
-      //     });
-      //   }
-      //
-      //   // Print the travelers list
-      //   print(travelers);
-      // }
+    int adultsCount = 3; // Example adult count
+    int childrenCount = 2; // Example children count
+    int infantsCount = 1; // Example infant count
+
+    // List<Map<String, dynamic>> travelers = []; // List to hold traveler data
+
+    // Add adults
+    for (int i = 1; i <= Aduld_cnt; i++) {
+      travelers.add({
+        'id': i,
+        'travelerType': 'ADULT'
+      });
+    }
+
+    // Add children
+    for (int i = 1; i <= children_cnt; i++) {
+      travelers.add({
+        'id': Aduld_cnt + i,
+        'travelerType': 'CHILD'
+      });
+    }
+
+    // Add infants (HELD_INFANT)
+    for (int i = 1; i <= infant_cnt; i++) {
+      travelers.add({
+        'id': Aduld_cnt + children_cnt + i,
+        'travelerType': 'HELD_INFANT',
+        'associatedAdultId': i
+        // This assumes infants are associated with the ith adult
+      });
+    }
+
+    // Print the travelers list
+    print('Added travellers array dynamically...');
+    print(travelers);
+
+
 
 
 
@@ -1107,7 +1084,7 @@ class _userDashboardState extends State<FlightOnWardTrip> {
           // }
         ],
 
-           "travelers": travelersArray,
+           "travelers": travelers,
 
         // "travelers": [
         //   {
