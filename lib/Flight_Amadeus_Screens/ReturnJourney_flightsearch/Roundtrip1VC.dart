@@ -53,6 +53,8 @@ class _userDashboardState extends State<Flight_Round_Trip> {
   List animalArray = [];
   String grandTotalprice = '';
   var grand_totalPricevaluesArray = [];
+  List<Map<String, dynamic>> travelers = []; // List to hold traveler data
+
 
 
 
@@ -620,7 +622,39 @@ class _userDashboardState extends State<Flight_Round_Trip> {
     print(infant_cnt);
 
 
-  //   int adultsCount = 3;  // Example adult count
+    // Add adults
+    for (int i = 1; i <= Aduld_cnt; i++) {
+      travelers.add({
+        'id': i,
+        'travelerType': 'ADULT'
+      });
+    }
+
+    // Add children
+    for (int i = 1; i <= children_cnt; i++) {
+      travelers.add({
+        'id': Aduld_cnt + i,
+        'travelerType': 'CHILD'
+      });
+    }
+
+    // Add infants (HELD_INFANT)
+    for (int i = 1; i <= infant_cnt; i++) {
+      travelers.add({
+        'id': Aduld_cnt + children_cnt + i,
+        'travelerType': 'HELD_INFANT',
+        'associatedAdultId': i
+        // This assumes infants are associated with the ith adult
+      });
+    }
+
+    // Print the travelers list
+    print('Added round trip travellers array dynamically...');
+    print(travelers);
+
+
+
+    //   int adultsCount = 3;  // Example adult count
   //   int childrenCount = 2;  // Example children count
   //   int infantsCount = 1;  // Example infant count
   //
@@ -1186,7 +1220,7 @@ class _userDashboardState extends State<Flight_Round_Trip> {
           // }
         ],
 
-        "travelers": travelersArray,
+        "travelers": travelers,
 
         // "travelers": [
         //   {

@@ -1121,30 +1121,7 @@ class _userDashboardState extends State<FlightOnWardTrip> {
           "GDS"
         ],
 
-        "searchCriteria": {
-          "maxFlightOffers": 10,
 
-          "cabinRestrictions": [
-            {
-              "cabin": Travel_class_str,
-              "coverage": "MOST_SEGMENTS",
-              "originDestinationIds": [
-                "1"
-              ]
-            }
-          ],
-          "additionalInformation": {
-            "chargeableCheckedBags": true,
-            "brandedFares": false
-          },
-          "pricingOptions": {
-            "fareType": [
-              "PUBLISHED",
-              "NEGOTIATED"
-            ],
-            "includedCheckedBagsOnly": true
-          }
-        }
       }
       // {
       //   "currencyCode": CurrencyCodestr,
