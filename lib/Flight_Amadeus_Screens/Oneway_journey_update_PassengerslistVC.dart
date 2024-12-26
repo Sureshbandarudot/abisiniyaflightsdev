@@ -95,6 +95,8 @@ class _SOFState extends State<Multiple_passengerlistVC> {
   var lastNamestr = '';
   var genderstr = '';
   var dobstr = '';
+  List<String> PasseType = [];
+
 
 
 
@@ -578,6 +580,19 @@ class _SOFState extends State<Multiple_passengerlistVC> {
     print(Retrived_Passengers_cnt);
     print(Retrived_Adult_cnt);
     print(Retrived_child_cnt);
+
+    // List<String> PasseType = [];
+
+    // Dynamically add the fruits
+    PasseType.addAll(List.generate(Retrived_Adult_cnt, (_) => 'Adult'));   // Adding 2 apples
+    PasseType.addAll(List.generate(Retrived_child_cnt, (_) => 'Child'));  // Adding 2 bananas
+    PasseType.addAll(List.generate(Retrived_infant_cnt, (_) => 'Infant'));
+    //PasseType.add('mango');                              // Adding 1 mango
+
+    // Print the result
+    print('passengers....');
+    print(PasseType);  // Output: [apple, apple, banana, banana, mango]
+
 
     if(Retrived_Adult_cnt >= 1 && Retrived_child_cnt == 0 && Retrived_child_cnt == 0) {
       print('pass Only Adults calling...');
@@ -1074,10 +1089,11 @@ class _SOFState extends State<Multiple_passengerlistVC> {
                 SizedBox(
                   height: 10,
                 ),
+                //changes made by suresh
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Passenger:- ${cards.length + 1} ${PassengerType}',
+                    'Passenger:- ${cards.length + 1} ${PasseType[cards.length]}',
                     style: TextStyle(fontSize: 18,fontWeight: FontWeight.w800,color: Colors.black),),
                 ),
                 SizedBox(
