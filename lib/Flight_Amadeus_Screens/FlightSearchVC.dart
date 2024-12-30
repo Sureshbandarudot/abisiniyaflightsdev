@@ -28,22 +28,38 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
   List<Widget> textFields = [];
 
   // Function to add a new TextField
+
+
   void _addTextField() {
     setState(() {
-
-      textFields.add(SizedBox(height: 20)); // Adds 20 units of space
-
-      textFields.add(TextField(
-        decoration: InputDecoration(
-          labelText: 'Enter text',
-          border: OutlineInputBorder(),
+      textFields.add(SizedBox(height: 10)); // Adds 20 units of space
+      textFields.add(
+        Container(
+          width: 340, // Adjust the width as needed
+          height: 50, // Adjust the height as needed
+          child: TextField(
+            onTap: ()async{
+              print('Add another flight...');
+            },
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Color(0xFFFFFFFF),
+                prefixIcon: Icon(
+                    Icons.flight, color: Colors.green),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(0),
+                  ),
+                ),
+                hintText: 'Add Multi city Flying to',
+              )
+          ),
         ),
-      ));
-      SizedBox(height: 20);// Add space between TextField widgets
-
-    }
-    );
+      );
+    });
   }
+
+
 
   String classstr = '';
   String currency_code_dropdownvalue = 'Select Currency Code';
@@ -421,7 +437,7 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
           Container(
             //margin: EdgeInsets.fromLTRB(30, 0, 0, 0),
             //padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
-            height: 400,
+            height: 600,
             width: 360,
     margin: EdgeInsets.only(
     left: 0.0, top: 0.0, right: 0.0, bottom: 0.0),
@@ -883,7 +899,7 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
                           Container(
                             height: 50,
                             width: 165,
-                            color: Colors.red,
+                            color: Colors.white,
                             child: TextField(
                                 style: TextStyle(fontSize: 15),
                                 decoration: InputDecoration(
@@ -1087,7 +1103,10 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
                   //Multi - city
                   Expanded(
                     child: Container(
-                      color: Colors.white,
+                      height: 600,
+                      //color: Colors.red,
+                      color: Color.fromRGBO(133, 193, 233, 0.5),
+
                       child: LayoutBuilder(
                         builder: (context, constraint) {
                           return SingleChildScrollView(
@@ -1144,7 +1163,7 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
                                                     Radius.circular(0),
                                                   ),
                                                 ),
-                                                hintText: 'Multi Flying from',
+                                                hintText: 'Multi city Flying from',
                                               ),
                                             ),
                                           ),
@@ -1152,6 +1171,7 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
                                           SizedBox(
                                             height: 10,
                                           ),
+
                                           Container(
                                             height: 50,
                                             width: 340,
@@ -1187,10 +1207,24 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
                                                     Radius.circular(0),
                                                   ),
                                                 ),
-                                                hintText: 'Multi Flying to',
+                                                hintText: 'Multi city Flying to',
                                               ),
                                             ),
                                           ),
+                                          //SizedBox(height: 5), // Space between button and text fields
+                                          Column(
+                                            children: textFields,
+                                            //     onTap: () async{
+
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          ElevatedButton(
+                                            onPressed: _addTextField,
+                                            child: Text('Add Another flight'),
+                                          ),
+
                                           SizedBox(
                                             height: 10,
                                           ),
@@ -1394,14 +1428,7 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
                                     ),
 
                                     //Add textfields
-                                    ElevatedButton(
-                                      onPressed: _addTextField,
-                                      child: Text('Add Text Field'),
-                                    ),
-                                    SizedBox(height: 20), // Space between button and text fields
-                                    Column(
-                                      children: textFields,
-                                    ),
+
 
 
                                   ],
