@@ -85,6 +85,8 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
   String classstr = '';
   String currency_code_dropdownvalue = 'Select Currency Code';
   String currency_code_Rndtrp_dropdownvalue = 'Select Currency Code';
+  String currency_code_Multi_city_dropdownvalue = 'Select Currency Code';
+
 
   var items = [
     'Select Currency Code',
@@ -357,6 +359,10 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
 
     String fromDate = '';
     TextEditingController FromdateInputController = TextEditingController();
+    //Multi city Departure controller
+    TextEditingController Multi_city_FromdateInputController = TextEditingController();
+
+
     // TextEditingController TodateInputController = TextEditingController();
     // bool first = false;
     TextEditingController returnFromdateInputController = TextEditingController();
@@ -458,7 +464,7 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
           Container(
             //margin: EdgeInsets.fromLTRB(30, 0, 0, 0),
             //padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
-            height: 600,
+            height: 550,
             width: 360,
             margin: EdgeInsets.only(
                 left: 0.0, top: 0.0, right: 0.0, bottom: 0.0),
@@ -566,44 +572,7 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          height: 50,
-                          width: 340,
-                          //color: Colors.white,
-                          color: Colors.white,
 
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              DropdownButton(
-                                isExpanded: true,
-                                // Initial Value
-                                value: currency_code_dropdownvalue,
-                                // Down Arrow Icon
-                                icon: const Icon(Icons.keyboard_arrow_down),
-                                // Array list of items
-                                items: items.map((String items) {
-                                  return DropdownMenuItem(
-                                    value: items,
-                                    child: Text(items),
-                                  );
-                                }).toList(),
-                                // After selecting the desired option,it will
-                                // change button value to selected value
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    currency_code_dropdownvalue = newValue!;
-
-
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
                         SizedBox(
                           height: 10,
                         ),
@@ -642,6 +611,44 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
                                   FromdateInputController.text = fromDate;
                                 }
                               }
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          height: 50,
+                          width: 340,
+                          //color: Colors.white,
+                          color: Colors.white,
+
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              DropdownButton(
+                                isExpanded: true,
+                                // Initial Value
+                                value: currency_code_dropdownvalue,
+                                // Down Arrow Icon
+                                icon: const Icon(Icons.keyboard_arrow_down),
+                                // Array list of items
+                                items: items.map((String items) {
+                                  return DropdownMenuItem(
+                                    value: items,
+                                    child: Text(items),
+                                  );
+                                }).toList(),
+                                // After selecting the desired option,it will
+                                // change button value to selected value
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    currency_code_dropdownvalue = newValue!;
+
+
+                                  });
+                                },
+                              ),
+                            ],
                           ),
                         ),
                         SizedBox(
@@ -872,42 +879,7 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
                           ),
                         ),
 
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          height: 50,
-                          width: 340,
-                          //color: Colors.white,
-                          color: Colors.white,
 
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              DropdownButton(
-                                isExpanded: true,
-                                // Initial Value
-                                value: currency_code_Rndtrp_dropdownvalue,
-                                // Down Arrow Icon
-                                icon: const Icon(Icons.keyboard_arrow_down),
-                                // Array list of items
-                                items: items.map((String items) {
-                                  return DropdownMenuItem(
-                                    value: items,
-                                    child: Text(items),
-                                  );
-                                }).toList(),
-                                // After selecting the desired option,it will
-                                // change button value to selected value
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    currency_code_Rndtrp_dropdownvalue = newValue!;
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
                         SizedBox(
                           height: 10,
                         ),
@@ -1028,6 +1000,42 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
                           //     }
                           // ),
                         ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          height: 50,
+                          width: 340,
+                          //color: Colors.white,
+                          color: Colors.white,
+
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              DropdownButton(
+                                isExpanded: true,
+                                // Initial Value
+                                value: currency_code_Rndtrp_dropdownvalue,
+                                // Down Arrow Icon
+                                icon: const Icon(Icons.keyboard_arrow_down),
+                                // Array list of items
+                                items: items.map((String items) {
+                                  return DropdownMenuItem(
+                                    value: items,
+                                    child: Text(items),
+                                  );
+                                }).toList(),
+                                // After selecting the desired option,it will
+                                // change button value to selected value
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    currency_code_Rndtrp_dropdownvalue = newValue!;
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
 
 
                         SizedBox(
@@ -1134,41 +1142,246 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
                         // Dynamic list of flight segments
                         ListView.builder(
                           shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+
                           itemCount: flights.length,
                           itemBuilder: (context, index) {
                             return Card(
-                              margin: EdgeInsets.symmetric(horizontal: 8),
+                              margin: EdgeInsets.symmetric(horizontal: 0),
                               elevation: 4,
                               child: Padding(
-                                padding: const EdgeInsets.all(16.0),
+                                padding: const EdgeInsets.all(4.0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    // Departure city
-                                    TextField(
-                                      controller: flights[index]["departure"],
-                                      decoration: InputDecoration(
-                                        labelText: 'Departure City',
-                                        border: OutlineInputBorder(),
+                                    Column(
+                                      children: [
+                                        Text(
+                                          'Flight ${index + 1}',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+
+                                Center(
+                                   child: Container(
+                                      width: 340,
+                                      height: 50,
+                                      color: Colors.blueGrey,
+                                      child:TextField(
+                                        controller: flights[index]["departure"],
+                                        readOnly: true,
+                                        style: TextStyle(fontSize: 16,fontWeight: FontWeight.w800),
+                                        onTap: () async{
+                                          print('Departure city clicked....');
+                                        },
+                                        decoration: InputDecoration(
+                                          filled: true,
+                                          fillColor: Color(0xFFFFFFFF),
+                                          prefixIcon: Icon(
+                                              Icons.flight, color: Colors.green),
+                                          border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(0),
+                                            ),
+                                          ),
+                                          hintText: 'Departure City',
+                                        ),
                                       ),
+                                    )
+                                )
+
+                                      ],
                                     ),
                                     SizedBox(height: 10),
                                     // Destination city
-                                    TextField(
-                                      controller: flights[index]["destination"],
-                                      decoration: InputDecoration(
-                                        labelText: 'Destination City',
-                                        border: OutlineInputBorder(),
+
+                                    Center(
+                                      child: Container(
+                                        width: 340,
+                                        height: 50,
+                                        color: Colors.blueGrey,
+                                        child:TextField(
+                                          //controller: flights[index]["departure"],
+                                          controller: flights[index]["destination"],
+                                          readOnly: true,
+                                          style: TextStyle(fontSize: 16,fontWeight: FontWeight.w800),
+                                          onTap: () async{
+                                            print('Departure city clicked....');
+                                          },
+                                          decoration: InputDecoration(
+                                            filled: true,
+                                            fillColor: Color(0xFFFFFFFF),
+                                            prefixIcon: Icon(
+                                                Icons.flight, color: Colors.green),
+                                            border: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(0),
+                                              ),
+                                            ),
+                                            hintText: 'Destination City',
+                                          ),
+                                        ),
                                       ),
                                     ),
+
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Center(
+                                      child: Container(
+                                        height: 50,
+                                        width: 340,
+                                        color: Colors.white,
+                                        child: TextField(
+                                            decoration: InputDecoration(
+                                              filled: true,
+                                              fillColor: Color(0xFFFFFFFF),
+                                              prefixIcon: Icon(
+                                                  Icons.calendar_month, color: Colors.green),
+                                              border: OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(0),
+                                                ),
+                                              ),
+
+                                              hintText: 'Multi city Departure',
+                                            ),
+
+                                            controller: Multi_city_FromdateInputController,
+                                            onTap: () async {
+                                              DateTime? pickedDate = await showDatePicker(
+                                                  context: context,
+                                                  initialDate: DateTime.now(),
+                                                  firstDate: DateTime(1950),
+                                                  lastDate: DateTime(2050));
+                                              if (pickedDate != null) {
+                                                Multi_city_FromdateInputController.text =
+                                                    pickedDate.toString();
+                                                fromDate = DateFormat('yyyy-MM-dd').format(
+                                                    pickedDate); // format date in required form here we use yyyy-MM-dd that means time is removed
+
+                                                Multi_city_FromdateInputController.text = fromDate;
+                                              }
+                                            }
+                                        ),
+                                      ),
+                                    ),
+                                    //Multi city currencty code
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                   Center(
+                                     child:  Container(
+                                       height: 50,
+                                       width: 340,
+                                       //color: Colors.white,
+                                       color: Colors.white,
+
+                                       child: Column(
+                                         mainAxisAlignment: MainAxisAlignment.center,
+                                         children: [
+                                           DropdownButton(
+                                             isExpanded: true,
+                                             // Initial Value
+                                             value: currency_code_Multi_city_dropdownvalue,
+                                             // Down Arrow Icon
+                                             icon: const Icon(Icons.keyboard_arrow_down),
+                                             // Array list of items
+                                             items: items.map((String items) {
+                                               return DropdownMenuItem(
+                                                 value: items,
+                                                 child: Text(items),
+                                               );
+                                             }).toList(),
+                                             // After selecting the desired option,it will
+                                             // change button value to selected value
+                                             onChanged: (String? newValue) {
+                                               setState(() {
+                                                 currency_code_Multi_city_dropdownvalue = newValue!;
+
+
+                                               });
+                                             },
+                                           ),
+                                         ],
+                                       ),
+                                     ),
+                                   ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Center(
+                                      child: Container(
+                                        height: 50,
+                                        width: 340,
+                                        color: Colors.white,
+                                        child: TextField(
+                                          controller: passengerController,
+                                          readOnly: true,
+                                          style: TextStyle(fontSize: 12),
+
+                                          onTap: () async{
+                                            print('Economy class clicked...');
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) => classTypesVC()),
+                                            );
+                                            print('Oneway selected ind');
+                                            print(selectedindex);
+                                            SharedPreferences prefs = await SharedPreferences.getInstance();
+                                            prefs.setInt('selectedIndexkey', selectedindex);
+
+                                          },
+                                          decoration: InputDecoration(
+                                            filled: true,
+                                            fillColor: Color(0xFFFFFFFF),
+                                            prefixIcon: Icon(Icons.account_circle_outlined,
+                                                color: Colors.green),
+                                            border: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(0),
+                                              ),
+                                            ),
+                                            hintText: 'Passengers',
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                    // TextField(
+                                    //   controller: flights[index]["destination"],
+                                    //   decoration: InputDecoration(
+                                    //     labelText: 'Destination City',
+                                    //     border: OutlineInputBorder(),
+                                    //   ),
+                                    // ),
                                   ],
                                 ),
                               ),
                             );
                           },
                         ),
-                        SizedBox(height: 20),
+                        SizedBox(height: 10),
+                        // Expanded(
+                        //   child: Container(
+                        //     child: Center(
+                        //       child: Text(
+                        //         'Second widget',
+                        //         style: TextStyle(
+                        //           color: Colors.white,
+                        //         ),
+                        //       ),
+                        //     ),
+                        //     color: Colors.amber,
+                        //     width: 200,
+                        //   ),
+                        // ),
+
                         // Add/Remove buttons
+
+
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -1183,14 +1396,73 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
                             ),
                           ],
                         ),
-                        SizedBox(height: 20),
-                        // Search button
-                        Center(
-                          child: ElevatedButton(
-                            onPressed: _searchFlights,
-                            child: Text('Search Flights'),
-                          ),
+
+                        SizedBox(
+                          height: 10,
                         ),
+
+                        //Multi city flight search button
+                        Center(
+                            child: InkWell(
+                              child: Container(
+                                  height: 50,
+                                  width: 340,
+                                  color: Colors.green,
+
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                        "Search",
+                                        style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w800,color: Colors.white),
+                                        textAlign: TextAlign.center
+                                    ),
+                                  )
+
+                              ),
+                              onTap: () async {
+
+                                if(Multi_city_FromdateInputController != ''){
+
+                                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                                  flightTokenstr = prefs.getString('flightTokenstrKey') ?? '';
+                                  print('multi city tap..');
+                                  print(flightTokenstr);
+                                  flightTokenstr = prefs.getString('flightTokenstrKey') ?? '';
+                                  prefs.setString("flightTokenstrKey", flightTokenstr);
+                                  prefs.setString("from_Datekey", Multi_city_FromdateInputController.text);
+                                  print(currency_code_dropdownvalue);
+                                  prefs.setString('currency_code_dropdownvaluekey', (currency_code_dropdownvalue));
+                                  prefs.setString('travel_classstr', (classstr));
+
+                                  print('Tapped onward....');
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => FlightOnWardTrip()),
+                                  );
+
+
+
+                                } else {
+                                  print('empty field...');
+                                  final snackBar = SnackBar(
+                                    content: Text('Please select currency code and date.'),
+                                  );
+                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                }
+
+
+                              },
+                            )
+                        )
+
+                        // Search button
+                        // Center(
+                        //   child: ElevatedButton(
+                        //     onPressed: _searchFlights,
+                        //     child: Text('Search Flights'),
+                        //   ),
+                        // ),
                       ],
                     ),
                   )
