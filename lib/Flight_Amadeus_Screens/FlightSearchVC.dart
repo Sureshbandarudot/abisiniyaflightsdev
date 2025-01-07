@@ -87,6 +87,8 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
       print("Selected Airport: $selectedAirport");
     }
   }
+
+
   // Handle date selection for the flight segment
   Future<void> _selectDate(BuildContext context, TextEditingController controller) async {
     final DateTime? selectedDate = await showDatePicker(
@@ -565,6 +567,84 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
                         Container(
                           height: 50,
                           width: 340,
+                          //color: Colors.white,
+                          color: Colors.white,
+
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              DropdownButton(
+                                isExpanded: true,
+                                // Initial Value
+                                value: currency_code_dropdownvalue,
+                                // Down Arrow Icon
+                                icon: const Icon(Icons.keyboard_arrow_down),
+                                // Array list of items
+                                items: items.map((String items) {
+                                  return DropdownMenuItem(
+                                    value: items,
+                                    child: Text(items),
+                                  );
+                                }).toList(),
+                                // After selecting the desired option,it will
+                                // change button value to selected value
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    currency_code_dropdownvalue = newValue!;
+
+
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+
+                        Container(
+                          height: 50,
+                          width: 340,
+                          color: Colors.white,
+                          child: TextField(
+                            controller: passengerController,
+                            readOnly: true,
+                            style: TextStyle(fontSize: 12),
+
+                            onTap: () async{
+                              print('Economy class clicked...');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => classTypesVC()),
+                              );
+                              print('Oneway selected ind');
+                              print(selectedindex);
+                              SharedPreferences prefs = await SharedPreferences.getInstance();
+                              prefs.setInt('selectedIndexkey', selectedindex);
+
+                            },
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Color(0xFFFFFFFF),
+                              prefixIcon: Icon(Icons.account_circle_outlined,
+                                  color: Colors.green),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(0),
+                                ),
+                              ),
+                              hintText: 'Passengers',
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          height: 50,
+                          width: 340,
                           color: Colors.white,
 
                           child: TextField(
@@ -690,83 +770,8 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
                               }
                           ),
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          height: 50,
-                          width: 340,
-                          //color: Colors.white,
-                          color: Colors.white,
-
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              DropdownButton(
-                                isExpanded: true,
-                                // Initial Value
-                                value: currency_code_dropdownvalue,
-                                // Down Arrow Icon
-                                icon: const Icon(Icons.keyboard_arrow_down),
-                                // Array list of items
-                                items: items.map((String items) {
-                                  return DropdownMenuItem(
-                                    value: items,
-                                    child: Text(items),
-                                  );
-                                }).toList(),
-                                // After selecting the desired option,it will
-                                // change button value to selected value
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    currency_code_dropdownvalue = newValue!;
 
 
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          height: 50,
-                          width: 340,
-                          color: Colors.white,
-                          child: TextField(
-                            controller: passengerController,
-                            readOnly: true,
-                            style: TextStyle(fontSize: 12),
-
-                            onTap: () async{
-                              print('Economy class clicked...');
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => classTypesVC()),
-                              );
-                              print('Oneway selected ind');
-                              print(selectedindex);
-                              SharedPreferences prefs = await SharedPreferences.getInstance();
-                              prefs.setInt('selectedIndexkey', selectedindex);
-
-                            },
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Color(0xFFFFFFFF),
-                              prefixIcon: Icon(Icons.account_circle_outlined,
-                                  color: Colors.green),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(0),
-                                ),
-                              ),
-                              hintText: 'Passengers',
-                            ),
-                          ),
-                        ),
                         SizedBox(
                           height: 30,
                         ),
@@ -789,11 +794,14 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
                           ),
                           onTap: () async {
 
-                            if(FromdateInputController.text != ''){
+                            // if(FromdateInputController.text != ''){
+                              //currency_code_dropdownvalue
+                              if(currency_code_dropdownvalue != "Select Currency Code"){
 
-                              SharedPreferences prefs = await SharedPreferences.getInstance();
+
+                                SharedPreferences prefs = await SharedPreferences.getInstance();
                               flightTokenstr = prefs.getString('flightTokenstrKey') ?? '';
-                              print('tap..');
+                              print('usd tap..');
                               print(flightTokenstr);
                               flightTokenstr = prefs.getString('flightTokenstrKey') ?? '';
                               prefs.setString("flightTokenstrKey", flightTokenstr);
@@ -812,7 +820,7 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
 
 
                             } else {
-                              print('empty field...');
+                              print('usd empty field...');
                               final snackBar = SnackBar(
                                 content: Text('Please select currency code and date.'),
                               );
@@ -865,6 +873,82 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
                   Container(
                     child: Column(
                       children: [
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          height: 50,
+                          width: 340,
+                          //color: Colors.white,
+                          color: Colors.white,
+
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              DropdownButton(
+                                isExpanded: true,
+                                // Initial Value
+                                value: currency_code_Rndtrp_dropdownvalue,
+                                // Down Arrow Icon
+                                icon: const Icon(Icons.keyboard_arrow_down),
+                                // Array list of items
+                                items: items.map((String items) {
+                                  return DropdownMenuItem(
+                                    value: items,
+                                    child: Text(items),
+                                  );
+                                }).toList(),
+                                // After selecting the desired option,it will
+                                // change button value to selected value
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    currency_code_Rndtrp_dropdownvalue = newValue!;
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+
+
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          height: 50,
+                          width: 340,
+                          color: Colors.white,
+                          child: TextField(
+                            controller: passengerController,
+                            readOnly: true,
+                            style: TextStyle(fontSize: 16),
+
+                            onTap: () async {
+                              print('Economy class clicked...');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => classTypesVC()),
+                              );
+                              print('Return selected ind');
+                              print(selectedindex);
+                              SharedPreferences prefs = await SharedPreferences.getInstance();
+                              prefs.setInt('selectedIndexkey', selectedindex);
+                            },
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Color(0xFFFFFFFF),
+                              prefixIcon: Icon(Icons.account_circle_outlined,
+                                  color: Colors.green),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(0),
+                                ),
+                              ),
+                              hintText: '1 Passenger , Economy',
+                            ),
+                          ),
+                        ),
                         SizedBox(
                           height: 10,
                         ),
@@ -1080,79 +1164,7 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
                         SizedBox(
                           height: 10,
                         ),
-                        Container(
-                          height: 50,
-                          width: 340,
-                          //color: Colors.white,
-                          color: Colors.white,
 
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              DropdownButton(
-                                isExpanded: true,
-                                // Initial Value
-                                value: currency_code_Rndtrp_dropdownvalue,
-                                // Down Arrow Icon
-                                icon: const Icon(Icons.keyboard_arrow_down),
-                                // Array list of items
-                                items: items.map((String items) {
-                                  return DropdownMenuItem(
-                                    value: items,
-                                    child: Text(items),
-                                  );
-                                }).toList(),
-                                // After selecting the desired option,it will
-                                // change button value to selected value
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    currency_code_Rndtrp_dropdownvalue = newValue!;
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-
-
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          height: 50,
-                          width: 340,
-                          color: Colors.white,
-                          child: TextField(
-                            controller: passengerController,
-                            readOnly: true,
-                            style: TextStyle(fontSize: 16),
-
-                            onTap: () async {
-                              print('Economy class clicked...');
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => classTypesVC()),
-                              );
-                              print('Return selected ind');
-                              print(selectedindex);
-                              SharedPreferences prefs = await SharedPreferences.getInstance();
-                              prefs.setInt('selectedIndexkey', selectedindex);
-                            },
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Color(0xFFFFFFFF),
-                              prefixIcon: Icon(Icons.account_circle_outlined,
-                                  color: Colors.green),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(0),
-                                ),
-                              ),
-                              hintText: '1 Passenger , Economy',
-                            ),
-                          ),
-                        ),
                         SizedBox(
                           height: 30,
                         ),
@@ -1173,31 +1185,68 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
 
                           ),
                           onTap: () async {
-                            print("tapped on container");
-                            SharedPreferences prefs = await SharedPreferences.getInstance();
-                            flightTokenstr = prefs.getString('flightTokenstrKey') ?? '';
-                            print('tap..');
-                            print(flightTokenstr);
-                            flightTokenstr = prefs.getString('flightTokenstrKey') ?? '';
-                            prefs.setString("flightTokenstrKey", flightTokenstr);
-                            prefs.setString("Oneway_iatacodekey", Retrived_Oneway_iatacodestr);
-                            prefs.setString("Oneway_Citynamekey", Retrived_Oneway_Citynamestr);
-                            prefs.setString("Oneway_Destinationiatacodekey", RetrivedOneway_Oneway_Destinationiatacodestr);
-                            prefs.setString("Oneway_DestinationCitynamekey", RetrivedOnew_Oneway_DestinationCitynamestr);
-
-                            prefs.setString("returnfrom_Datekey", returnFromdateInputController.text);
-                            prefs.setString("returnto_Datekey", TodateInputController.text);
-                            print(currency_code_Rndtrp_dropdownvalue);
-                            prefs.setString('currency_code_Rndtrp_dropdownvaluekey', (currency_code_Rndtrp_dropdownvalue));
-
+                            // print("tapped on container");
+                            // SharedPreferences prefs = await SharedPreferences.getInstance();
+                            // flightTokenstr = prefs.getString('flightTokenstrKey') ?? '';
+                            // print('tap..');
+                            // print(flightTokenstr);
+                            // flightTokenstr = prefs.getString('flightTokenstrKey') ?? '';
+                            // prefs.setString("flightTokenstrKey", flightTokenstr);
+                            // prefs.setString("Oneway_iatacodekey", Retrived_Oneway_iatacodestr);
+                            // prefs.setString("Oneway_Citynamekey", Retrived_Oneway_Citynamestr);
+                            // prefs.setString("Oneway_Destinationiatacodekey", RetrivedOneway_Oneway_Destinationiatacodestr);
+                            // prefs.setString("Oneway_DestinationCitynamekey", RetrivedOnew_Oneway_DestinationCitynamestr);
+                            //
+                            // prefs.setString("returnfrom_Datekey", returnFromdateInputController.text);
+                            // prefs.setString("returnto_Datekey", TodateInputController.text);
+                            // print(currency_code_Rndtrp_dropdownvalue);
+                            // prefs.setString('currency_code_Rndtrp_dropdownvaluekey', (currency_code_Rndtrp_dropdownvalue));
+                            //
 
 
                             print('forward Tapped onward....');
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Flight_Round_Trip()),
-                            );
+                            if(currency_code_Rndtrp_dropdownvalue != "Select Currency Code"){
+
+
+                              print("tapped on container");
+                              SharedPreferences prefs = await SharedPreferences.getInstance();
+                              flightTokenstr = prefs.getString('flightTokenstrKey') ?? '';
+                              print('tap..');
+                              print(flightTokenstr);
+                              flightTokenstr = prefs.getString('flightTokenstrKey') ?? '';
+                              prefs.setString("flightTokenstrKey", flightTokenstr);
+                              prefs.setString("Oneway_iatacodekey", Retrived_Oneway_iatacodestr);
+                              prefs.setString("Oneway_Citynamekey", Retrived_Oneway_Citynamestr);
+                              prefs.setString("Oneway_Destinationiatacodekey", RetrivedOneway_Oneway_Destinationiatacodestr);
+                              prefs.setString("Oneway_DestinationCitynamekey", RetrivedOnew_Oneway_DestinationCitynamestr);
+
+                              prefs.setString("returnfrom_Datekey", returnFromdateInputController.text);
+                              prefs.setString("returnto_Datekey", TodateInputController.text);
+                              print(currency_code_Rndtrp_dropdownvalue);
+                              prefs.setString('currency_code_Rndtrp_dropdownvaluekey', (currency_code_Rndtrp_dropdownvalue));
+
+
+                              print('Tapped onward....');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Flight_Round_Trip()),
+                              );
+
+
+
+                            } else {
+                              print('usd empty field...');
+                              final snackBar = SnackBar(
+                                content: Text('Please select currency code.'),
+                              );
+                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            }
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //       builder: (context) => Flight_Round_Trip()),
+                            // );
                           },
                         )
                       ],
@@ -1217,6 +1266,92 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
                         // ),
                         // SizedBox(height: 20),
                         // Dynamic list of flight segments
+                        //Multi city currencty code
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Center(
+                          child:  Container(
+                            height: 50,
+                            width: 340,
+                            //color: Colors.white,
+                            color: Colors.white,
+
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                DropdownButton(
+                                  isExpanded: true,
+                                  // Initial Value
+                                  value: currency_code_Multi_city_dropdownvalue,
+                                  // Down Arrow Icon
+                                  icon: const Icon(Icons.keyboard_arrow_down),
+                                  // Array list of items
+                                  items: items.map((String items) {
+                                    return DropdownMenuItem(
+                                      value: items,
+                                      child: Text(items),
+                                    );
+                                  }).toList(),
+                                  // After selecting the desired option,it will
+                                  // change button value to selected value
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      currency_code_Multi_city_dropdownvalue = newValue!;
+
+
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Center(
+                          child: Container(
+                            height: 50,
+                            width: 340,
+                            color: Colors.white,
+                            child: TextField(
+                              controller: passengerController,
+                              readOnly: true,
+                              style: TextStyle(fontSize: 12),
+
+                              onTap: () async{
+                                print('Economy class clicked...');
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => classTypesVC()),
+                                );
+                                print('Oneway selected ind');
+                                print(selectedindex);
+                                SharedPreferences prefs = await SharedPreferences.getInstance();
+                                prefs.setInt('selectedIndexkey', selectedindex);
+
+                              },
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Color(0xFFFFFFFF),
+                                prefixIcon: Icon(Icons.account_circle_outlined,
+                                    color: Colors.green),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(0),
+                                  ),
+                                ),
+                                hintText: 'Passengers',
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+
                         ListView.builder(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
@@ -1257,15 +1392,7 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
                                           print('Departure city clicked....');
                                           print('multi city way source clicked...');
                                           _selectAirport(context, true, index);
-                                          //print(_selectAirport(context, true, index));
 
-
-                                          // Navigator.push(
-                                          //   context,
-                                          //   MaterialPageRoute(
-                                          //       builder: (context) => multicityOrigincity()),
-                                          // );
-                                          // print('multicity selected ind1 ');
                                           print(selectedindex);
                                           SharedPreferences prefs = await SharedPreferences.getInstance();
                                           prefs.setInt('selectedIndexkey', selectedindex);
@@ -1309,7 +1436,9 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
                                           readOnly: true,
                                           style: TextStyle(fontSize: 16,fontWeight: FontWeight.w800),
                                           onTap: () async{
-                                            print('Departure city clicked....');
+                                            print('Destination  city clicked....');
+                                            _selectAirport(context, false, index);
+
                                           },
                                           decoration: InputDecoration(
                                             filled: true,
@@ -1406,88 +1535,6 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
 
                         // Add/Remove buttons
 
-                        //Multi city currencty code
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Center(
-                          child:  Container(
-                            height: 50,
-                            width: 340,
-                            //color: Colors.white,
-                            color: Colors.white,
-
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                DropdownButton(
-                                  isExpanded: true,
-                                  // Initial Value
-                                  value: currency_code_Multi_city_dropdownvalue,
-                                  // Down Arrow Icon
-                                  icon: const Icon(Icons.keyboard_arrow_down),
-                                  // Array list of items
-                                  items: items.map((String items) {
-                                    return DropdownMenuItem(
-                                      value: items,
-                                      child: Text(items),
-                                    );
-                                  }).toList(),
-                                  // After selecting the desired option,it will
-                                  // change button value to selected value
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      currency_code_Multi_city_dropdownvalue = newValue!;
-
-
-                                    });
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Center(
-                          child: Container(
-                            height: 50,
-                            width: 340,
-                            color: Colors.white,
-                            child: TextField(
-                              controller: passengerController,
-                              readOnly: true,
-                              style: TextStyle(fontSize: 12),
-
-                              onTap: () async{
-                                print('Economy class clicked...');
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => classTypesVC()),
-                                );
-                                print('Oneway selected ind');
-                                print(selectedindex);
-                                SharedPreferences prefs = await SharedPreferences.getInstance();
-                                prefs.setInt('selectedIndexkey', selectedindex);
-
-                              },
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Color(0xFFFFFFFF),
-                                prefixIcon: Icon(Icons.account_circle_outlined,
-                                    color: Colors.green),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(0),
-                                  ),
-                                ),
-                                hintText: 'Passengers',
-                              ),
-                            ),
-                          ),
-                        ),
 
 
 
@@ -1555,7 +1602,7 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
                                 } else {
                                   print('empty field...');
                                   final snackBar = SnackBar(
-                                    content: Text('Please select currency code and date.'),
+                                    content: Text('Please select currency code.'),
                                   );
                                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                 }
