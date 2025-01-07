@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 
 import '../flyScreens/Flights.dart';
 import '../flyScreens/airlineVC.dart';
+import 'Multi_city_Airport_pickup/Multi_city_origins_airports/multi_city_select_airportVC.dart';
 import 'OneWay_DestinationSelection/Oneway-DestinationJsonVC.dart';
 import 'OnwardJourneyVC.dart';
 import 'OnwardtripVC.dart';
@@ -31,6 +32,8 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
     {
       "departure": TextEditingController(),
       "destination": TextEditingController(),
+      "departureDate": TextEditingController(),
+
     }
   ];
 
@@ -40,9 +43,15 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
       flights.add({
         "departure": TextEditingController(),
         "destination": TextEditingController(),
+        "departureDate": TextEditingController(),
+
       });
     });
   }
+
+  // Date format
+  final DateFormat _dateFormat = DateFormat('yyyy-MM-dd');
+
 
   // Remove the last flight segment
   void _removeFlightSegment() {
@@ -50,6 +59,53 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
       setState(() {
         flights.removeLast();
       });
+    }
+  }
+
+  // Open the airport selection page
+  void _selectAirport(BuildContext context, bool isDeparture, int index) async {
+    final selectedAirport = await Navigator.push<String>(
+      context,
+      MaterialPageRoute(
+        builder: (context) => multicityOrigincity(
+          onAirportSelected: (airport) {
+            // Set the selected airport to the respective text field
+            setState(() {
+              if (isDeparture) {
+                flights[index]["departure"]?.text = airport;
+              } else {
+                flights[index]["destination"]?.text = airport;
+              }
+            });
+          },
+        ),
+      ),
+    );
+
+    // Optionally, you can handle the selected airport here if needed
+    if (selectedAirport != null) {
+      print("Selected Airport: $selectedAirport");
+    }
+  }
+  // Handle date selection for the flight segment
+  Future<void> _selectDate(BuildContext context, TextEditingController controller) async {
+    final DateTime? selectedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    //     if (pickedDate != null) {
+    //   Multi_city_FromdateInputController.text =
+    //       pickedDate.toString();
+    //   fromDate = DateFormat('yyyy-MM-dd').format(
+    //       pickedDate); // format date in required form here we use yyyy-MM-dd that means time is removed
+    //
+    //   Multi_city_FromdateInputController.text = fromDate;
+    // }
+    );
+
+    if (selectedDate != null) {
+      controller.text = _dateFormat.format(selectedDate);
     }
   }
 
@@ -103,6 +159,10 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
   String Retrived_Oneway_iatacodestr = '';
   String Retrived_Oneway_Citynamestr = '';
   String Retrived_Oneway_Airportnamestr = '';
+  //Multi city Airport pick up variables
+  String Retrived_multicity_iatacodestr = '';
+  String Retrived_multicity_Citynamestr = '';
+  String Retrived_multicity_Airportnamestr = '';
 
   String RetrivedOneway_Oneway_Destinationiatacodestr = '';
   String RetrivedOnew_Oneway_DestinationCitynamestr = '';
@@ -164,6 +224,19 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
 
       RetrivedOneway_Oneway_Destinationiatacodestr = prefs.getString('Oneway_Destinationiatacodekey') ?? '';
       RetrivedOnew_Oneway_DestinationCitynamestr = prefs.getString('Oneway_DestinationCitynamekey') ?? '';
+
+
+      //Multicity airport cities pick up
+      Retrived_multicity_iatacodestr = prefs.getString('multicity_iatacodekey') ?? '';
+      Retrived_multicity_Citynamestr = prefs.getString('multicity_Citynamekey') ?? '';
+      Retrived_multicity_iatacodestr = prefs.getString('multicity_iatacodekey') ?? '';
+      print('Retrived_multicity_iatacodestr....');
+      print(Retrived_multicity_iatacodestr);
+      print('Retrived_multicity_Citynamestr...');
+      print(Retrived_multicity_Citynamestr);
+
+      //Retrived_Oneway_Airportnamestr = prefs.getString('Oneway_Oneway_Airportnamestrkey') ?? '';
+
       print('flight token received...');
       print(flightTokenstr);
       print('current page1...');
@@ -388,6 +461,10 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
     // Rnd_DestinationAirportCityController.text = Retrived_Rndtrp_Destination_iatacodestr;
 
     //DestinationAirportCityController.text = DestinationAirportcitystr;
+    //Multi city textfields
+    TextEditingController multicity_OriginAirportCityController = TextEditingController();
+    TextEditingController multicity_DestinationAirportCityController = TextEditingController();
+
 
 
     passengerController.text = passengerliststr + " ," + classstr;
@@ -1146,6 +1223,9 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
 
                           itemCount: flights.length,
                           itemBuilder: (context, index) {
+                            print('');
+                            //Retrived_multicity_iatacodestr = prefs.getString('multicity_iatacodekey') ?? '';
+
                             return Card(
                               margin: EdgeInsets.symmetric(horizontal: 0),
                               elevation: 4,
@@ -1175,6 +1255,27 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
                                         style: TextStyle(fontSize: 16,fontWeight: FontWeight.w800),
                                         onTap: () async{
                                           print('Departure city clicked....');
+                                          print('multi city way source clicked...');
+                                          _selectAirport(context, true, index);
+                                          //print(_selectAirport(context, true, index));
+
+
+                                          // Navigator.push(
+                                          //   context,
+                                          //   MaterialPageRoute(
+                                          //       builder: (context) => multicityOrigincity()),
+                                          // );
+                                          // print('multicity selected ind1 ');
+                                          print(selectedindex);
+                                          SharedPreferences prefs = await SharedPreferences.getInstance();
+                                          prefs.setInt('selectedIndexkey', selectedindex);
+                                          prefs.setString("multicityDeparturekey", 'OnewayDeparture');
+                                          prefs.setString("multicity_iatacodekey", Retrived_multicity_iatacodestr);
+                                          prefs.setString("multicity_Citynamekey", Retrived_multicity_Citynamestr);
+
+
+
+
                                         },
                                         decoration: InputDecoration(
                                           filled: true,
@@ -1248,108 +1349,32 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
 
                                               hintText: 'Multi city Departure',
                                             ),
+                                            controller: flights[index]["departureDate"],
 
-                                            controller: Multi_city_FromdateInputController,
-                                            onTap: () async {
-                                              DateTime? pickedDate = await showDatePicker(
-                                                  context: context,
-                                                  initialDate: DateTime.now(),
-                                                  firstDate: DateTime(1950),
-                                                  lastDate: DateTime(2050));
-                                              if (pickedDate != null) {
-                                                Multi_city_FromdateInputController.text =
-                                                    pickedDate.toString();
-                                                fromDate = DateFormat('yyyy-MM-dd').format(
-                                                    pickedDate); // format date in required form here we use yyyy-MM-dd that means time is removed
 
-                                                Multi_city_FromdateInputController.text = fromDate;
-                                              }
-                                            }
+                                           // controller: Multi_city_FromdateInputController,
+
+                                          onTap: () => _selectDate(context, flights[index]["departureDate"]!),
+
+                                          //  onTap: () async {
+                                           //    DateTime? pickedDate = await showDatePicker(
+                                           //        context: context,
+                                           //        initialDate: DateTime.now(),
+                                           //        firstDate: DateTime(1950),
+                                           //        lastDate: DateTime(2050));
+                                           //    if (pickedDate != null) {
+                                           //      Multi_city_FromdateInputController.text =
+                                           //          pickedDate.toString();
+                                           //      fromDate = DateFormat('yyyy-MM-dd').format(
+                                           //          pickedDate); // format date in required form here we use yyyy-MM-dd that means time is removed
+                                           //
+                                           //      Multi_city_FromdateInputController.text = fromDate;
+                                           //    }
+                                           //  }
                                         ),
                                       ),
                                     ),
-                                    //Multi city currencty code
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                   Center(
-                                     child:  Container(
-                                       height: 50,
-                                       width: 340,
-                                       //color: Colors.white,
-                                       color: Colors.white,
 
-                                       child: Column(
-                                         mainAxisAlignment: MainAxisAlignment.center,
-                                         children: [
-                                           DropdownButton(
-                                             isExpanded: true,
-                                             // Initial Value
-                                             value: currency_code_Multi_city_dropdownvalue,
-                                             // Down Arrow Icon
-                                             icon: const Icon(Icons.keyboard_arrow_down),
-                                             // Array list of items
-                                             items: items.map((String items) {
-                                               return DropdownMenuItem(
-                                                 value: items,
-                                                 child: Text(items),
-                                               );
-                                             }).toList(),
-                                             // After selecting the desired option,it will
-                                             // change button value to selected value
-                                             onChanged: (String? newValue) {
-                                               setState(() {
-                                                 currency_code_Multi_city_dropdownvalue = newValue!;
-
-
-                                               });
-                                             },
-                                           ),
-                                         ],
-                                       ),
-                                     ),
-                                   ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Center(
-                                      child: Container(
-                                        height: 50,
-                                        width: 340,
-                                        color: Colors.white,
-                                        child: TextField(
-                                          controller: passengerController,
-                                          readOnly: true,
-                                          style: TextStyle(fontSize: 12),
-
-                                          onTap: () async{
-                                            print('Economy class clicked...');
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) => classTypesVC()),
-                                            );
-                                            print('Oneway selected ind');
-                                            print(selectedindex);
-                                            SharedPreferences prefs = await SharedPreferences.getInstance();
-                                            prefs.setInt('selectedIndexkey', selectedindex);
-
-                                          },
-                                          decoration: InputDecoration(
-                                            filled: true,
-                                            fillColor: Color(0xFFFFFFFF),
-                                            prefixIcon: Icon(Icons.account_circle_outlined,
-                                                color: Colors.green),
-                                            border: OutlineInputBorder(
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(0),
-                                              ),
-                                            ),
-                                            hintText: 'Passengers',
-                                          ),
-                                        ),
-                                      ),
-                                    )
                                     // TextField(
                                     //   controller: flights[index]["destination"],
                                     //   decoration: InputDecoration(
@@ -1380,6 +1405,90 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
                         // ),
 
                         // Add/Remove buttons
+
+                        //Multi city currencty code
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Center(
+                          child:  Container(
+                            height: 50,
+                            width: 340,
+                            //color: Colors.white,
+                            color: Colors.white,
+
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                DropdownButton(
+                                  isExpanded: true,
+                                  // Initial Value
+                                  value: currency_code_Multi_city_dropdownvalue,
+                                  // Down Arrow Icon
+                                  icon: const Icon(Icons.keyboard_arrow_down),
+                                  // Array list of items
+                                  items: items.map((String items) {
+                                    return DropdownMenuItem(
+                                      value: items,
+                                      child: Text(items),
+                                    );
+                                  }).toList(),
+                                  // After selecting the desired option,it will
+                                  // change button value to selected value
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      currency_code_Multi_city_dropdownvalue = newValue!;
+
+
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Center(
+                          child: Container(
+                            height: 50,
+                            width: 340,
+                            color: Colors.white,
+                            child: TextField(
+                              controller: passengerController,
+                              readOnly: true,
+                              style: TextStyle(fontSize: 12),
+
+                              onTap: () async{
+                                print('Economy class clicked...');
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => classTypesVC()),
+                                );
+                                print('Oneway selected ind');
+                                print(selectedindex);
+                                SharedPreferences prefs = await SharedPreferences.getInstance();
+                                prefs.setInt('selectedIndexkey', selectedindex);
+
+                              },
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Color(0xFFFFFFFF),
+                                prefixIcon: Icon(Icons.account_circle_outlined,
+                                    color: Colors.green),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(0),
+                                  ),
+                                ),
+                                hintText: 'Passengers',
+                              ),
+                            ),
+                          ),
+                        ),
+
 
 
                         Row(
