@@ -3,6 +3,8 @@ import 'package:intl/intl.dart';
 
 import '../flyScreens/Flights.dart';
 import '../flyScreens/airlineVC.dart';
+import 'Multi_City_flightSearch/multi_city_tripVC.dart';
+import 'Multi_City_flightSearch/multi_city_trip_flightsearchVC.dart';
 import 'Multi_city_Airport_pickup/Multi_city_origins_airports/multi_city_select_airportVC.dart';
 import 'OneWay_DestinationSelection/Oneway-DestinationJsonVC.dart';
 import 'OnwardJourneyVC.dart';
@@ -19,6 +21,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class FlightSearchVC extends StatefulWidget {
   String classstr = '';
+
 
   @override
   _FlightSearchVCState createState() => _FlightSearchVCState();
@@ -49,8 +52,24 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
     });
   }
 
+
+
   // Date format
   final DateFormat _dateFormat = DateFormat('yyyy-MM-dd');
+  String multicity_departure_airport = '';
+  String multicity_destination_airport = '';
+  String multicity_departure_Date = '';
+  List<String> departureAirports = [];
+  List<String> destinationAirports = [];
+  List<String> multicity_dates = [];
+
+  List<String> selected_dates = [];
+
+
+
+
+
+
 
 
   // Remove the last flight segment
@@ -73,6 +92,10 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
             setState(() {
               if (isDeparture) {
                 flights[index]["departure"]?.text = airport;
+                //  multicity_departure_airport = flights[index]["departure"]?.text ?? "";
+                // print('selected airports1111...');
+                // print(multicity_departure_airport);
+
               } else {
                 flights[index]["destination"]?.text = airport;
               }
@@ -90,7 +113,7 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
 
 
   // Handle date selection for the flight segment
-  Future<void> _selectDate(BuildContext context, TextEditingController controller) async {
+  Future<void> _selectDate(BuildContext context, TextEditingController Datecontroller) async {
     final DateTime? selectedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -107,34 +130,51 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
     );
 
     if (selectedDate != null) {
-      controller.text = _dateFormat.format(selectedDate);
+      Datecontroller.text = _dateFormat.format(selectedDate);
+      print('dates...');
+      print(Datecontroller.text);
+      selected_dates.add(Datecontroller.text);
     }
   }
 
   // Handle search functionality
-  void _searchFlights() {
-    // Implement the flight search functionality here
-    // You can use APIs to fetch flight data based on the selected cities
 
-    // Just showing a message for now
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text('Searching Flights'),
-          content: Text('You have searched for ${flights.length} flight segments.'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
+  void _searchFlights() {
+    // Collect the flight segment data
+    List<Map<String, String>> legs = [];
+    for (int i = 0; i < flights.length; i++) {
+      legs.add({
+        "origin": flights[i]["departure"]?.text ?? '',
+        "destination": flights[i]["destination"]?.text ?? '',
+        "departureDate": flights[i]["departureDate"]?.text ?? "2025-01-15",
+        // Example date
+      });
+    }
   }
+
+  // void _searchFlights() {
+  //   // Implement the flight search functionality here
+  //   // You can use APIs to fetch flight data based on the selected cities
+  //
+  //   // Just showing a message for now
+  //   showDialog(
+  //     context: context,
+  //     builder: (context) {
+  //       return AlertDialog(
+  //         title: Text('Searching Flights'),
+  //         content: Text('You have searched for ${flights.length} flight segments.'),
+  //         actions: <Widget>[
+  //           TextButton(
+  //             onPressed: () {
+  //               Navigator.pop(context);
+  //             },
+  //             child: Text('OK'),
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
 
 
 
@@ -1576,36 +1616,95 @@ class _FlightSearchVCState extends State<FlightSearchVC> with SingleTickerProvid
 
                               ),
                               onTap: () async {
+                                if(currency_code_Multi_city_dropdownvalue != "Select Currency Code"){
 
-                                if(Multi_city_FromdateInputController != ''){
 
                                   SharedPreferences prefs = await SharedPreferences.getInstance();
                                   flightTokenstr = prefs.getString('flightTokenstrKey') ?? '';
-                                  print('multi city tap..');
+                                  print('usd tap..');
                                   print(flightTokenstr);
                                   flightTokenstr = prefs.getString('flightTokenstrKey') ?? '';
                                   prefs.setString("flightTokenstrKey", flightTokenstr);
-                                  prefs.setString("from_Datekey", Multi_city_FromdateInputController.text);
+                                  prefs.setString("from_Datekey", FromdateInputController.text);
                                   print(currency_code_dropdownvalue);
                                   prefs.setString('currency_code_dropdownvaluekey', (currency_code_dropdownvalue));
                                   prefs.setString('travel_classstr', (classstr));
 
-                                  print('Tapped onward....');
+
+                                  print('selected airports...');
+                                  print(multicity_departure_airport);
+                                  //multicity_departure_airport = flights[index]["departure"]?.text ?? "";
+
+
+                                  flights.asMap().forEach((index, flight) {
+                                    multicity_departure_airport = flight["departure"]?.text ?? "";
+                                    print('Index: $index, Departure: $multicity_departure_airport');
+                                    departureAirports.add(multicity_departure_airport);
+
+                                    multicity_destination_airport = flight["destination"]?.text ?? "";
+                                    print('Index: $index, Destination: $multicity_destination_airport');
+                                    destinationAirports.add(multicity_destination_airport);
+
+                                    multicity_departure_Date = flight["departureDate"]?.text ?? "";
+                                    print('Index: $index, selected Dates: $multicity_departure_Date');
+                                    multicity_dates.add(multicity_departure_Date);
+                                  });
+
+
+                                  print('dates........');
+                                  print(selected_dates);
+
+                                  //                                          onTap: () => _selectDate(context, flights[index]["departureDate"]!),
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => FlightOnWardTrip()),
+                                      builder: (context) => Flight_Multicity_Trip(
+                                        Received_departure_Airports: departureAirports,
+                                        Received_destination_Airports: destinationAirports,
+                                        Received_Dates: multicity_dates,
+                                      ), // Pass airport here
+                                    ),
                                   );
 
 
 
                                 } else {
-                                  print('empty field...');
+                                  print('usd empty field...');
                                   final snackBar = SnackBar(
-                                    content: Text('Please select currency code.'),
+                                    content: Text('Please select currency code and date.'),
                                   );
                                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                 }
+
+                                // if(Multi_city_FromdateInputController != ''){
+                                //
+                                //   SharedPreferences prefs = await SharedPreferences.getInstance();
+                                //   flightTokenstr = prefs.getString('flightTokenstrKey') ?? '';
+                                //   print('multi city tap..');
+                                //   print(flightTokenstr);
+                                //   flightTokenstr = prefs.getString('flightTokenstrKey') ?? '';
+                                //   prefs.setString("flightTokenstrKey", flightTokenstr);
+                                //   prefs.setString("from_Datekey", Multi_city_FromdateInputController.text);
+                                //   print(currency_code_dropdownvalue);
+                                //   prefs.setString('currency_code_dropdownvaluekey', (currency_code_dropdownvalue));
+                                //   prefs.setString('travel_classstr', (classstr));
+                                //
+                                //   print('Tapped onward....');
+                                //   Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) => FlightOnWardTrip()),
+                                //   );
+                                //
+                                //
+                                //
+                                // } else {
+                                //   print('empty field...');
+                                //   final snackBar = SnackBar(
+                                //     content: Text('Please select currency code.'),
+                                //   );
+                                //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                // }
 
 
                               },

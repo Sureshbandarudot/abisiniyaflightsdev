@@ -14,6 +14,8 @@ class multicityOrigincity extends StatefulWidget {
 
   // HomePage({Key key}) : super(key: key);
   final Function(String) onAirportSelected;
+  //final Function(String) onAirportSelected_iata;
+
 
   multicityOrigincity({required this.onAirportSelected});
 
@@ -285,8 +287,11 @@ class _HomePageState extends State<multicityOrigincity> {
                 // prefs.setString("multicity_Citynamekey", multicity_Cityname);
                 print('selected city...');
                 print(_searchResult[index].City);
+
                 //onAirportSelected(_userDetails[index].City);
                 widget.onAirportSelected(_searchResult[index].City);
+                widget.onAirportSelected(_searchResult[index].iata);
+
                 Navigator.pop(context);
 
                 // Navigator.push(
