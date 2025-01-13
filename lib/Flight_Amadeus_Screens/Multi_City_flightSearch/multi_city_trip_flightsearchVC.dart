@@ -49,6 +49,9 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
   String totalpricevalues = '';
   String totalpriceSignvalues = '';
   List travelersArray = [];
+  List originDestinationsArray = [];
+
+
   var travelerIdArray = [];
   var segmentValuesAray = [];
   var segmentValuesAraycnt = [];
@@ -163,6 +166,16 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
   var ReturnJourney_durationArray = [];
   var ReturnJourney_carrierCodeArray = [];
   var ReturnJourney_carrierCodeArray1 = [];
+  //Third Flight details
+  //Return Journey details
+  var Multi_third_Journey_depiataCodelist = [];
+  var Multi_third_Journey_arrivaliataCodelist = [];
+  var Multi_third_Journey_DeptimeArray = [];
+  var Multi_third_ArrivaltimeArray = [];
+  var Multi_third_Journey_dateArray = [];
+  var Multi_third_Journey_durationArray = [];
+  var Multi_third_Journey_carrierCodeArray = [];
+  var Multi_third_Journey_carrierCodeArray1 = [];
 
   var ReturnJourney_airlineCodeArray = [];
   var ReturnJourney_airlineNameArray = [];
@@ -716,456 +729,85 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
     print(Aduld_cnt);
 
 
-    if(Aduld_cnt >= 1 && children_cnt == 0 && infant_cnt == 0) {
-      print('first adult checking....');
 
-      if (Aduld_cnt == 1) {
-        print('first adult checking....');
-
-        travelersArray = <Map<String, dynamic>>[
+    // print('Received values....');
+    // print(widget.Received_departure_Airports.first);
+    // print(widget.Received_departure_Airports[1]);
+    // print('Received_departure_Airports cnt..');
+    // print(widget.Received_departure_Airports.length);
+    // print(widget.Received_destination_Airports.first);
+    // print(widget.Received_destination_Airports[1]);
+    // print('widget.Received_destination_Airports cnt');
+    // print(widget.Received_destination_Airports.length);
+    // print(widget.Received_Dates.first);
+    // print(widget.Received_Dates[1]);
+      if (widget.Received_departure_Airports.length == 1 && widget.Received_destination_Airports.length == 1) {
+        print('Checking with 1 flight...');
+        originDestinationsArray = <Map<String, dynamic>>[
           {
             "id": "1",
-            "travelerType": 'ADULT',
-            "fareOptions": [
-              "STANDARD"
-            ],
+            "originLocationCode": widget.Received_departure_Airports.first,
+            "destinationLocationCode": widget.Received_destination_Airports.first,
+            "departureDateTimeRange": {
+              "date": widget.Received_Dates.first
+            }
           },
         ];
-      } else if (Aduld_cnt == 2) {
-        print('second adult checking....');
-
-        travelersArray = <Map<String, dynamic>>[
-          {
-            "id": "1",
-            "travelerType": 'ADULT',
-            "fareOptions": [
-              "STANDARD"
-            ]
-          },
-
-          {
-            "id": "2",
-            "travelerType": 'ADULT',
-            "fareOptions": [
-              "STANDARD"
-            ]
+      } else if (widget.Received_departure_Airports.length == 2 && widget.Received_destination_Airports.length == 2) {
+        print('Checking with 2 flight...');
+      originDestinationsArray = <Map<String, dynamic>>[
+        {
+          "id": "1",
+          "originLocationCode": widget.Received_departure_Airports.first,
+          "destinationLocationCode": widget.Received_destination_Airports.first,
+          "departureDateTimeRange": {
+            "date": widget.Received_Dates.first
           }
-
-        ];
-      } else if (Aduld_cnt == 3) {
-        print('second adult checking....');
-
-        travelersArray = <Map<String, dynamic>>[
-          {
-            "id": "1",
-            "travelerType": 'ADULT',
-            "fareOptions": [
-              "STANDARD"
-            ]
-          },
-
-          {
-            "id": "2",
-            "travelerType": 'ADULT',
-            "fareOptions": [
-              "STANDARD"
-            ]
-          },
-          {
-            "id": "3",
-            "travelerType": 'ADULT',
-            "fareOptions": [
-              "STANDARD"
-            ]
+        },
+        {
+          "id": "2",
+          "originLocationCode": widget.Received_departure_Airports[1],
+          "destinationLocationCode": widget.Received_destination_Airports[1],
+          "departureDateTimeRange": {
+            "date": widget.Received_Dates[1]
           }
-
-        ];
-      } else if (Aduld_cnt == 4) {
-        print('second adult checking....');
-
-        travelersArray = <Map<String, dynamic>>[
-          {
-            "id": "1",
-            "travelerType": 'ADULT',
-            "fareOptions": [
-              "STANDARD"
-            ]
-          },
-
-          {
-            "id": "2",
-            "travelerType": 'ADULT',
-            "fareOptions": [
-              "STANDARD"
-            ]
-          },
-          {
-            "id": "3",
-            "travelerType": 'ADULT',
-            "fareOptions": [
-              "STANDARD"
-            ]
-          },
-          {
-            "id": "4",
-            "travelerType": 'ADULT',
-            "fareOptions": [
-              "STANDARD"
-            ]
+        }
+      ];
+    } else if(widget.Received_departure_Airports.length == 3 && widget.Received_destination_Airports.length == 3) {
+        print('Checking with 3 flight...');
+        originDestinationsArray = <Map<String, dynamic>>[
+        {
+          "id": "1",
+          "originLocationCode": widget.Received_departure_Airports.first,
+          "destinationLocationCode": widget.Received_destination_Airports.first,
+          "departureDateTimeRange": {
+            "date": widget.Received_Dates.first
           }
-
-        ];
-      } else {
-        print('second adult checking....');
-
-        travelersArray = <Map<String, dynamic>>[
-          {
-            "id": "1",
-            "travelerType": 'ADULT',
-            "fareOptions": [
-              "STANDARD"
-            ]
-          },
-
-          {
-            "id": "2",
-            "travelerType": 'ADULT',
-            "fareOptions": [
-              "STANDARD"
-            ]
-          },
-          {
-            "id": "3",
-            "travelerType": 'ADULT',
-            "fareOptions": [
-              "STANDARD"
-            ]
-          },
-          {
-            "id": "4",
-            "travelerType": 'ADULT',
-            "fareOptions": [
-              "STANDARD"
-            ]
-          },
-          {
-            "id": "5",
-            "travelerType": 'ADULT',
-            "fareOptions": [
-              "STANDARD"
-            ]
+        },
+        {
+          "id": "2",
+          "originLocationCode": widget.Received_departure_Airports[1],
+          "destinationLocationCode": widget.Received_destination_Airports[1],
+          "departureDateTimeRange": {
+            "date": widget.Received_Dates[1]
           }
-
-        ];
-      }
-    } else if(Aduld_cnt == 1 && children_cnt == 1 && infant_cnt == 1) {
-      print('1 adult,1 child and 1 infant');
-      travelersArray = <Map<String, dynamic>>[
-        {
-          "id": "1",
-          "travelerType": "ADULT",
-          "fareOptions": [
-            "STANDARD"
-          ]
-        },
-        {
-          "id": "2",
-          "travelerType": "CHILD",
-          "fareOptions": [
-            "STANDARD"
-          ]
         },
         {
           "id": "3",
-          "travelerType": "HELD_INFANT",
-          "fareOptions": [
-            "STANDARD"
-          ],
-          "associatedAdultId": "1"
-        }
-        // {
-        //   "id": "1",
-        //   "travelerType": 'ADULT',
-        //   "fareOptions": [
-        //     "STANDARD"
-        //   ]
-        // },
-        //
-        // {
-        //   "id": "2",
-        //   "travelerType": 'CHILD',
-        //   "fareOptions": [
-        //     "STANDARD"
-        //   ]
-        // },
-        // {
-        //   "id": "3",
-        //   "travelerType": 'HELD_INFANT',
-        //   "fareOptions": [
-        //     "STANDARD"
-        //   ],
-        //   "associatedAdultId": "1"
-        // }
-      ];
-    } else if(Aduld_cnt == 1 && children_cnt == 1 && infant_cnt == 0) {
-      print('1 adult,1 child ');
-      travelersArray = <Map<String, dynamic>>[
-        {
-          "id": "1",
-          "travelerType": "ADULT",
-          "fareOptions": [
-            "STANDARD"
-          ]
-        },
-        {
-          "id": "2",
-          "travelerType": "CHILD",
-          "fareOptions": [
-            "STANDARD"
-          ]
+          "originLocationCode": widget.Received_departure_Airports[2],
+          "destinationLocationCode": widget.Received_destination_Airports[2],
+          "departureDateTimeRange": {
+            "date": widget.Received_Dates[2]
+          }
         }
       ];
-    } else if(Aduld_cnt == 2 && children_cnt == 1 && infant_cnt == 0) {
-      print('2 adult,1 child ');
-      travelersArray = <Map<String, dynamic>>[
-        {
-          "id": "1",
-          "travelerType": "ADULT",
-          "fareOptions": [
-            "STANDARD"
-          ]
-        },
-        {
-          "id": "2",
-          "travelerType": "ADULT",
-          "fareOptions": [
-            "STANDARD"
-          ]
-        },
-        {
-          "id": "3",
-          "travelerType": "CHILD",
-          "fareOptions": [
-            "STANDARD"
-          ]
-        }
-      ];
-    } else if(Aduld_cnt == 3 && children_cnt == 1 && infant_cnt == 0) {
-      print('3 adult,1 child ');
-      travelersArray = <Map<String, dynamic>>[
-        {
-          "id": "1",
-          "travelerType": "ADULT",
-          "fareOptions": [
-            "STANDARD"
-          ]
-        },
-        {
-          "id": "2",
-          "travelerType": "ADULT",
-          "fareOptions": [
-            "STANDARD"
-          ]
-        },
-        {
-          "id": "3",
-          "travelerType": "ADULT",
-          "fareOptions": [
-            "STANDARD"
-          ]
-        },
-        {
-          "id": "4",
-          "travelerType": "CHILD",
-          "fareOptions": [
-            "STANDARD"
-          ]
-        }
-      ];
-    } else if(Aduld_cnt == 4 && children_cnt == 1 && infant_cnt == 0) {
-      print('4 adult,1 child ');
-      travelersArray = <Map<String, dynamic>>[
-        {
-          "id": "1",
-          "travelerType": "ADULT",
-          "fareOptions": [
-            "STANDARD"
-          ]
-        },
-        {
-          "id": "2",
-          "travelerType": "ADULT",
-          "fareOptions": [
-            "STANDARD"
-          ]
-        },
-        {
-          "id": "3",
-          "travelerType": "ADULT",
-          "fareOptions": [
-            "STANDARD"
-          ]
-        },
-        {
-          "id": "4",
-          "travelerType": "ADULT",
-          "fareOptions": [
-            "STANDARD"
-          ]
-        },
-        {
-          "id": "5",
-          "travelerType": "CHILD",
-          "fareOptions": [
-            "STANDARD"
-          ]
-        }
-      ];
-    } else if(Aduld_cnt == 1 && children_cnt == 2 && infant_cnt == 0) {
-      print('1 adult,2 child ');
-      travelersArray = <Map<String, dynamic>>[
-        {
-          "id": "1",
-          "travelerType": "ADULT",
-          "fareOptions": [
-            "STANDARD"
-          ]
-        },
-        {
-          "id": "2",
-          "travelerType": "CHILD",
-          "fareOptions": [
-            "STANDARD"
-          ]
-        },
-        {
-          "id": "3",
-          "travelerType": "CHILD",
-          "fareOptions": [
-            "STANDARD"
-          ]
-        }
-      ];
-    } else if(Aduld_cnt == 2 && children_cnt == 2 && infant_cnt == 0) {
-      print('2 adult,2 child ');
-      travelersArray = <Map<String, dynamic>>[
-        {
-          "id": "1",
-          "travelerType": "ADULT",
-          "fareOptions": [
-            "STANDARD"
-          ]
-        },
-        {
-          "id": "2",
-          "travelerType": "ADULT",
-          "fareOptions": [
-            "STANDARD"
-          ]
-        },
-        {
-          "id": "3",
-          "travelerType": "CHILD",
-          "fareOptions": [
-            "STANDARD"
-          ]
-        },
-        {
-          "id": "4",
-          "travelerType": "CHILD",
-          "fareOptions": [
-            "STANDARD"
-          ]
-        }
-      ];
-    } else if(Aduld_cnt == 1 && children_cnt == 2 && infant_cnt == 1) {
-      print('1 adult,2 child and 1 infant');
-      travelersArray = <Map<String, dynamic>>[
-        {
-          "id": "1",
-          "travelerType": 'ADULT',
-          "fareOptions": [
-            "STANDARD"
-          ]
-        },
-
-        {
-          "id": "2",
-          "travelerType": 'CHILD',
-          "fareOptions": [
-            "STANDARD"
-          ]
-        },
-        {
-          "id": "3",
-          "travelerType": 'CHILD',
-          "fareOptions": [
-            "STANDARD"
-          ],
-          // "associatedAdultId": "1"
-        },
-        {
-          "id": "4",
-          "travelerType": 'HELD_INFANT',
-          "fareOptions": [
-            "STANDARD"
-          ],
-          "associatedAdultId": "1"
-        }
-      ];
-
-    } else if(Aduld_cnt == 2 && children_cnt == 1 && infant_cnt == 1) {
-      print('2 adult,2 child and 1 infant');
-      travelersArray = <Map<String, dynamic>>[
-        {
-          "id": "1",
-          "travelerType": 'ADULT',
-          "fareOptions": [
-            "STANDARD"
-          ]
-        },
-        {
-          "id": "2",
-          "travelerType": 'ADULT',
-          "fareOptions": [
-            "STANDARD"
-          ]
-        },
-
-        {
-          "id": "3",
-          "travelerType": 'CHILD',
-          "fareOptions": [
-            "STANDARD"
-          ]
-        },
-        // {
-        //   "id": "4",
-        //   "travelerType": 'CHILD',
-        //   "fareOptions": [
-        //     "STANDARD"
-        //   ],
-        //   // "associatedAdultId": "1"
-        // },
-        {
-          "id": "4",
-          "travelerType": 'HELD_INFANT',
-          "fareOptions": [
-            "STANDARD"
-          ],
-          "associatedAdultId": "1"
-        }
-      ];
-
     }
 
 
 
-    print('travelersArray....');
-    print(travelersArray);
-    //}
-    print('side travelersArray....');
-    print(travelersArray);
+    print('originDestinationsArray....');
+    print(originDestinationsArray);
+
     setState(() {
       isLoading = true;
     });
@@ -1194,52 +836,38 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
       body: jsonEncode(<String, dynamic>
       {
         "currencyCode": "ZAR",
-        "originDestinations": [
-          {
-            "id": "1",
-
-            //   "originLocationCode": Retrived_Oneway_iatacodestr,
-            // "destinationLocationCode": RetrivedOneway_Oneway_Destinationiatacodestr,
-            // // "originLocationCode": "HRE",
-            // // "destinationLocationCode": "DEL",
-            // "departureDateTimeRange": {
-            // "date": Oneway_From_Datestr
-            "originLocationCode": widget.Received_departure_Airports.first,
-            "destinationLocationCode": widget.Received_destination_Airports.first,
-            // "originLocationCode": "HRE",
-            // "destinationLocationCode": "DEL",
-            "departureDateTimeRange": {
-              "date": widget.Received_Dates.first
-              // "time": "10:00:00"
-            }
-          },
-          {
-            "id": "2",
-            "originLocationCode": widget.Received_departure_Airports[1],
-            "destinationLocationCode": widget.Received_destination_Airports[1],
-            "departureDateTimeRange": {
-              "date": widget.Received_Dates[1]
-              //"time": "17:00:00"
-            }
-          }
-          // {
-          //   "id": "1",
-          //   "originLocationCode": Retrived_Oneway_iatacodestr,
-          //   "destinationLocationCode": RetrivedOneway_Oneway_Destinationiatacodestr,
-          //   "departureDateTimeRange": {
-          //     "date": Oneway_From_Datestr
-          //   }
-          // }
-          // {
-          //     "id": "2",
-          //     "originLocationCode": "FRA",
-          //     "destinationLocationCode": "CDG",
-          //     "departureDateTimeRange": {
-          //         "date": "2024-09-17"
-          //
-          //     }
-          // }
-        ],
+        "originDestinations": originDestinationsArray,
+        //
+        // "originDestinations": [
+        //   {
+        //     "id": "1",
+        //
+        //     //   "originLocationCode": Retrived_Oneway_iatacodestr,
+        //     // "destinationLocationCode": RetrivedOneway_Oneway_Destinationiatacodestr,
+        //     // // "originLocationCode": "HRE",
+        //     // // "destinationLocationCode": "DEL",
+        //     // "departureDateTimeRange": {
+        //     // "date": Oneway_From_Datestr
+        //     "originLocationCode": widget.Received_departure_Airports.first,
+        //     "destinationLocationCode": widget.Received_destination_Airports.first,
+        //     // "originLocationCode": "HRE",
+        //     // "destinationLocationCode": "DEL",
+        //     "departureDateTimeRange": {
+        //       "date": widget.Received_Dates.first
+        //       // "time": "10:00:00"
+        //     }
+        //   },
+        //   {
+        //     "id": "2",
+        //     "originLocationCode": widget.Received_departure_Airports[1],
+        //     "destinationLocationCode": widget.Received_destination_Airports[1],
+        //     "departureDateTimeRange": {
+        //       "date": widget.Received_Dates[1]
+        //       //"time": "17:00:00"
+        //     }
+        //   }
+        //
+        // ],
 
         "travelers": travelers,
 
@@ -1305,81 +933,7 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
           }
         }
       }
-        // {
-        //   "currencyCode": CurrencyCodestr,
-        //   "originDestinations": [
-        //     {
-        //       "id": "1",
-        //
-        //     //   "originLocationCode": Retrived_Oneway_iatacodestr,
-        //     // "destinationLocationCode": RetrivedOneway_Oneway_Destinationiatacodestr,
-        //     // // "originLocationCode": "HRE",
-        //     // // "destinationLocationCode": "DEL",
-        //     // "departureDateTimeRange": {
-        //     // "date": Oneway_From_Datestr
-        //       "originLocationCode": Retrived_Oneway_iatacodestr,
-        //       "destinationLocationCode": RetrivedOneway_Oneway_Destinationiatacodestr,
-        //       // "originLocationCode": "HRE",
-        //       // "destinationLocationCode": "DEL",
-        //       "departureDateTimeRange": {
-        //         "date": Oneway_From_Datestr
-        //         // "time": "10:00:00"
-        //       }
-        //     }
-        //     // {
-        //     //   "id": "2",
-        //     //   "originLocationCode": "DEL",
-        //     //   "destinationLocationCode": "HRE",
-        //     //   "departureDateTimeRange": {
-        //     //     "date": "2024-07-12"
-        //     //     //"time": "17:00:00"
-        //     //   }
-        //     // }
-        //   ],
-        //
-        //
-        //   "travelers": travelersArray,
-        //   // "travelers": [
-        //   //   {
-        //   //     "id": "1",
-        //   //     "travelerType": "ADULT",
-        //   //     "fareOptions": [
-        //   //       "STANDARD"
-        //   //     ]
-        //   //   }
-        //     // {
-        //     //   "id": "2",
-        //     //   "travelerType": "CHILD",
-        //     //   "fareOptions": [
-        //     //     "STANDARD"
-        //     //   ]
-        //     // }
-        //
-        //   "sources": [
-        //     "GDS"
-        //   ],
-        //   "searchCriteria": {
-        //     "maxFlightOffers": 50,
-        //     "flightFilters": {
-        //       "cabinRestrictions": [
-        //         {
-        //           "cabin": "BUSINESS",
-        //           "coverage": "MOST_SEGMENTS",
-        //           "originDestinationIds": [
-        //             "1"
-        //           ]
-        //         }
-        //       ],
-        //       "carrierRestrictions": {
-        //         "excludedCarrierCodes": [
-        //           "AA",
-        //           "TP",
-        //           "AZ"
-        //         ]
-        //       }
-        //     }
-        //   }
-        // }
+
       ),
     );
 
@@ -1603,35 +1157,35 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
             // }
 
             // if(segmentValuesAray.length == 2) {
-              print('calling 2nd loop....');
 
-              var carrierCodestr = segmentValuesAray.first['carrierCode'];
-              print('new carrierCodestr....');
+            var carrierCodestr = segmentValuesAray.first['carrierCode'];
+            print('new carrierCodestr....');
+            print(carrierCodestr);
+            setState(() {
+              OnwardJourney_carrierCodeArray1.add(carrierCodestr);
+            });
+            for (var DeparturArray in segmentValuesAray) {
+              var carrierCodestr = DeparturArray['carrierCode'];
+              print('careercode.');
               print(carrierCodestr);
               setState(() {
-                OnwardJourney_carrierCodeArray1.add(carrierCodestr);
+                getUserDetails();
+                // print('Array........');
+                // print(AirportListArray.toString());
               });
-              for (var DeparturArray in segmentValuesAray) {
-                var carrierCodestr = DeparturArray['carrierCode'];
-                print('careercode.');
-                print(carrierCodestr);
-                setState(() {
-                  getUserDetails();
-                  // print('Array........');
-                  // print(AirportListArray.toString());
-                });
 
-                // setState(() {
-                //   OnwardJourney_carrierCodeArray.add(carrierCodestr);
-                // });
+              // setState(() {
+              //   OnwardJourney_carrierCodeArray.add(carrierCodestr);
+              // });
+              if (widget.Received_departure_Airports.length == 1 &&
+                  widget.Received_destination_Airports.length == 1) {
                 var Dep = DeparturArray['departure'];
                 depiataCode = Dep['iataCode'];
-                print('2nd dep...');
                 print(depiataCode);
-                if(widget.Received_departure_Airports.first == depiataCode) {
+                if (widget.Received_departure_Airports.first == depiataCode) {
                   print('First flight..');
                   //first flight data...
-                  if(segmentValuesAray.length == 1) {
+                  if (segmentValuesAray.length == 1) {
                     OnwardJourney_depiataCodelist.add(depiataCode);
                     OnwardJourney_carrierCodeArray1.add(carrierCodestr);
                     print('first flight departure data...');
@@ -1641,14 +1195,13 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                     Deptimeconvert =
                     (new DateFormat.Hm().format(DateTime.parse(departuretime)));
                     Datestr =
-                    (new DateFormat.yMd().format(DateTime.parse(departuretime)));
+                    (new DateFormat.yMd().format(
+                        DateTime.parse(departuretime)));
                     OnwardJourney_dateArray.add(Datestr);
                     print('time3...');
                     print(Deptimeconvert);
                     OnwardJourney_DeptimeArray.add(Deptimeconvert);
-
-
-                  } else if(segmentValuesAray.length == 2) {
+                  } else if (segmentValuesAray.length == 2) {
                     OnwardJourney_depiataCodelist.add(depiataCode);
                     OnwardJourney_carrierCodeArray1.add(carrierCodestr);
 
@@ -1658,7 +1211,8 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                     Deptimeconvert =
                     (new DateFormat.Hm().format(DateTime.parse(departuretime)));
                     Datestr =
-                    (new DateFormat.yMd().format(DateTime.parse(departuretime)));
+                    (new DateFormat.yMd().format(
+                        DateTime.parse(departuretime)));
                     OnwardJourney_dateArray.add(Datestr);
                     print('time3...');
                     print(Deptimeconvert);
@@ -1698,13 +1252,12 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                 // }
 
 
-
                 var arrival = DeparturArray['arrival'];
                 arrivalcode = arrival['iataCode'];
                 print('arrival....');
                 print(arrivalcode);
                 // Connectflightcnt_Arrival.add(arrivalcode);
-                if(widget.Received_destination_Airports.first == arrivalcode) {
+                if (widget.Received_destination_Airports.first == arrivalcode) {
                   print('First flight arrival');
                   if (segmentValuesAray.length == 1) {
                     OnwardJourney_arrivaliataCodelist.add(arrivalcode);
@@ -1736,47 +1289,49 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                     // print(OnwardJourney_ArrivaltimeArray);
                   }
                 }
+              }
+              if (widget.Received_departure_Airports.length == 2 &&
+                  widget.Received_destination_Airports.length == 2) {
+                print('testing with 2 flights....');
 
-
-
-
-                //Second flight details
-
-                if(widget.Received_departure_Airports[1] == depiataCode) {
-                  print('ssssss1');
+                var Dep = DeparturArray['departure'];
+                depiataCode = Dep['iataCode'];
+                print(depiataCode);
+                if (widget.Received_departure_Airports.first == depiataCode) {
+                  print('First flight..');
                   //first flight data...
-                  if(segmentValuesAray.length == 1) {
-                    ReturnJourney_depiataCodelist.add(depiataCode);
-                    ReturnJourney_depiataCodelist.add(carrierCodestr);
-                    print('sssss first flight departure data...');
+                  if (segmentValuesAray.length == 1) {
+                    OnwardJourney_depiataCodelist.add(depiataCode);
+                    OnwardJourney_carrierCodeArray1.add(carrierCodestr);
+                    print('first flight departure data...');
 
-                    print(ReturnJourney_depiataCodelist);
+                    print(OnwardJourney_depiataCodelist);
                     var departuretime = Dep['at'];
                     Deptimeconvert =
                     (new DateFormat.Hm().format(DateTime.parse(departuretime)));
                     Datestr =
-                    (new DateFormat.yMd().format(DateTime.parse(departuretime)));
-                    ReturnJourney_dateArray.add(Datestr);
+                    (new DateFormat.yMd().format(
+                        DateTime.parse(departuretime)));
+                    OnwardJourney_dateArray.add(Datestr);
                     print('time3...');
                     print(Deptimeconvert);
-                    ReturnJourney_DeptimeArray.add(Deptimeconvert);
-
-
-                  } else if(segmentValuesAray.length == 2) {
-                    ReturnJourney_depiataCodelist.add(depiataCode);
+                    OnwardJourney_DeptimeArray.add(Deptimeconvert);
+                  } else if (segmentValuesAray.length == 2) {
+                    OnwardJourney_depiataCodelist.add(depiataCode);
                     OnwardJourney_carrierCodeArray1.add(carrierCodestr);
 
                     print('2nd dep array...');
-                    print(ReturnJourney_depiataCodelist);
+                    print(OnwardJourney_depiataCodelist);
                     var departuretime = Dep['at'];
                     Deptimeconvert =
                     (new DateFormat.Hm().format(DateTime.parse(departuretime)));
                     Datestr =
-                    (new DateFormat.yMd().format(DateTime.parse(departuretime)));
-                    ReturnJourney_dateArray.add(Datestr);
+                    (new DateFormat.yMd().format(
+                        DateTime.parse(departuretime)));
+                    OnwardJourney_dateArray.add(Datestr);
                     print('time3...');
                     print(Deptimeconvert);
-                    ReturnJourney_DeptimeArray.add(Deptimeconvert);
+                    OnwardJourney_DeptimeArray.add(Deptimeconvert);
                   }
                 }
 
@@ -1812,16 +1367,380 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                 // }
 
 
-
-                // var arrival = DeparturArray['arrival'];
-                // arrivalcode = arrival['iataCode'];
-                // print('arrival....');
-                // print(arrivalcode);
+                var arrival = DeparturArray['arrival'];
+                arrivalcode = arrival['iataCode'];
+                print('arrival....');
+                print(arrivalcode);
                 // Connectflightcnt_Arrival.add(arrivalcode);
-                if(widget.Received_destination_Airports[1] == arrivalcode) {
+                if (widget.Received_destination_Airports.first == arrivalcode) {
+                  print('First flight arrival');
+                  if (segmentValuesAray.length == 1) {
+                    OnwardJourney_arrivaliataCodelist.add(arrivalcode);
+                    ReturnJourney_carrierCodeArray1.add(carrierCodestr);
+                    print('First flight arrival....');
+                    print(ReturnJourney_carrierCodeArray1);
+
+                    // print('arrival array...');
+                    // print(OnwardJourney_arrivaliataCodelist);
+                    var arrivaltime = arrival['at'];
+                    var Arrivaltimeconvert = (new DateFormat.Hm().format(
+                        DateTime.parse(arrivaltime)));
+                    OnwardJourney_ArrivaltimeArray.add(Arrivaltimeconvert);
+                    // print('last...');
+                    // print(OnwardJourney_ArrivaltimeArray);
+                  } else if (segmentValuesAray.length == 2) {
+                    OnwardJourney_arrivaliataCodelist.add(arrivalcode);
+                    ReturnJourney_carrierCodeArray1.add(carrierCodestr);
+                    print('..segment2 flight arrival....');
+                    print(ReturnJourney_carrierCodeArray1);
+
+                    // print('arrival array...');
+                    // print(OnwardJourney_arrivaliataCodelist);
+                    var arrivaltime = arrival['at'];
+                    var Arrivaltimeconvert = (new DateFormat.Hm().format(
+                        DateTime.parse(arrivaltime)));
+                    OnwardJourney_ArrivaltimeArray.add(Arrivaltimeconvert);
+                    // print('last...');
+                    // print(OnwardJourney_ArrivaltimeArray);
+                  }
+                }
+                //Second flight details
+
+                if (widget.Received_departure_Airports[1] == depiataCode) {
+                  print('ssssss1');
+                  //first flight data...
+                  if (segmentValuesAray.length == 1) {
+                    ReturnJourney_depiataCodelist.add(depiataCode);
+                    ReturnJourney_depiataCodelist.add(carrierCodestr);
+                    print('sssss first flight departure data...');
+
+                    print(ReturnJourney_depiataCodelist);
+                    var departuretime = Dep['at'];
+                    Deptimeconvert =
+                    (new DateFormat.Hm().format(DateTime.parse(departuretime)));
+                    Datestr =
+                    (new DateFormat.yMd().format(
+                        DateTime.parse(departuretime)));
+                    ReturnJourney_dateArray.add(Datestr);
+                    print('time3...');
+                    print(Deptimeconvert);
+                    ReturnJourney_DeptimeArray.add(Deptimeconvert);
+                  } else if (segmentValuesAray.length == 2) {
+                    ReturnJourney_depiataCodelist.add(depiataCode);
+                    OnwardJourney_carrierCodeArray1.add(carrierCodestr);
+
+                    print('2nd dep array...');
+                    print(ReturnJourney_depiataCodelist);
+                    var departuretime = Dep['at'];
+                    Deptimeconvert =
+                    (new DateFormat.Hm().format(DateTime.parse(departuretime)));
+                    Datestr =
+                    (new DateFormat.yMd().format(
+                        DateTime.parse(departuretime)));
+                    ReturnJourney_dateArray.add(Datestr);
+                    print('time3...');
+                    print(Deptimeconvert);
+                    ReturnJourney_DeptimeArray.add(Deptimeconvert);
+                  }
+
+                  // if(widget.Received_departure_Airports.first == depiataCode) {
+                  //   OnwardJourney_depiataCodelist.add(depiataCode);
+                  //   OnwardJourney_carrierCodeArray1.add(carrierCodestr);
+                  //
+                  //   print('2nd dep array...');
+                  //   print(OnwardJourney_depiataCodelist);
+                  //   var departuretime = Dep['at'];
+                  //   Deptimeconvert =
+                  //   (new DateFormat.Hm().format(DateTime.parse(departuretime)));
+                  //   Datestr =
+                  //   (new DateFormat.yMd().format(DateTime.parse(departuretime)));
+                  //   OnwardJourney_dateArray.add(Datestr);
+                  //   print('time3...');
+                  //   print(Deptimeconvert);
+                  //   OnwardJourney_DeptimeArray.add(Deptimeconvert);
+                  // }
+                  // if(widget.Received_departure_Airports[1] == depiataCode) {
+                  //   ReturnJourney_depiataCodelist.add(depiataCode);
+                  //   print('return dep array...');
+                  //   print(ReturnJourney_depiataCodelist);
+                  //   var departuretime = Dep['at'];
+                  //   Deptimeconvert =
+                  //   (new DateFormat.Hm().format(DateTime.parse(departuretime)));
+                  //   Datestr =
+                  //   (new DateFormat.yMd().format(DateTime.parse(departuretime)));
+                  //   ReturnJourney_dateArray.add(Datestr);
+                  //   print('time4...');
+                  //   print(Deptimeconvert);
+                  //   ReturnJourney_DeptimeArray.add(Deptimeconvert);
+                  // }
+                  // var arrival = DeparturArray['arrival'];
+                  // arrivalcode = arrival['iataCode'];
+                  // print('arrival....');
+                  // print(arrivalcode);
+                  // Connectflightcnt_Arrival.add(arrivalcode);
+                  if (widget.Received_destination_Airports[1] == arrivalcode) {
+                    print('.......First flight arrival');
+                    if (segmentValuesAray.length == 1) {
+                      ReturnJourney_arrivaliataCodelist.add(arrivalcode);
+                      OnwardJourney_carrierCodeArray1.add(carrierCodestr);
+                      print('.......2nd arrival First flight arrival....');
+                      print(OnwardJourney_carrierCodeArray1);
+
+                      // print('arrival array...');
+                      // print(OnwardJourney_arrivaliataCodelist);
+                      var arrivaltime = arrival['at'];
+                      var Arrivaltimeconvert = (new DateFormat.Hm().format(
+                          DateTime.parse(arrivaltime)));
+                      ReturnJourney_ArrivaltimeArray.add(Arrivaltimeconvert);
+                      print('last123...');
+                      print(OnwardJourney_ArrivaltimeArray);
+                    } else if (segmentValuesAray.length == 2) {
+                      ReturnJourney_arrivaliataCodelist.add(arrivalcode);
+                      OnwardJourney_carrierCodeArray1.add(carrierCodestr);
+                      print('.-.-.segment2 flight arrival....');
+                      print(OnwardJourney_carrierCodeArray1);
+
+                      // print('arrival array...');
+                      // print(OnwardJourney_arrivaliataCodelist);
+                      var arrivaltime = arrival['at'];
+                      var Arrivaltimeconvert = (new DateFormat.Hm().format(
+                          DateTime.parse(arrivaltime)));
+                      ReturnJourney_ArrivaltimeArray.add(Arrivaltimeconvert);
+                      print('rrrrr last...');
+                      print(OnwardJourney_ArrivaltimeArray);
+                    }
+                  }
+
+                  // if(widget.Received_destination_Airports[1] == arrivalcode){
+                  //   ReturnJourney_arrivaliataCodelist.add(arrivalcode);
+                  //   // print('arrival array...');
+                  //   // print(OnwardJourney_arrivaliataCodelist);
+                  //   var arrivaltime = arrival['at'];
+                  //   var Arrivaltimeconvert = (new DateFormat.Hm().format(
+                  //       DateTime.parse(arrivaltime)));
+                  //   ReturnJourney_ArrivaltimeArray.add(Arrivaltimeconvert);
+                  //   // print('last...');
+                  //   // print(OnwardJourney_ArrivaltimeArray);
+                  // }
+                }
+                // }
+                // for(var DeparturArray in segmentValuesAray) {
+                //   var Dep = DeparturArray['departure'];
+                //   depiataCode = Dep['iataCode'];
+                //   print('depiataCode....');
+                //   print(depiataCode);
+                //
+                //       if(Retrived_Rndtrp_iatacodestr == depiataCode) {
+                //        // OnwardJourney_depiataCodelist.add(depiataCode);
+                //        //  print('1----------dep array...');
+                //        //  print(OnwardJourney_depiataCodelist);
+                //         var departuretime = Dep['at'];
+                //         Deptimeconvert =
+                //         (new DateFormat.Hm().format(DateTime.parse(departuretime)));
+                //         Datestr =
+                //         (new DateFormat.yMd().format(DateTime.parse(departuretime)));
+                //         OnwardJourney_dateArray.add(Datestr);
+                //         print('Deptimeconvert....');
+                //         print(Deptimeconvert);
+                //         OnwardJourney_DeptimeArray.add(Deptimeconvert);
+                //       }
+                //
+                //
+                // }
+              } if (widget.Received_departure_Airports.length == 3 &&
+                  widget.Received_destination_Airports.length == 3) {
+                print('testing with 2 flights....');
+
+                var Dep = DeparturArray['departure'];
+                depiataCode = Dep['iataCode'];
+                print(depiataCode);
+                if (widget.Received_departure_Airports.first == depiataCode) {
+                  print('First flight..');
+                  //first flight data...
+                  if (segmentValuesAray.length == 1) {
+                    OnwardJourney_depiataCodelist.add(depiataCode);
+                    OnwardJourney_carrierCodeArray1.add(carrierCodestr);
+                    print('first flight departure data...');
+
+                    print(OnwardJourney_depiataCodelist);
+                    var departuretime = Dep['at'];
+                    Deptimeconvert =
+                    (new DateFormat.Hm().format(DateTime.parse(departuretime)));
+                    Datestr =
+                    (new DateFormat.yMd().format(
+                        DateTime.parse(departuretime)));
+                    OnwardJourney_dateArray.add(Datestr);
+                    print('time3...');
+                    print(Deptimeconvert);
+                    OnwardJourney_DeptimeArray.add(Deptimeconvert);
+                  } else if (segmentValuesAray.length == 2) {
+                    OnwardJourney_depiataCodelist.add(depiataCode);
+                    OnwardJourney_carrierCodeArray1.add(carrierCodestr);
+
+                    print('2nd dep array...');
+                    print(OnwardJourney_depiataCodelist);
+                    var departuretime = Dep['at'];
+                    Deptimeconvert =
+                    (new DateFormat.Hm().format(DateTime.parse(departuretime)));
+                    Datestr =
+                    (new DateFormat.yMd().format(
+                        DateTime.parse(departuretime)));
+                    OnwardJourney_dateArray.add(Datestr);
+                    print('time3...');
+                    print(Deptimeconvert);
+                    OnwardJourney_DeptimeArray.add(Deptimeconvert);
+                  }
+                }
+                var arrival = DeparturArray['arrival'];
+                arrivalcode = arrival['iataCode'];
+                print('arrival....');
+                print(arrivalcode);
+                // Connectflightcnt_Arrival.add(arrivalcode);
+                if (widget.Received_destination_Airports.first == arrivalcode) {
+                  print('First flight arrival');
+                  if (segmentValuesAray.length == 1) {
+                    OnwardJourney_arrivaliataCodelist.add(arrivalcode);
+                    ReturnJourney_carrierCodeArray1.add(carrierCodestr);
+                    print('First flight arrival....');
+                    print(ReturnJourney_carrierCodeArray1);
+
+                    // print('arrival array...');
+                    // print(OnwardJourney_arrivaliataCodelist);
+                    var arrivaltime = arrival['at'];
+                    var Arrivaltimeconvert = (new DateFormat.Hm().format(
+                        DateTime.parse(arrivaltime)));
+                    OnwardJourney_ArrivaltimeArray.add(Arrivaltimeconvert);
+                    // print('last...');
+                    // print(OnwardJourney_ArrivaltimeArray);
+                  } else if (segmentValuesAray.length == 2) {
+                    OnwardJourney_arrivaliataCodelist.add(arrivalcode);
+                    ReturnJourney_carrierCodeArray1.add(carrierCodestr);
+                    print('..segment2 flight arrival....');
+                    print(ReturnJourney_carrierCodeArray1);
+
+                    // print('arrival array...');
+                    // print(OnwardJourney_arrivaliataCodelist);
+                    var arrivaltime = arrival['at'];
+                    var Arrivaltimeconvert = (new DateFormat.Hm().format(
+                        DateTime.parse(arrivaltime)));
+                    OnwardJourney_ArrivaltimeArray.add(Arrivaltimeconvert);
+                    // print('last...');
+                    // print(OnwardJourney_ArrivaltimeArray);
+                  }
+                }
+                //Second flight details
+
+                if (widget.Received_departure_Airports[1] == depiataCode) {
+                  print('ssssss1');
+                  //first flight data...
+                  if (segmentValuesAray.length == 1) {
+                    ReturnJourney_depiataCodelist.add(depiataCode);
+                    ReturnJourney_depiataCodelist.add(carrierCodestr);
+                    print('sssss first flight departure data...');
+
+                    print(ReturnJourney_depiataCodelist);
+                    var departuretime = Dep['at'];
+                    Deptimeconvert =
+                    (new DateFormat.Hm().format(DateTime.parse(departuretime)));
+                    Datestr =
+                    (new DateFormat.yMd().format(
+                        DateTime.parse(departuretime)));
+                    ReturnJourney_dateArray.add(Datestr);
+                    print('time3...');
+                    print(Deptimeconvert);
+                    ReturnJourney_DeptimeArray.add(Deptimeconvert);
+                  } else if (segmentValuesAray.length == 2) {
+                    ReturnJourney_depiataCodelist.add(depiataCode);
+                    OnwardJourney_carrierCodeArray1.add(carrierCodestr);
+
+                    print('2nd dep array...');
+                    print(ReturnJourney_depiataCodelist);
+                    var departuretime = Dep['at'];
+                    Deptimeconvert =
+                    (new DateFormat.Hm().format(DateTime.parse(departuretime)));
+                    Datestr =
+                    (new DateFormat.yMd().format(
+                        DateTime.parse(departuretime)));
+                    ReturnJourney_dateArray.add(Datestr);
+                    print('time3...');
+                    print(Deptimeconvert);
+                    ReturnJourney_DeptimeArray.add(Deptimeconvert);
+                  }
+                }
+                  if (widget.Received_destination_Airports[1] == arrivalcode) {
+                    print('.......First flight arrival');
+                    if (segmentValuesAray.length == 1) {
+                      ReturnJourney_arrivaliataCodelist.add(arrivalcode);
+                      OnwardJourney_carrierCodeArray1.add(carrierCodestr);
+                      print('.......2nd arrival First flight arrival....');
+                      print(OnwardJourney_carrierCodeArray1);
+
+                      // print('arrival array...');
+                      // print(OnwardJourney_arrivaliataCodelist);
+                      var arrivaltime = arrival['at'];
+                      var Arrivaltimeconvert = (new DateFormat.Hm().format(
+                          DateTime.parse(arrivaltime)));
+                      ReturnJourney_ArrivaltimeArray.add(Arrivaltimeconvert);
+                      print('last123...');
+                      print(OnwardJourney_ArrivaltimeArray);
+                    } else if (segmentValuesAray.length == 2) {
+                      ReturnJourney_arrivaliataCodelist.add(arrivalcode);
+                      OnwardJourney_carrierCodeArray1.add(carrierCodestr);
+                      print('.-.-.segment2 flight arrival....');
+                      print(OnwardJourney_carrierCodeArray1);
+
+                      // print('arrival array...');
+                      // print(OnwardJourney_arrivaliataCodelist);
+                      var arrivaltime = arrival['at'];
+                      var Arrivaltimeconvert = (new DateFormat.Hm().format(
+                          DateTime.parse(arrivaltime)));
+                      ReturnJourney_ArrivaltimeArray.add(Arrivaltimeconvert);
+                      print('rrrrr last...');
+                      print(OnwardJourney_ArrivaltimeArray);
+                    }
+                  }
+                  //Third flight details
+                if (widget.Received_departure_Airports[2] == depiataCode) {
+                  print('ssssss1');
+                  //first flight data...
+                  if (segmentValuesAray.length == 1) {
+                    Multi_third_Journey_depiataCodelist.add(depiataCode);
+                    ReturnJourney_depiataCodelist.add(carrierCodestr);
+                    print('sssss first flight departure data...');
+
+                    print(ReturnJourney_depiataCodelist);
+                    var departuretime = Dep['at'];
+                    Deptimeconvert =
+                    (new DateFormat.Hm().format(DateTime.parse(departuretime)));
+                    Datestr =
+                    (new DateFormat.yMd().format(
+                        DateTime.parse(departuretime)));
+                    Multi_third_Journey_dateArray.add(Datestr);
+                    print('time3...');
+                    print(Deptimeconvert);
+                    Multi_third_Journey_DeptimeArray.add(Deptimeconvert);
+                  } else if (segmentValuesAray.length == 2) {
+                    Multi_third_Journey_depiataCodelist.add(depiataCode);
+                    OnwardJourney_carrierCodeArray1.add(carrierCodestr);
+
+                    print('2nd dep array...');
+                    print(ReturnJourney_depiataCodelist);
+                    var departuretime = Dep['at'];
+                    Deptimeconvert =
+                    (new DateFormat.Hm().format(DateTime.parse(departuretime)));
+                    Datestr =
+                    (new DateFormat.yMd().format(
+                        DateTime.parse(departuretime)));
+                    Multi_third_Journey_dateArray.add(Datestr);
+                    print('time3...');
+                    print(Deptimeconvert);
+                    Multi_third_Journey_DeptimeArray.add(Deptimeconvert);
+                  }
+                }
+                if (widget.Received_destination_Airports[2] == arrivalcode) {
                   print('.......First flight arrival');
                   if (segmentValuesAray.length == 1) {
-                    ReturnJourney_arrivaliataCodelist.add(arrivalcode);
+                    Multi_third_Journey_arrivaliataCodelist.add(arrivalcode);
                     OnwardJourney_carrierCodeArray1.add(carrierCodestr);
                     print('.......2nd arrival First flight arrival....');
                     print(OnwardJourney_carrierCodeArray1);
@@ -1831,11 +1750,11 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                     var arrivaltime = arrival['at'];
                     var Arrivaltimeconvert = (new DateFormat.Hm().format(
                         DateTime.parse(arrivaltime)));
-                    ReturnJourney_ArrivaltimeArray.add(Arrivaltimeconvert);
+                    Multi_third_ArrivaltimeArray.add(Arrivaltimeconvert);
                     print('last123...');
                     print(OnwardJourney_ArrivaltimeArray);
                   } else if (segmentValuesAray.length == 2) {
-                    ReturnJourney_arrivaliataCodelist.add(arrivalcode);
+                    Multi_third_Journey_arrivaliataCodelist.add(arrivalcode);
                     OnwardJourney_carrierCodeArray1.add(carrierCodestr);
                     print('.-.-.segment2 flight arrival....');
                     print(OnwardJourney_carrierCodeArray1);
@@ -1845,56 +1764,16 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                     var arrivaltime = arrival['at'];
                     var Arrivaltimeconvert = (new DateFormat.Hm().format(
                         DateTime.parse(arrivaltime)));
-                    ReturnJourney_ArrivaltimeArray.add(Arrivaltimeconvert);
+                    Multi_third_ArrivaltimeArray.add(Arrivaltimeconvert);
                     print('rrrrr last...');
                     print(OnwardJourney_ArrivaltimeArray);
                   }
                 }
-
-                // if(widget.Received_destination_Airports[1] == arrivalcode){
-                //   ReturnJourney_arrivaliataCodelist.add(arrivalcode);
-                //   // print('arrival array...');
-                //   // print(OnwardJourney_arrivaliataCodelist);
-                //   var arrivaltime = arrival['at'];
-                //   var Arrivaltimeconvert = (new DateFormat.Hm().format(
-                //       DateTime.parse(arrivaltime)));
-                //   ReturnJourney_ArrivaltimeArray.add(Arrivaltimeconvert);
-                //   // print('last...');
-                //   // print(OnwardJourney_ArrivaltimeArray);
-                // }
-
               }
-            // }
-
-
-            // for(var DeparturArray in segmentValuesAray) {
-            //   var Dep = DeparturArray['departure'];
-            //   depiataCode = Dep['iataCode'];
-            //   print('depiataCode....');
-            //   print(depiataCode);
-            //
-            //       if(Retrived_Rndtrp_iatacodestr == depiataCode) {
-            //        // OnwardJourney_depiataCodelist.add(depiataCode);
-            //        //  print('1----------dep array...');
-            //        //  print(OnwardJourney_depiataCodelist);
-            //         var departuretime = Dep['at'];
-            //         Deptimeconvert =
-            //         (new DateFormat.Hm().format(DateTime.parse(departuretime)));
-            //         Datestr =
-            //         (new DateFormat.yMd().format(DateTime.parse(departuretime)));
-            //         OnwardJourney_dateArray.add(Datestr);
-            //         print('Deptimeconvert....');
-            //         print(Deptimeconvert);
-            //         OnwardJourney_DeptimeArray.add(Deptimeconvert);
-            //       }
-            //
-            //
-            // }
-
-
-
-
+            }
           }
+
+
 
           // for (var Durationstrv in itinerariesArray) {
           //   String duration = Durationstrv['duration'];
@@ -2420,304 +2299,891 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                                                         SizedBox(
                                                           height: 5,
                                                         ),
+
+                                                        if (widget.Received_departure_Airports.length == 1 && widget.Received_destination_Airports.length == 1) ...[
+                                                          Container(
+                                                            height: 180,
+                                                            width: 300,
+                                                            color: Colors.white,
+                                                            child: Column(
+                                                              children: [
+                                                                Text('Flight Details                    ',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                ),),
+
+                                                                // Text(OnwardJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 14,fontWeight: FontWeight.w300,color: Colors.black
+                                                                // ),),
+
+                                                                Text(OnwardJourney_DeptimeArray[index].toString() + '---------------------------------> ' + OnwardJourney_ArrivaltimeArray[index],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                ),),
+                                                                // Text(Retrived_Rndtrp_Destinationiatacodestr[index].toString(),style: TextStyle(fontSize: 14,fontWeight: FontWeight.w300,color: Colors.black
+                                                                // ),),
+                                                                SizedBox(),
+                                                                Text(OnwardJourney_depiataCodelist[index].toString() + '            '+ segmentValuesAraycnt[index] + ' ' + 'Segments' +'             '+  OnwardJourney_arrivaliataCodelist[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                ),),
+                                                                Container(
+                                                                  height: 50,
+                                                                  width: 360,
+                                                                  color: Colors.transparent,
+                                                                  child: Row(
+                                                                    children: [
+                                                                      SizedBox(
+                                                                        width: 0,
+                                                                      ),
+                                                                      Container(
+                                                                        height: 45,
+                                                                        width: 130,
+                                                                        color: Colors.transparent,
+                                                                        child: Column(
+                                                                          children: [
+                                                                            SizedBox(height: 10,),
+                                                                            // Text(convertedAirlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                            // ),),
+                                                                            Text( "Seats:${numberOfBookableSeats}",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                            ),),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                      //SizedBox(width: 40,),
+                                                                      // Container(
+                                                                      //   height: 45,
+                                                                      //   width: 150,
+                                                                      //   color: Colors.transparent,
+                                                                      //   child: Column(
+                                                                      //     children: [
+                                                                      //       SizedBox(height: 10,),
+                                                                      //       // Text(convertedAirlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                      //       // ),),
+                                                                      //       Text( "${totalpriceSignvalues}",style: TextStyle(fontSize: 22,fontWeight: FontWeight.w800,color: Colors.red
+                                                                      //       ),),
+                                                                      //     ],
+                                                                      //   ),
+                                                                      // )
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                Container(
+                                                                  height: 20,
+                                                                  width: 360,
+                                                                  color: Colors.transparent,
+                                                                  child: Row(
+                                                                    children: [
+                                                                      SizedBox(
+                                                                        width: 30,
+                                                                      ),
+                                                                      Container(
+                                                                        height: 40,
+                                                                        width: 50,
+                                                                        decoration: BoxDecoration(
+                                                                            image: DecorationImage(image: NetworkImage(AirlinelogoArray[index].toString()),
+                                                                                fit: BoxFit.cover)
+                                                                        ),
+                                                                      ),
+                                                                      SizedBox(width: 40,),
+                                                                      Container(
+                                                                        height: 20,
+                                                                        width: 150,
+                                                                        color: Colors.transparent,
+                                                                        child:  Text(convertedAirlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray1[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                        ),),
+                                                                      )
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 20,
+                                                                ),
+                                                                Container(
+                                                                  height: 40,
+                                                                  width: 300,
+                                                                  color: Colors.transparent,
+                                                                  child:  Text(cabintrvalue_Array[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                  ),),
+                                                                )
+
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          ] else if(widget.Received_departure_Airports.length == 2 && widget.Received_destination_Airports.length == 2)...[
+
+                                                          Container(
+                                                            height: 180,
+                                                            width: 300,
+                                                            color: Colors.white,
+                                                            child: Column(
+                                                              children: [
+                                                                Text('First Flight Details                    ',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                ),),
+
+                                                                // Text(OnwardJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 14,fontWeight: FontWeight.w300,color: Colors.black
+                                                                // ),),
+
+                                                                Text(OnwardJourney_DeptimeArray[index].toString() + '---------------------------------> ' + OnwardJourney_ArrivaltimeArray[index],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                ),),
+                                                                // Text(Retrived_Rndtrp_Destinationiatacodestr[index].toString(),style: TextStyle(fontSize: 14,fontWeight: FontWeight.w300,color: Colors.black
+                                                                // ),),
+                                                                SizedBox(),
+                                                                Text(OnwardJourney_depiataCodelist[index].toString() + '            '+ segmentValuesAraycnt[index] + ' ' + 'Segments' +'             '+  OnwardJourney_arrivaliataCodelist[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                ),),
+                                                                Container(
+                                                                  height: 50,
+                                                                  width: 360,
+                                                                  color: Colors.transparent,
+                                                                  child: Row(
+                                                                    children: [
+                                                                      SizedBox(
+                                                                        width: 0,
+                                                                      ),
+                                                                      Container(
+                                                                        height: 45,
+                                                                        width: 130,
+                                                                        color: Colors.transparent,
+                                                                        child: Column(
+                                                                          children: [
+                                                                            SizedBox(height: 10,),
+                                                                            // Text(convertedAirlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                            // ),),
+                                                                            Text( "Seats:${numberOfBookableSeats}",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                            ),),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                      //SizedBox(width: 40,),
+                                                                      // Container(
+                                                                      //   height: 45,
+                                                                      //   width: 150,
+                                                                      //   color: Colors.transparent,
+                                                                      //   child: Column(
+                                                                      //     children: [
+                                                                      //       SizedBox(height: 10,),
+                                                                      //       // Text(convertedAirlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                      //       // ),),
+                                                                      //       Text( "${totalpriceSignvalues}",style: TextStyle(fontSize: 22,fontWeight: FontWeight.w800,color: Colors.red
+                                                                      //       ),),
+                                                                      //     ],
+                                                                      //   ),
+                                                                      // )
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                Container(
+                                                                  height: 20,
+                                                                  width: 360,
+                                                                  color: Colors.transparent,
+                                                                  child: Row(
+                                                                    children: [
+                                                                      SizedBox(
+                                                                        width: 30,
+                                                                      ),
+                                                                      Container(
+                                                                        height: 40,
+                                                                        width: 50,
+                                                                        decoration: BoxDecoration(
+                                                                            image: DecorationImage(image: NetworkImage(AirlinelogoArray[index].toString()),
+                                                                                fit: BoxFit.cover)
+                                                                        ),
+                                                                      ),
+                                                                      SizedBox(width: 40,),
+                                                                      Container(
+                                                                        height: 20,
+                                                                        width: 150,
+                                                                        color: Colors.transparent,
+                                                                        child:  Text(convertedAirlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray1[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                        ),),
+                                                                      )
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 20,
+                                                                ),
+                                                                Container(
+                                                                  height: 40,
+                                                                  width: 300,
+                                                                  color: Colors.transparent,
+                                                                  child:  Text(cabintrvalue_Array[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                  ),),
+                                                                )
+
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            height: 10,
+                                                          ),
+
+                                                          Container(
+                                                            height: 180,
+                                                            width: 300,
+                                                            color: Colors.white,
+                                                            child: Column(
+                                                              children: [
+                                                                Text('second Flight Details                           ',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                ),),
+
+                                                                // Text(ReturnJourney_DeptimeArray[index].toString() + '----------------------------------> ' + ReturnJourney_ArrivaltimeArray[index],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                // ),),
+
+                                                                // Column(
+                                                                //   children: [
+                                                                //     if (widget.Received_destination_Airports[1] == arrivalcode) ...[
+                                                                //
+                                                                //
+                                                                //       Text(first_seg_OnwardJourney_DeptimeArray[index].toString() + '------------sec----------------------> ' + first_Seg_OnwardJourney_ArrivaltimeArray[index],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                //       ),),
+                                                                //       //
+                                                                //       // Text('------------sec----------------------> ' + first_Seg_OnwardJourney_ArrivaltimeArray[index],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                //       // ),),
+                                                                //
+                                                                //
+                                                                //     ] else...[
+                                                                //
+                                                                //       Text(ReturnJourney_DeptimeArray[index].toString() + '------------------second----------------> ' + ReturnJourney_ArrivaltimeArray[index],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                //       ),),
+                                                                //     ],
+                                                                //   ],
+                                                                // ),
+
+
+
+                                                                // Text(Retrived_Rndtrp_Destinationiatacodestr[index].toString(),style: TextStyle(fontSize: 14,fontWeight: FontWeight.w300,color: Colors.black
+                                                                // ),),
+
+                                                                Text(ReturnJourney_DeptimeArray[index].toString() + '----------------------------------> ' + ReturnJourney_ArrivaltimeArray[index],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                ),),
+                                                                Text(ReturnJourney_depiataCodelist[index].toString() + '           '+ segmentValuesAraycnt[index] + ' ' + 'Segments' +'             '+  ReturnJourney_arrivaliataCodelist[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                ),),
+                                                                Container(
+                                                                  height: 50,
+                                                                  width: 360,
+                                                                  color: Colors.transparent,
+                                                                  child: Row(
+                                                                    children: [
+                                                                      SizedBox(
+                                                                        width: 0,
+                                                                      ),
+                                                                      Container(
+                                                                        height: 45,
+                                                                        width: 130,
+                                                                        color: Colors.transparent,
+                                                                        child: Column(
+                                                                          children: [
+                                                                            SizedBox(height: 10,),
+                                                                            // Text(convertedAirlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                            // ),),
+                                                                            Text( "Seats:${numberOfBookableSeats}",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                            ),),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                      //SizedBox(width: 40,),
+                                                                      // Container(
+                                                                      //   height: 45,
+                                                                      //   width: 150,
+                                                                      //   color: Colors.transparent,
+                                                                      //   child: Column(
+                                                                      //     children: [
+                                                                      //       SizedBox(height: 10,),
+                                                                      //       // Text(convertedAirlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                      //       // ),),
+                                                                      //       Text( "${totalpriceSignvalues}",style: TextStyle(fontSize: 22,fontWeight: FontWeight.w800,color: Colors.red
+                                                                      //       ),),
+                                                                      //     ],
+                                                                      //   ),
+                                                                      // )
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                // Container(
+                                                                //   height: 20,
+                                                                //   width: 360,
+                                                                //   color: Colors.transparent,
+                                                                //   child: Row(
+                                                                //     children: [
+                                                                //       SizedBox(
+                                                                //         width: 30,
+                                                                //       ),
+                                                                // //       Container(
+                                                                // //         height: 40,
+                                                                // //         width: 50,
+                                                                // //         decoration: BoxDecoration(
+                                                                // //             image: DecorationImage(image: NetworkImage(Return_AirlinelogoArray[index].toString()),
+                                                                // //                 fit: BoxFit.cover)
+                                                                // //         ),
+                                                                // //       ),
+                                                                // //       SizedBox(width: 40,),
+                                                                // //
+                                                                // //
+                                                                // //
+                                                                // //       // Column(
+                                                                // //       //   children: [
+                                                                // //       //     if (widget.Received_destination_Airports.first == depiataCode) ...[
+                                                                // //       //       Container(
+                                                                // //       //         height: 20,
+                                                                // //       //         width: 150,
+                                                                // //       //         color: Colors.transparent,
+                                                                // //       //         child:  Text(Return_convertedAirlineArray[index].toString() + "   -" + OnwardJourney_arrivaliataCodelist[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                // //       //         ),),
+                                                                // //       //       )
+                                                                // //       //
+                                                                // //       //     ] else...[
+                                                                // //       //       Container(
+                                                                // //       //         height: 20,
+                                                                // //       //         width: 150,
+                                                                // //       //         color: Colors.transparent,
+                                                                // //       //         child:  Text(Return_convertedAirlineArray[index].toString() + "   -" + OnwardJourney_arrivaliataCodelist[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                // //       //         ),),
+                                                                // //       //       )
+                                                                // //       //     ],
+                                                                // //       //   ],
+                                                                // //       // ),
+                                                                // //
+                                                                // //
+                                                                // //
+                                                                // //
+                                                                // //       // Container(
+                                                                // //       //   height: 20,
+                                                                // //       //   width: 150,
+                                                                // //       //   color: Colors.transparent,
+                                                                // //       //   child:  Text(Return_convertedAirlineArray[index].toString() + "   -" + ReturnJourney_carrierCodeArray1[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                // //       //   ),),
+                                                                // //       // )
+                                                                // //     ],
+                                                                // //   ),
+                                                                // // ),
+                                                                Container(
+                                                                  height: 20,
+                                                                  width: 360,
+                                                                  color: Colors.transparent,
+                                                                  child: Row(
+                                                                    children: [
+                                                                      SizedBox(
+                                                                        width: 30,
+                                                                      ),
+                                                                      Container(
+                                                                        height: 40,
+                                                                        width: 50,
+                                                                        decoration: BoxDecoration(
+                                                                            image: DecorationImage(image: NetworkImage(AirlinelogoArray[index].toString()),
+                                                                                fit: BoxFit.cover)
+                                                                        ),
+                                                                      ),
+                                                                      SizedBox(width: 40,),
+                                                                      Container(
+                                                                        height: 20,
+                                                                        width: 150,
+                                                                        color: Colors.transparent,
+                                                                        child:  Text(convertedAirlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray1[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                        ),),
+                                                                      )
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 20,
+                                                                ),
+                                                                Container(
+                                                                  height: 40,
+                                                                  width: 300,
+                                                                  color: Colors.transparent,
+                                                                  child:  Text(cabintrvalue_Array[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                  ),),
+                                                                )
+
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ] else if(widget.Received_departure_Airports.length == 3 && widget.Received_destination_Airports.length == 3)...[
+
+                                                          Container(
+                                                            height: 180,
+                                                            width: 300,
+                                                            color: Colors.white,
+                                                            child: Column(
+                                                              children: [
+                                                                Text('First Flight Details                    ',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                ),),
+
+                                                                // Text(OnwardJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 14,fontWeight: FontWeight.w300,color: Colors.black
+                                                                // ),),
+
+                                                                Text(OnwardJourney_DeptimeArray[index].toString() + '---------------------------------> ' + OnwardJourney_ArrivaltimeArray[index],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                ),),
+                                                                // Text(Retrived_Rndtrp_Destinationiatacodestr[index].toString(),style: TextStyle(fontSize: 14,fontWeight: FontWeight.w300,color: Colors.black
+                                                                // ),),
+                                                                SizedBox(),
+                                                                Text(OnwardJourney_depiataCodelist[index].toString() + '            '+ segmentValuesAraycnt[index] + ' ' + 'Segments' +'             '+  OnwardJourney_arrivaliataCodelist[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                ),),
+                                                                Container(
+                                                                  height: 50,
+                                                                  width: 360,
+                                                                  color: Colors.transparent,
+                                                                  child: Row(
+                                                                    children: [
+                                                                      SizedBox(
+                                                                        width: 0,
+                                                                      ),
+                                                                      Container(
+                                                                        height: 45,
+                                                                        width: 130,
+                                                                        color: Colors.transparent,
+                                                                        child: Column(
+                                                                          children: [
+                                                                            SizedBox(height: 10,),
+                                                                            // Text(convertedAirlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                            // ),),
+                                                                            Text( "Seats:${numberOfBookableSeats}",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                            ),),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                      //SizedBox(width: 40,),
+                                                                      // Container(
+                                                                      //   height: 45,
+                                                                      //   width: 150,
+                                                                      //   color: Colors.transparent,
+                                                                      //   child: Column(
+                                                                      //     children: [
+                                                                      //       SizedBox(height: 10,),
+                                                                      //       // Text(convertedAirlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                      //       // ),),
+                                                                      //       Text( "${totalpriceSignvalues}",style: TextStyle(fontSize: 22,fontWeight: FontWeight.w800,color: Colors.red
+                                                                      //       ),),
+                                                                      //     ],
+                                                                      //   ),
+                                                                      // )
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                Container(
+                                                                  height: 20,
+                                                                  width: 360,
+                                                                  color: Colors.transparent,
+                                                                  child: Row(
+                                                                    children: [
+                                                                      SizedBox(
+                                                                        width: 30,
+                                                                      ),
+                                                                      Container(
+                                                                        height: 40,
+                                                                        width: 50,
+                                                                        decoration: BoxDecoration(
+                                                                            image: DecorationImage(image: NetworkImage(AirlinelogoArray[index].toString()),
+                                                                                fit: BoxFit.cover)
+                                                                        ),
+                                                                      ),
+                                                                      SizedBox(width: 40,),
+                                                                      Container(
+                                                                        height: 20,
+                                                                        width: 150,
+                                                                        color: Colors.transparent,
+                                                                        child:  Text(convertedAirlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray1[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                        ),),
+                                                                      )
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 20,
+                                                                ),
+                                                                Container(
+                                                                  height: 40,
+                                                                  width: 300,
+                                                                  color: Colors.transparent,
+                                                                  child:  Text(cabintrvalue_Array[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                  ),),
+                                                                )
+
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            height: 10,
+                                                          ),
+
+                                                          Container(
+                                                            height: 180,
+                                                            width: 300,
+                                                            color: Colors.white,
+                                                            child: Column(
+                                                              children: [
+                                                                Text('second Flight Details                           ',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                ),),
+
+                                                                // Text(ReturnJourney_DeptimeArray[index].toString() + '----------------------------------> ' + ReturnJourney_ArrivaltimeArray[index],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                // ),),
+
+                                                                // Column(
+                                                                //   children: [
+                                                                //     if (widget.Received_destination_Airports[1] == arrivalcode) ...[
+                                                                //
+                                                                //
+                                                                //       Text(first_seg_OnwardJourney_DeptimeArray[index].toString() + '------------sec----------------------> ' + first_Seg_OnwardJourney_ArrivaltimeArray[index],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                //       ),),
+                                                                //       //
+                                                                //       // Text('------------sec----------------------> ' + first_Seg_OnwardJourney_ArrivaltimeArray[index],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                //       // ),),
+                                                                //
+                                                                //
+                                                                //     ] else...[
+                                                                //
+                                                                //       Text(ReturnJourney_DeptimeArray[index].toString() + '------------------second----------------> ' + ReturnJourney_ArrivaltimeArray[index],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                //       ),),
+                                                                //     ],
+                                                                //   ],
+                                                                // ),
+
+
+
+                                                                // Text(Retrived_Rndtrp_Destinationiatacodestr[index].toString(),style: TextStyle(fontSize: 14,fontWeight: FontWeight.w300,color: Colors.black
+                                                                // ),),
+
+                                                                Text(ReturnJourney_DeptimeArray[index].toString() + '----------------------------------> ' + ReturnJourney_ArrivaltimeArray[index],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                ),),
+                                                                Text(ReturnJourney_depiataCodelist[index].toString() + '           '+ segmentValuesAraycnt[index] + ' ' + 'Segments' +'             '+  ReturnJourney_arrivaliataCodelist[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                ),),
+                                                                Container(
+                                                                  height: 50,
+                                                                  width: 360,
+                                                                  color: Colors.transparent,
+                                                                  child: Row(
+                                                                    children: [
+                                                                      SizedBox(
+                                                                        width: 0,
+                                                                      ),
+                                                                      Container(
+                                                                        height: 45,
+                                                                        width: 130,
+                                                                        color: Colors.transparent,
+                                                                        child: Column(
+                                                                          children: [
+                                                                            SizedBox(height: 10,),
+                                                                            // Text(convertedAirlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                            // ),),
+                                                                            Text( "Seats:${numberOfBookableSeats}",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                            ),),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                      //SizedBox(width: 40,),
+                                                                      // Container(
+                                                                      //   height: 45,
+                                                                      //   width: 150,
+                                                                      //   color: Colors.transparent,
+                                                                      //   child: Column(
+                                                                      //     children: [
+                                                                      //       SizedBox(height: 10,),
+                                                                      //       // Text(convertedAirlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                      //       // ),),
+                                                                      //       Text( "${totalpriceSignvalues}",style: TextStyle(fontSize: 22,fontWeight: FontWeight.w800,color: Colors.red
+                                                                      //       ),),
+                                                                      //     ],
+                                                                      //   ),
+                                                                      // )
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                // Container(
+                                                                //   height: 20,
+                                                                //   width: 360,
+                                                                //   color: Colors.transparent,
+                                                                //   child: Row(
+                                                                //     children: [
+                                                                //       SizedBox(
+                                                                //         width: 30,
+                                                                //       ),
+                                                                // //       Container(
+                                                                // //         height: 40,
+                                                                // //         width: 50,
+                                                                // //         decoration: BoxDecoration(
+                                                                // //             image: DecorationImage(image: NetworkImage(Return_AirlinelogoArray[index].toString()),
+                                                                // //                 fit: BoxFit.cover)
+                                                                // //         ),
+                                                                // //       ),
+                                                                // //       SizedBox(width: 40,),
+                                                                // //
+                                                                // //
+                                                                // //
+                                                                // //       // Column(
+                                                                // //       //   children: [
+                                                                // //       //     if (widget.Received_destination_Airports.first == depiataCode) ...[
+                                                                // //       //       Container(
+                                                                // //       //         height: 20,
+                                                                // //       //         width: 150,
+                                                                // //       //         color: Colors.transparent,
+                                                                // //       //         child:  Text(Return_convertedAirlineArray[index].toString() + "   -" + OnwardJourney_arrivaliataCodelist[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                // //       //         ),),
+                                                                // //       //       )
+                                                                // //       //
+                                                                // //       //     ] else...[
+                                                                // //       //       Container(
+                                                                // //       //         height: 20,
+                                                                // //       //         width: 150,
+                                                                // //       //         color: Colors.transparent,
+                                                                // //       //         child:  Text(Return_convertedAirlineArray[index].toString() + "   -" + OnwardJourney_arrivaliataCodelist[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                // //       //         ),),
+                                                                // //       //       )
+                                                                // //       //     ],
+                                                                // //       //   ],
+                                                                // //       // ),
+                                                                // //
+                                                                // //
+                                                                // //
+                                                                // //
+                                                                // //       // Container(
+                                                                // //       //   height: 20,
+                                                                // //       //   width: 150,
+                                                                // //       //   color: Colors.transparent,
+                                                                // //       //   child:  Text(Return_convertedAirlineArray[index].toString() + "   -" + ReturnJourney_carrierCodeArray1[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                // //       //   ),),
+                                                                // //       // )
+                                                                // //     ],
+                                                                // //   ),
+                                                                // // ),
+                                                                Container(
+                                                                  height: 20,
+                                                                  width: 360,
+                                                                  color: Colors.transparent,
+                                                                  child: Row(
+                                                                    children: [
+                                                                      SizedBox(
+                                                                        width: 30,
+                                                                      ),
+                                                                      Container(
+                                                                        height: 40,
+                                                                        width: 50,
+                                                                        decoration: BoxDecoration(
+                                                                            image: DecorationImage(image: NetworkImage(AirlinelogoArray[index].toString()),
+                                                                                fit: BoxFit.cover)
+                                                                        ),
+                                                                      ),
+                                                                      SizedBox(width: 40,),
+                                                                      Container(
+                                                                        height: 20,
+                                                                        width: 150,
+                                                                        color: Colors.transparent,
+                                                                        child:  Text(convertedAirlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray1[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                        ),),
+                                                                      )
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 20,
+                                                                ),
+                                                                Container(
+                                                                  height: 40,
+                                                                  width: 300,
+                                                                  color: Colors.transparent,
+                                                                  child:  Text(cabintrvalue_Array[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                  ),),
+                                                                )
+
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            height: 10,
+                                                          ),
+
+                                                          Container(
+                                                            height: 180,
+                                                            width: 300,
+                                                            color: Colors.white,
+                                                            child: Column(
+                                                              children: [
+                                                                Text('Third Flight Details                           ',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                ),),
+
+                                                                // Text(ReturnJourney_DeptimeArray[index].toString() + '----------------------------------> ' + ReturnJourney_ArrivaltimeArray[index],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                // ),),
+
+                                                                // Column(
+                                                                //   children: [
+                                                                //     if (widget.Received_destination_Airports[1] == arrivalcode) ...[
+                                                                //
+                                                                //
+                                                                //       Text(first_seg_OnwardJourney_DeptimeArray[index].toString() + '------------sec----------------------> ' + first_Seg_OnwardJourney_ArrivaltimeArray[index],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                //       ),),
+                                                                //       //
+                                                                //       // Text('------------sec----------------------> ' + first_Seg_OnwardJourney_ArrivaltimeArray[index],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                //       // ),),
+                                                                //
+                                                                //
+                                                                //     ] else...[
+                                                                //
+                                                                //       Text(ReturnJourney_DeptimeArray[index].toString() + '------------------second----------------> ' + ReturnJourney_ArrivaltimeArray[index],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                //       ),),
+                                                                //     ],
+                                                                //   ],
+                                                                // ),
+
+
+
+                                                                // Text(Retrived_Rndtrp_Destinationiatacodestr[index].toString(),style: TextStyle(fontSize: 14,fontWeight: FontWeight.w300,color: Colors.black
+                                                                // ),),
+
+                                                                Text(Multi_third_Journey_DeptimeArray[index].toString() + '----------------------------------> ' + Multi_third_ArrivaltimeArray[index],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                ),),
+                                                                Text(Multi_third_Journey_depiataCodelist[index].toString() + '           '+ segmentValuesAraycnt[index] + ' ' + 'Segments' +'             '+  Multi_third_Journey_arrivaliataCodelist[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                ),),
+                                                                Container(
+                                                                  height: 50,
+                                                                  width: 360,
+                                                                  color: Colors.transparent,
+                                                                  child: Row(
+                                                                    children: [
+                                                                      SizedBox(
+                                                                        width: 0,
+                                                                      ),
+                                                                      Container(
+                                                                        height: 45,
+                                                                        width: 130,
+                                                                        color: Colors.transparent,
+                                                                        child: Column(
+                                                                          children: [
+                                                                            SizedBox(height: 10,),
+                                                                            // Text(convertedAirlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                            // ),),
+                                                                            Text( "Seats:${numberOfBookableSeats}",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                            ),),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                      //SizedBox(width: 40,),
+                                                                      // Container(
+                                                                      //   height: 45,
+                                                                      //   width: 150,
+                                                                      //   color: Colors.transparent,
+                                                                      //   child: Column(
+                                                                      //     children: [
+                                                                      //       SizedBox(height: 10,),
+                                                                      //       // Text(convertedAirlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                      //       // ),),
+                                                                      //       Text( "${totalpriceSignvalues}",style: TextStyle(fontSize: 22,fontWeight: FontWeight.w800,color: Colors.red
+                                                                      //       ),),
+                                                                      //     ],
+                                                                      //   ),
+                                                                      // )
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                // Container(
+                                                                //   height: 20,
+                                                                //   width: 360,
+                                                                //   color: Colors.transparent,
+                                                                //   child: Row(
+                                                                //     children: [
+                                                                //       SizedBox(
+                                                                //         width: 30,
+                                                                //       ),
+                                                                // //       Container(
+                                                                // //         height: 40,
+                                                                // //         width: 50,
+                                                                // //         decoration: BoxDecoration(
+                                                                // //             image: DecorationImage(image: NetworkImage(Return_AirlinelogoArray[index].toString()),
+                                                                // //                 fit: BoxFit.cover)
+                                                                // //         ),
+                                                                // //       ),
+                                                                // //       SizedBox(width: 40,),
+                                                                // //
+                                                                // //
+                                                                // //
+                                                                // //       // Column(
+                                                                // //       //   children: [
+                                                                // //       //     if (widget.Received_destination_Airports.first == depiataCode) ...[
+                                                                // //       //       Container(
+                                                                // //       //         height: 20,
+                                                                // //       //         width: 150,
+                                                                // //       //         color: Colors.transparent,
+                                                                // //       //         child:  Text(Return_convertedAirlineArray[index].toString() + "   -" + OnwardJourney_arrivaliataCodelist[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                // //       //         ),),
+                                                                // //       //       )
+                                                                // //       //
+                                                                // //       //     ] else...[
+                                                                // //       //       Container(
+                                                                // //       //         height: 20,
+                                                                // //       //         width: 150,
+                                                                // //       //         color: Colors.transparent,
+                                                                // //       //         child:  Text(Return_convertedAirlineArray[index].toString() + "   -" + OnwardJourney_arrivaliataCodelist[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                // //       //         ),),
+                                                                // //       //       )
+                                                                // //       //     ],
+                                                                // //       //   ],
+                                                                // //       // ),
+                                                                // //
+                                                                // //
+                                                                // //
+                                                                // //
+                                                                // //       // Container(
+                                                                // //       //   height: 20,
+                                                                // //       //   width: 150,
+                                                                // //       //   color: Colors.transparent,
+                                                                // //       //   child:  Text(Return_convertedAirlineArray[index].toString() + "   -" + ReturnJourney_carrierCodeArray1[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                // //       //   ),),
+                                                                // //       // )
+                                                                // //     ],
+                                                                // //   ),
+                                                                // // ),
+                                                                Container(
+                                                                  height: 20,
+                                                                  width: 360,
+                                                                  color: Colors.transparent,
+                                                                  child: Row(
+                                                                    children: [
+                                                                      SizedBox(
+                                                                        width: 30,
+                                                                      ),
+                                                                      Container(
+                                                                        height: 40,
+                                                                        width: 50,
+                                                                        decoration: BoxDecoration(
+                                                                            image: DecorationImage(image: NetworkImage(AirlinelogoArray[index].toString()),
+                                                                                fit: BoxFit.cover)
+                                                                        ),
+                                                                      ),
+                                                                      SizedBox(width: 40,),
+                                                                      Container(
+                                                                        height: 20,
+                                                                        width: 150,
+                                                                        color: Colors.transparent,
+                                                                        child:  Text(convertedAirlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray1[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                        ),),
+                                                                      )
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 20,
+                                                                ),
+                                                                Container(
+                                                                  height: 40,
+                                                                  width: 300,
+                                                                  color: Colors.transparent,
+                                                                  child:  Text(cabintrvalue_Array[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                  ),),
+                                                                )
+
+                                                              ],
+                                                            ),
+                                                          )
+                                                        ],
+
+
+
+
                                                         // Text(OnwardJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 14,fontWeight: FontWeight.w300,color: Colors.black
                                                         // ),),
                                                         // Text(OnwardJourney_dateArray[index].toString(),style: TextStyle(fontSize: 14,fontWeight: FontWeight.w300,color: Colors.black
                                                         // ),),
 
-                                                        Container(
-                                                          height: 180,
-                                                          width: 300,
-                                                          color: Colors.white,
-                                                          child: Column(
-                                                            children: [
-                                                              Text('First Flight Details                    ',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
-                                                              ),),
 
-                                                              // Text(OnwardJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 14,fontWeight: FontWeight.w300,color: Colors.black
-                                                              // ),),
-
-                                                              Text(OnwardJourney_DeptimeArray[index].toString() + '---------------------------------> ' + OnwardJourney_ArrivaltimeArray[index],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
-                                                              ),),
-                                                              // Text(Retrived_Rndtrp_Destinationiatacodestr[index].toString(),style: TextStyle(fontSize: 14,fontWeight: FontWeight.w300,color: Colors.black
-                                                              // ),),
-                                                              SizedBox(),
-                                                              Text(OnwardJourney_depiataCodelist[index].toString() + '            '+ segmentValuesAraycnt[index] + ' ' + 'Segments' +'             '+  OnwardJourney_arrivaliataCodelist[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
-                                                              ),),
-                                                              Container(
-                                                                height: 50,
-                                                                width: 360,
-                                                                color: Colors.transparent,
-                                                                child: Row(
-                                                                  children: [
-                                                                    SizedBox(
-                                                                      width: 0,
-                                                                    ),
-                                                                    Container(
-                                                                      height: 45,
-                                                                      width: 130,
-                                                                      color: Colors.transparent,
-                                                                      child: Column(
-                                                                        children: [
-                                                                          SizedBox(height: 10,),
-                                                                          // Text(convertedAirlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
-                                                                          // ),),
-                                                                          Text( "Seats:${numberOfBookableSeats}",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
-                                                                          ),),
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                    //SizedBox(width: 40,),
-                                                                    // Container(
-                                                                    //   height: 45,
-                                                                    //   width: 150,
-                                                                    //   color: Colors.transparent,
-                                                                    //   child: Column(
-                                                                    //     children: [
-                                                                    //       SizedBox(height: 10,),
-                                                                    //       // Text(convertedAirlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
-                                                                    //       // ),),
-                                                                    //       Text( "${totalpriceSignvalues}",style: TextStyle(fontSize: 22,fontWeight: FontWeight.w800,color: Colors.red
-                                                                    //       ),),
-                                                                    //     ],
-                                                                    //   ),
-                                                                    // )
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              Container(
-                                                                height: 20,
-                                                                width: 360,
-                                                                color: Colors.transparent,
-                                                                child: Row(
-                                                                  children: [
-                                                                    SizedBox(
-                                                                      width: 30,
-                                                                    ),
-                                                                    Container(
-                                                                      height: 40,
-                                                                      width: 50,
-                                                                      decoration: BoxDecoration(
-                                                                          image: DecorationImage(image: NetworkImage(AirlinelogoArray[index].toString()),
-                                                                              fit: BoxFit.cover)
-                                                                      ),
-                                                                    ),
-                                                                    SizedBox(width: 40,),
-                                                                    Container(
-                                                                      height: 20,
-                                                                      width: 150,
-                                                                      color: Colors.transparent,
-                                                                      child:  Text(convertedAirlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray1[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
-                                                                      ),),
-                                                                    )
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              SizedBox(
-                                                                width: 20,
-                                                              ),
-                                                              Container(
-                                                                height: 40,
-                                                                width: 300,
-                                                                color: Colors.transparent,
-                                                                child:  Text(cabintrvalue_Array[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
-                                                                ),),
-                                                              )
-
-                                                            ],
-                                                          ),
-                                                        ),
 
 
 
                                                         // Text(OnwardJourney_arrivaliataCodelist[index].toString() + '                                          ' + OnwardJourney_depiataCodelist[index].toString(),style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500,color: Colors.black
                                                         // ),),
 
-                                                        SizedBox(
-                                                          height: 10,
-                                                        ),
 
-                                                        Container(
-                                                          height: 180,
-                                                          width: 300,
-                                                          color: Colors.white,
-                                                          child: Column(
-                                                            children: [
-                                                              Text('second Flight Details                           ',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
-                                                              ),),
-
-                                                              // Text(ReturnJourney_DeptimeArray[index].toString() + '----------------------------------> ' + ReturnJourney_ArrivaltimeArray[index],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
-                                                              // ),),
-
-                                                              // Column(
-                                                              //   children: [
-                                                              //     if (widget.Received_destination_Airports[1] == arrivalcode) ...[
-                                                              //
-                                                              //
-                                                              //       Text(first_seg_OnwardJourney_DeptimeArray[index].toString() + '------------sec----------------------> ' + first_Seg_OnwardJourney_ArrivaltimeArray[index],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
-                                                              //       ),),
-                                                              //       //
-                                                              //       // Text('------------sec----------------------> ' + first_Seg_OnwardJourney_ArrivaltimeArray[index],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
-                                                              //       // ),),
-                                                              //
-                                                              //
-                                                              //     ] else...[
-                                                              //
-                                                              //       Text(ReturnJourney_DeptimeArray[index].toString() + '------------------second----------------> ' + ReturnJourney_ArrivaltimeArray[index],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
-                                                              //       ),),
-                                                              //     ],
-                                                              //   ],
-                                                              // ),
-
-
-
-                                                              // Text(Retrived_Rndtrp_Destinationiatacodestr[index].toString(),style: TextStyle(fontSize: 14,fontWeight: FontWeight.w300,color: Colors.black
-                                                              // ),),
-
-                                                              Text(ReturnJourney_DeptimeArray[index].toString() + '----------------------------------> ' + ReturnJourney_ArrivaltimeArray[index],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
-                                                              ),),
-                                                              Text(ReturnJourney_depiataCodelist[index].toString() + '           '+ segmentValuesAraycnt[index] + ' ' + 'Segments' +'             '+  ReturnJourney_arrivaliataCodelist[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
-                                                              ),),
-                                                              Container(
-                                                                height: 50,
-                                                                width: 360,
-                                                                color: Colors.transparent,
-                                                                child: Row(
-                                                                  children: [
-                                                                    SizedBox(
-                                                                      width: 0,
-                                                                    ),
-                                                                    Container(
-                                                                      height: 45,
-                                                                      width: 130,
-                                                                      color: Colors.transparent,
-                                                                      child: Column(
-                                                                        children: [
-                                                                          SizedBox(height: 10,),
-                                                                          // Text(convertedAirlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
-                                                                          // ),),
-                                                                          Text( "Seats:${numberOfBookableSeats}",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
-                                                                          ),),
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                    //SizedBox(width: 40,),
-                                                                    // Container(
-                                                                    //   height: 45,
-                                                                    //   width: 150,
-                                                                    //   color: Colors.transparent,
-                                                                    //   child: Column(
-                                                                    //     children: [
-                                                                    //       SizedBox(height: 10,),
-                                                                    //       // Text(convertedAirlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
-                                                                    //       // ),),
-                                                                    //       Text( "${totalpriceSignvalues}",style: TextStyle(fontSize: 22,fontWeight: FontWeight.w800,color: Colors.red
-                                                                    //       ),),
-                                                                    //     ],
-                                                                    //   ),
-                                                                    // )
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              // Container(
-                                                              //   height: 20,
-                                                              //   width: 360,
-                                                              //   color: Colors.transparent,
-                                                              //   child: Row(
-                                                              //     children: [
-                                                              //       SizedBox(
-                                                              //         width: 30,
-                                                              //       ),
-                                                              // //       Container(
-                                                              // //         height: 40,
-                                                              // //         width: 50,
-                                                              // //         decoration: BoxDecoration(
-                                                              // //             image: DecorationImage(image: NetworkImage(Return_AirlinelogoArray[index].toString()),
-                                                              // //                 fit: BoxFit.cover)
-                                                              // //         ),
-                                                              // //       ),
-                                                              // //       SizedBox(width: 40,),
-                                                              // //
-                                                              // //
-                                                              // //
-                                                              // //       // Column(
-                                                              // //       //   children: [
-                                                              // //       //     if (widget.Received_destination_Airports.first == depiataCode) ...[
-                                                              // //       //       Container(
-                                                              // //       //         height: 20,
-                                                              // //       //         width: 150,
-                                                              // //       //         color: Colors.transparent,
-                                                              // //       //         child:  Text(Return_convertedAirlineArray[index].toString() + "   -" + OnwardJourney_arrivaliataCodelist[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
-                                                              // //       //         ),),
-                                                              // //       //       )
-                                                              // //       //
-                                                              // //       //     ] else...[
-                                                              // //       //       Container(
-                                                              // //       //         height: 20,
-                                                              // //       //         width: 150,
-                                                              // //       //         color: Colors.transparent,
-                                                              // //       //         child:  Text(Return_convertedAirlineArray[index].toString() + "   -" + OnwardJourney_arrivaliataCodelist[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
-                                                              // //       //         ),),
-                                                              // //       //       )
-                                                              // //       //     ],
-                                                              // //       //   ],
-                                                              // //       // ),
-                                                              // //
-                                                              // //
-                                                              // //
-                                                              // //
-                                                              // //       // Container(
-                                                              // //       //   height: 20,
-                                                              // //       //   width: 150,
-                                                              // //       //   color: Colors.transparent,
-                                                              // //       //   child:  Text(Return_convertedAirlineArray[index].toString() + "   -" + ReturnJourney_carrierCodeArray1[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
-                                                              // //       //   ),),
-                                                              // //       // )
-                                                              // //     ],
-                                                              // //   ),
-                                                              // // ),
-                                                              Container(
-                                                                height: 20,
-                                                                width: 360,
-                                                                color: Colors.transparent,
-                                                                child: Row(
-                                                                  children: [
-                                                                    SizedBox(
-                                                                      width: 30,
-                                                                    ),
-                                                                    Container(
-                                                                      height: 40,
-                                                                      width: 50,
-                                                                      decoration: BoxDecoration(
-                                                                          image: DecorationImage(image: NetworkImage(AirlinelogoArray[index].toString()),
-                                                                              fit: BoxFit.cover)
-                                                                      ),
-                                                                    ),
-                                                                    SizedBox(width: 40,),
-                                                                    Container(
-                                                                      height: 20,
-                                                                      width: 150,
-                                                                      color: Colors.transparent,
-                                                                      child:  Text(convertedAirlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray1[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
-                                                                      ),),
-                                                                    )
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              SizedBox(
-                                                                width: 20,
-                                                              ),
-                                                              Container(
-                                                                height: 40,
-                                                                width: 300,
-                                                                color: Colors.transparent,
-                                                                child:  Text(cabintrvalue_Array[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
-                                                                ),),
-                                                              )
-
-                                                            ],
-                                                          ),
-                                                        ),
 
 
 
