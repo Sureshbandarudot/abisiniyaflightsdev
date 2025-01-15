@@ -125,6 +125,14 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
   var AirportListArray = [];
   var convertedAirlineArray = [];
   var AirlinelogoArray = [];
+  //multi city if two flights are operating
+  var secondJouney_firstflight_airlineArray = [];
+  var secondJouney_firstflight_airlinelogo= [];
+  var secondJouney_secondflight_airlineArray = [];
+  var secondJouney_secondflight_airlinelogo= [];
+
+
+
   var Return_AirportListArray = [];
   var Return_convertedAirlineArray = [];
   var Return_AirlinelogoArray = [];
@@ -2117,16 +2125,83 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                                     // itemCount: totalPricevaluesArray.length ,
                                     separatorBuilder: (BuildContext context, int index) => const Divider(),
                                     itemBuilder: (BuildContext context, int index) {
-                                      var Carrercodestr = OnwardJourney_carrierCodeArray1[index].toString();
-                                      List newLst_airport = AirportListArray.first.where( (o) => o['airlineCode'] == Carrercodestr).toList();
-                                      print('jump code...');
-                                      //  print(newLst_airport);
-                                      for(var airlinenamearray in newLst_airport){
-                                        var Airline_name = airlinenamearray['airlineName'];
-                                        convertedAirlineArray.add(Airline_name);
-                                        var Airline_logo = airlinenamearray['airlineLogo'];
-                                        AirlinelogoArray.add(Airline_logo);
-                                      }
+                                      // var Carrercodestr = OnwardJourney_carrierCodeArray1[index].toString();
+                                      // List newLst_airport = AirportListArray.first.where( (o) => o['airlineCode'] == Carrercodestr).toList();
+                                      // print('jump code...');
+                                      // //  print(newLst_airport);
+                                      // for(var airlinenamearray in newLst_airport){
+                                      //   var Airline_name = airlinenamearray['airlineName'];
+                                      //   convertedAirlineArray.add(Airline_name);
+                                      //   var Airline_logo = airlinenamearray['airlineLogo'];
+                                      //   AirlinelogoArray.add(Airline_logo);
+                                      // }
+
+    if (widget.Received_departure_Airports.length == 1 &&
+    widget.Received_destination_Airports.length == 1) {
+      var Carrercodestr = OnwardJourney_carrierCodeArray1[index].toString();
+      List newLst_airport = AirportListArray.first.where( (o) => o['airlineCode'] == Carrercodestr).toList();
+      print('jump code...');
+      //  print(newLst_airport);
+      for(var airlinenamearray in newLst_airport){
+        var Airline_name = airlinenamearray['airlineName'];
+        convertedAirlineArray.add(Airline_name);
+        var Airline_logo = airlinenamearray['airlineLogo'];
+        AirlinelogoArray.add(Airline_logo);
+      }
+
+    }  else if (widget.Received_departure_Airports.length == 2 &&
+    widget.Received_destination_Airports.length == 2) {
+      print('2nd journey airline name and logo...');
+      //if (segmentValuesAray.length == 1) {
+    var firstflight_Carrercodestr = OnwardJourney_carrierCodeArray[index]
+        .toString();
+    List newLst_airport = AirportListArray.first.where((
+    o) => o['airlineCode'] == firstflight_Carrercodestr).toList();
+    print('second journey jump code...');
+    //  print(newLst_airport);
+    for (var airlinenamearray in newLst_airport) {
+    var firstflight_Airline_name = airlinenamearray['airlineName'];
+    secondJouney_firstflight_airlineArray.add(firstflight_Airline_name);
+    print('airline name ...');
+    print(firstflight_Airline_name);
+    print(secondJouney_firstflight_airlineArray);
+    var firstflight_Airline_logo = airlinenamearray['airlineLogo'];
+    secondJouney_firstflight_airlinelogo.add(firstflight_Airline_logo);
+    print('secondJouney_firstflight_airlinelogo.....');
+    print(secondJouney_firstflight_airlinelogo);
+
+    }
+    //}
+
+        //second flight airline name and airline logo
+        //if (widget.Received_departure_Airports[1] == depiataCode) {
+          print('second flight second jouney...');
+          var secondflight_Carrercodestr = SecondJourney_carrierCodeArray[index]
+              .toString();
+          List newLst_airport1 = AirportListArray.first.where((
+              o) => o['airlineCode'] == secondflight_Carrercodestr).toList();
+          //  print(newLst_airport);
+          for (var airlinenamearray in newLst_airport1) {
+            var secondflight_Airline_name = airlinenamearray['airlineName'];
+            secondJouney_secondflight_airlineArray.add(
+                secondflight_Airline_name);
+            print('secondJouney_secondflight_airlineArray...');
+            print(secondJouney_secondflight_airlineArray);
+            var secondflight_Airline_logo = airlinenamearray['airlineLogo'];
+            secondJouney_secondflight_airlinelogo.add(
+                secondflight_Airline_logo);
+            print('secondJouney_secondflight_airlinelogo...2');
+            print(secondJouney_secondflight_airlinelogo);
+          }
+        //}
+      }
+
+
+
+
+
+
+
 
                                       //Return Journey
 
@@ -2389,7 +2464,7 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                                                                         height: 40,
                                                                         width: 50,
                                                                         decoration: BoxDecoration(
-                                                                            image: DecorationImage(image: NetworkImage(AirlinelogoArray[index].toString()),
+                                                                            image: DecorationImage(image: NetworkImage(secondJouney_firstflight_airlinelogo[index].toString()),
                                                                                 fit: BoxFit.cover)
                                                                         ),
                                                                       ),
@@ -2398,7 +2473,7 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                                                                         height: 20,
                                                                         width: 150,
                                                                         color: Colors.transparent,
-                                                                        child:  Text(convertedAirlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                        child:  Text(secondJouney_firstflight_airlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
                                                                         ),),
                                                                       )
                                                                     ],
@@ -2574,7 +2649,7 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                                                                         height: 40,
                                                                         width: 50,
                                                                         decoration: BoxDecoration(
-                                                                            image: DecorationImage(image: NetworkImage(AirlinelogoArray[index].toString()),
+                                                                            image: DecorationImage(image: NetworkImage(secondJouney_secondflight_airlinelogo[index].toString()),
                                                                                 fit: BoxFit.cover)
                                                                         ),
                                                                       ),
@@ -2585,10 +2660,10 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                                                                         height: 20,
                                                                         width: 150,
                                                                         color: Colors.transparent,
-                                                                        // child:  Text(convertedAirlineArray[index].toString() + "   -" + ReturnJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
-                                                                        // ),),
-                                                                        child:  Text( SecondJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                        child:  Text(secondJouney_secondflight_airlineArray[index].toString() + "   -" + SecondJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
                                                                         ),),
+                                                                        // child:  Text( SecondJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                        // ),),
                                                                       )
                                                                     ],
                                                                   ),
