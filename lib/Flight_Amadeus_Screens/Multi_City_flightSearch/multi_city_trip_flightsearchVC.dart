@@ -149,12 +149,21 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
   var OnwardJourney_Segmentrray = [];
   var Round_trip_dep_Journey_Segmentrray = [];
   var Round_trip_ItinerariArray = [];
-
-
   var Round_trip_Currency_Price_Array = [];
   var Round_trip_fareRulesArray = [];
   var Round_trip_travelerPricingslistArray = [];
 
+
+
+  //second flight Journey details
+  var SecondJourney_firstflight_depiataCodelist = [];
+  var SecondJourney_firstflight_arrivaliataCodelist = [];
+  var SecondJourney_firstflight_DeptimeArray = [];
+  var SecondJourney_firstflight_ArrivaltimeArray = [];
+  var SecondJourney_firstflight_dateArray = [];
+  var ScondJourney_firstflight_durationArray = [];
+  var SecondJourney_firstflight_carrierCodeArray = [];
+  var SecondJourney_firstflight_carrierCodeArray1 = [];
 
 
   //Return Journey details
@@ -166,6 +175,12 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
   var ReturnJourney_durationArray = [];
   var ReturnJourney_carrierCodeArray = [];
   var ReturnJourney_carrierCodeArray1 = [];
+  //Career code
+
+  var SecondJourney_carrierCodeArray = [];
+
+
+
   //Third Flight details
   //Return Journey details
   var Multi_third_Journey_depiataCodelist = [];
@@ -1188,9 +1203,9 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                   if (segmentValuesAray.length == 1) {
                     OnwardJourney_depiataCodelist.add(depiataCode);
                     OnwardJourney_carrierCodeArray1.add(carrierCodestr);
-                    print('first flight departure data...');
 
-                    print(OnwardJourney_depiataCodelist);
+                    print('first flight careercode...');
+                    print(carrierCodestr);
                     var departuretime = Dep['at'];
                     Deptimeconvert =
                     (new DateFormat.Hm().format(DateTime.parse(departuretime)));
@@ -1205,7 +1220,8 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                     OnwardJourney_depiataCodelist.add(depiataCode);
                     OnwardJourney_carrierCodeArray1.add(carrierCodestr);
 
-                    print('2nd dep array...');
+                    print('first flight careercode...1');
+                    print(carrierCodestr);
                     print(OnwardJourney_depiataCodelist);
                     var departuretime = Dep['at'];
                     Deptimeconvert =
@@ -1275,12 +1291,6 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                     // print(OnwardJourney_ArrivaltimeArray);
                   } else if (segmentValuesAray.length == 2) {
                     OnwardJourney_arrivaliataCodelist.add(arrivalcode);
-                    ReturnJourney_carrierCodeArray1.add(carrierCodestr);
-                    print('..segment2 flight arrival....');
-                    print(ReturnJourney_carrierCodeArray1);
-
-                    // print('arrival array...');
-                    // print(OnwardJourney_arrivaliataCodelist);
                     var arrivaltime = arrival['at'];
                     var Arrivaltimeconvert = (new DateFormat.Hm().format(
                         DateTime.parse(arrivaltime)));
@@ -1290,22 +1300,21 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                   }
                 }
               }
+
+
+              //Two flights data...
               if (widget.Received_departure_Airports.length == 2 &&
                   widget.Received_destination_Airports.length == 2) {
-                print('testing with 2 flights....');
-
                 var Dep = DeparturArray['departure'];
                 depiataCode = Dep['iataCode'];
                 print(depiataCode);
                 if (widget.Received_departure_Airports.first == depiataCode) {
-                  print('First flight..');
-                  //first flight data...
                   if (segmentValuesAray.length == 1) {
                     OnwardJourney_depiataCodelist.add(depiataCode);
-                    OnwardJourney_carrierCodeArray1.add(carrierCodestr);
-                    print('first flight departure data...');
-
-                    print(OnwardJourney_depiataCodelist);
+                    OnwardJourney_carrierCodeArray.add(carrierCodestr);
+                    print('second journey1....');
+                    print(carrierCodestr);
+                    print(OnwardJourney_carrierCodeArray);
                     var departuretime = Dep['at'];
                     Deptimeconvert =
                     (new DateFormat.Hm().format(DateTime.parse(departuretime)));
@@ -1318,10 +1327,10 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                     OnwardJourney_DeptimeArray.add(Deptimeconvert);
                   } else if (segmentValuesAray.length == 2) {
                     OnwardJourney_depiataCodelist.add(depiataCode);
-                    OnwardJourney_carrierCodeArray1.add(carrierCodestr);
-
-                    print('2nd dep array...');
-                    print(OnwardJourney_depiataCodelist);
+                    OnwardJourney_carrierCodeArray.add(carrierCodestr);
+                    print('second journey2....');
+                    print(carrierCodestr);
+                    print(OnwardJourney_carrierCodeArray);
                     var departuretime = Dep['at'];
                     Deptimeconvert =
                     (new DateFormat.Hm().format(DateTime.parse(departuretime)));
@@ -1334,51 +1343,18 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                     OnwardJourney_DeptimeArray.add(Deptimeconvert);
                   }
                 }
-
-                // if(widget.Received_departure_Airports.first == depiataCode) {
-                //   OnwardJourney_depiataCodelist.add(depiataCode);
-                //   OnwardJourney_carrierCodeArray1.add(carrierCodestr);
-                //
-                //   print('2nd dep array...');
-                //   print(OnwardJourney_depiataCodelist);
-                //   var departuretime = Dep['at'];
-                //   Deptimeconvert =
-                //   (new DateFormat.Hm().format(DateTime.parse(departuretime)));
-                //   Datestr =
-                //   (new DateFormat.yMd().format(DateTime.parse(departuretime)));
-                //   OnwardJourney_dateArray.add(Datestr);
-                //   print('time3...');
-                //   print(Deptimeconvert);
-                //   OnwardJourney_DeptimeArray.add(Deptimeconvert);
-                // }
-                // if(widget.Received_departure_Airports[1] == depiataCode) {
-                //   ReturnJourney_depiataCodelist.add(depiataCode);
-                //   print('return dep array...');
-                //   print(ReturnJourney_depiataCodelist);
-                //   var departuretime = Dep['at'];
-                //   Deptimeconvert =
-                //   (new DateFormat.Hm().format(DateTime.parse(departuretime)));
-                //   Datestr =
-                //   (new DateFormat.yMd().format(DateTime.parse(departuretime)));
-                //   ReturnJourney_dateArray.add(Datestr);
-                //   print('time4...');
-                //   print(Deptimeconvert);
-                //   ReturnJourney_DeptimeArray.add(Deptimeconvert);
-                // }
-
-
                 var arrival = DeparturArray['arrival'];
                 arrivalcode = arrival['iataCode'];
                 print('arrival....');
                 print(arrivalcode);
                 // Connectflightcnt_Arrival.add(arrivalcode);
                 if (widget.Received_destination_Airports.first == arrivalcode) {
-                  print('First flight arrival');
                   if (segmentValuesAray.length == 1) {
                     OnwardJourney_arrivaliataCodelist.add(arrivalcode);
-                    ReturnJourney_carrierCodeArray1.add(carrierCodestr);
-                    print('First flight arrival....');
-                    print(ReturnJourney_carrierCodeArray1);
+                    // OnwardJourney_carrierCodeArray.add(carrierCodestr);
+                    // print('second journey3....');
+                    // print(carrierCodestr);
+                    // print(OnwardJourney_carrierCodeArray);
 
                     // print('arrival array...');
                     // print(OnwardJourney_arrivaliataCodelist);
@@ -1390,10 +1366,10 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                     // print(OnwardJourney_ArrivaltimeArray);
                   } else if (segmentValuesAray.length == 2) {
                     OnwardJourney_arrivaliataCodelist.add(arrivalcode);
-                    ReturnJourney_carrierCodeArray1.add(carrierCodestr);
-                    print('..segment2 flight arrival....');
-                    print(ReturnJourney_carrierCodeArray1);
-
+                    OnwardJourney_carrierCodeArray.add(carrierCodestr);
+                    print('second journey4....');
+                    print(carrierCodestr);
+                    print(OnwardJourney_carrierCodeArray);
                     // print('arrival array...');
                     // print(OnwardJourney_arrivaliataCodelist);
                     var arrivaltime = arrival['at'];
@@ -1404,17 +1380,16 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                     // print(OnwardJourney_ArrivaltimeArray);
                   }
                 }
-                //Second flight details
+
+                //Second Journey second flight details
 
                 if (widget.Received_departure_Airports[1] == depiataCode) {
-                  print('ssssss1');
-                  //first flight data...
                   if (segmentValuesAray.length == 1) {
                     ReturnJourney_depiataCodelist.add(depiataCode);
-                    ReturnJourney_depiataCodelist.add(carrierCodestr);
-                    print('sssss first flight departure data...');
-
-                    print(ReturnJourney_depiataCodelist);
+                    SecondJourney_carrierCodeArray.add(carrierCodestr);
+                    print('second journey 2nd flight...1');
+                    print(carrierCodestr);
+                    print(SecondJourney_carrierCodeArray);
                     var departuretime = Dep['at'];
                     Deptimeconvert =
                     (new DateFormat.Hm().format(DateTime.parse(departuretime)));
@@ -1427,10 +1402,10 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                     ReturnJourney_DeptimeArray.add(Deptimeconvert);
                   } else if (segmentValuesAray.length == 2) {
                     ReturnJourney_depiataCodelist.add(depiataCode);
-                    OnwardJourney_carrierCodeArray1.add(carrierCodestr);
-
-                    print('2nd dep array...');
-                    print(ReturnJourney_depiataCodelist);
+                    SecondJourney_carrierCodeArray.add(carrierCodestr);
+                    print('second journey 2nd flight...2');
+                    print(carrierCodestr);
+                    print(SecondJourney_carrierCodeArray);
                     var departuretime = Dep['at'];
                     Deptimeconvert =
                     (new DateFormat.Hm().format(DateTime.parse(departuretime)));
@@ -1442,49 +1417,15 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                     print(Deptimeconvert);
                     ReturnJourney_DeptimeArray.add(Deptimeconvert);
                   }
-
-                  // if(widget.Received_departure_Airports.first == depiataCode) {
-                  //   OnwardJourney_depiataCodelist.add(depiataCode);
-                  //   OnwardJourney_carrierCodeArray1.add(carrierCodestr);
-                  //
-                  //   print('2nd dep array...');
-                  //   print(OnwardJourney_depiataCodelist);
-                  //   var departuretime = Dep['at'];
-                  //   Deptimeconvert =
-                  //   (new DateFormat.Hm().format(DateTime.parse(departuretime)));
-                  //   Datestr =
-                  //   (new DateFormat.yMd().format(DateTime.parse(departuretime)));
-                  //   OnwardJourney_dateArray.add(Datestr);
-                  //   print('time3...');
-                  //   print(Deptimeconvert);
-                  //   OnwardJourney_DeptimeArray.add(Deptimeconvert);
-                  // }
-                  // if(widget.Received_departure_Airports[1] == depiataCode) {
-                  //   ReturnJourney_depiataCodelist.add(depiataCode);
-                  //   print('return dep array...');
-                  //   print(ReturnJourney_depiataCodelist);
-                  //   var departuretime = Dep['at'];
-                  //   Deptimeconvert =
-                  //   (new DateFormat.Hm().format(DateTime.parse(departuretime)));
-                  //   Datestr =
-                  //   (new DateFormat.yMd().format(DateTime.parse(departuretime)));
-                  //   ReturnJourney_dateArray.add(Datestr);
-                  //   print('time4...');
-                  //   print(Deptimeconvert);
-                  //   ReturnJourney_DeptimeArray.add(Deptimeconvert);
-                  // }
-                  // var arrival = DeparturArray['arrival'];
-                  // arrivalcode = arrival['iataCode'];
-                  // print('arrival....');
-                  // print(arrivalcode);
-                  // Connectflightcnt_Arrival.add(arrivalcode);
+                }
                   if (widget.Received_destination_Airports[1] == arrivalcode) {
                     print('.......First flight arrival');
                     if (segmentValuesAray.length == 1) {
                       ReturnJourney_arrivaliataCodelist.add(arrivalcode);
-                      OnwardJourney_carrierCodeArray1.add(carrierCodestr);
-                      print('.......2nd arrival First flight arrival....');
-                      print(OnwardJourney_carrierCodeArray1);
+                      SecondJourney_carrierCodeArray.add(carrierCodestr);
+                      print('second journey 2nd flight...3');
+                      print(carrierCodestr);
+                      print(SecondJourney_carrierCodeArray);
 
                       // print('arrival array...');
                       // print(OnwardJourney_arrivaliataCodelist);
@@ -1496,9 +1437,10 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                       print(OnwardJourney_ArrivaltimeArray);
                     } else if (segmentValuesAray.length == 2) {
                       ReturnJourney_arrivaliataCodelist.add(arrivalcode);
-                      OnwardJourney_carrierCodeArray1.add(carrierCodestr);
-                      print('.-.-.segment2 flight arrival....');
-                      print(OnwardJourney_carrierCodeArray1);
+                      // SecondJourney_carrierCodeArray.add(carrierCodestr);
+                      // print('second journey 2nd flight...4');
+                      // print(carrierCodestr);
+                      // print(SecondJourney_carrierCodeArray);
 
                       // print('arrival array...');
                       // print(OnwardJourney_arrivaliataCodelist);
@@ -1510,47 +1452,14 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                       print(OnwardJourney_ArrivaltimeArray);
                     }
                   }
+              }
 
-                  // if(widget.Received_destination_Airports[1] == arrivalcode){
-                  //   ReturnJourney_arrivaliataCodelist.add(arrivalcode);
-                  //   // print('arrival array...');
-                  //   // print(OnwardJourney_arrivaliataCodelist);
-                  //   var arrivaltime = arrival['at'];
-                  //   var Arrivaltimeconvert = (new DateFormat.Hm().format(
-                  //       DateTime.parse(arrivaltime)));
-                  //   ReturnJourney_ArrivaltimeArray.add(Arrivaltimeconvert);
-                  //   // print('last...');
-                  //   // print(OnwardJourney_ArrivaltimeArray);
-                  // }
-                }
-                // }
-                // for(var DeparturArray in segmentValuesAray) {
-                //   var Dep = DeparturArray['departure'];
-                //   depiataCode = Dep['iataCode'];
-                //   print('depiataCode....');
-                //   print(depiataCode);
-                //
-                //       if(Retrived_Rndtrp_iatacodestr == depiataCode) {
-                //        // OnwardJourney_depiataCodelist.add(depiataCode);
-                //        //  print('1----------dep array...');
-                //        //  print(OnwardJourney_depiataCodelist);
-                //         var departuretime = Dep['at'];
-                //         Deptimeconvert =
-                //         (new DateFormat.Hm().format(DateTime.parse(departuretime)));
-                //         Datestr =
-                //         (new DateFormat.yMd().format(DateTime.parse(departuretime)));
-                //         OnwardJourney_dateArray.add(Datestr);
-                //         print('Deptimeconvert....');
-                //         print(Deptimeconvert);
-                //         OnwardJourney_DeptimeArray.add(Deptimeconvert);
-                //       }
-                //
-                //
-                // }
-              } if (widget.Received_departure_Airports.length == 3 &&
+
+
+              //Three fligts data...
+              if (widget.Received_departure_Airports.length == 3 &&
                   widget.Received_destination_Airports.length == 3) {
                 print('testing with 2 flights....');
-
                 var Dep = DeparturArray['departure'];
                 depiataCode = Dep['iataCode'];
                 print(depiataCode);
@@ -1634,6 +1543,8 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                   print('ssssss1');
                   //first flight data...
                   if (segmentValuesAray.length == 1) {
+                    print('second flight careercode...');
+                    print(carrierCodestr);
                     ReturnJourney_depiataCodelist.add(depiataCode);
                     ReturnJourney_depiataCodelist.add(carrierCodestr);
                     print('sssss first flight departure data...');
@@ -2487,7 +2398,7 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                                                                         height: 20,
                                                                         width: 150,
                                                                         color: Colors.transparent,
-                                                                        child:  Text(convertedAirlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray1[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                        child:  Text(convertedAirlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
                                                                         ),),
                                                                       )
                                                                     ],
@@ -2517,7 +2428,7 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                                                             color: Colors.white,
                                                             child: Column(
                                                               children: [
-                                                                Text('second Flight Details                           ',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                Text('Second Flight Details                           ',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
                                                                 ),),
 
                                                                 // Text(ReturnJourney_DeptimeArray[index].toString() + '----------------------------------> ' + ReturnJourney_ArrivaltimeArray[index],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
@@ -2548,7 +2459,7 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                                                                 // Text(Retrived_Rndtrp_Destinationiatacodestr[index].toString(),style: TextStyle(fontSize: 14,fontWeight: FontWeight.w300,color: Colors.black
                                                                 // ),),
 
-                                                                Text(ReturnJourney_DeptimeArray[index].toString() + '----------------------------------> ' + ReturnJourney_ArrivaltimeArray[index],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                Text(ReturnJourney_DeptimeArray[index].toString() + '----------------------------------> ' + ReturnJourney_ArrivaltimeArray[index].toString() ,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
                                                                 ),),
                                                                 Text(ReturnJourney_depiataCodelist[index].toString() + '           '+ segmentValuesAraycnt[index] + ' ' + 'Segments' +'             '+  ReturnJourney_arrivaliataCodelist[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
                                                                 ),),
@@ -2668,11 +2579,15 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                                                                         ),
                                                                       ),
                                                                       SizedBox(width: 40,),
+
+
                                                                       Container(
                                                                         height: 20,
                                                                         width: 150,
                                                                         color: Colors.transparent,
-                                                                        child:  Text(convertedAirlineArray[index].toString() + "   -" + OnwardJourney_carrierCodeArray1[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                        // child:  Text(convertedAirlineArray[index].toString() + "   -" + ReturnJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                                                        // ),),
+                                                                        child:  Text( SecondJourney_carrierCodeArray[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
                                                                         ),),
                                                                       )
                                                                     ],
