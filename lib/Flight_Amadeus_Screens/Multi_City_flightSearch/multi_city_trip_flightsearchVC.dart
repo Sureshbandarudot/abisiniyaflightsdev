@@ -1482,6 +1482,7 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                   widget.Received_destination_Airports.length == 3) {
                 var Dep = DeparturArray['departure'];
                 depiataCode = Dep['iataCode'];
+                print('3re dep..');
                 print(depiataCode);
                 if (widget.Received_departure_Airports.first == depiataCode) {
                   if (segmentValuesAray.length == 1) {
@@ -1513,9 +1514,12 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                     OnwardJourney_DeptimeArray.add(Deptimeconvert);
                   }
                 }
+
                 var arrival = DeparturArray['arrival'];
                 arrivalcode = arrival['iataCode'];
-                // Connectflightcnt_Arrival.add(arrivalcode);
+                print('three flights arrival....');
+                print(widget.Received_destination_Airports.first);
+                print(arrivalcode);
                 if (widget.Received_destination_Airports.first == arrivalcode) {
                   print('First flight arrival');
                   if (segmentValuesAray.length == 1) {
@@ -1526,6 +1530,8 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                     var arrivaltime = arrival['at'];
                     var Arrivaltimeconvert = (new DateFormat.Hm().format(
                         DateTime.parse(arrivaltime)));
+                    print('2 segments time array1...');
+                    print(Arrivaltimeconvert);
                     OnwardJourney_ArrivaltimeArray.add(Arrivaltimeconvert);
                   } else if (segmentValuesAray.length == 2) {
                     OnwardJourney_arrivaliataCodelist.add(arrivalcode);
@@ -1535,9 +1541,14 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                     var arrivaltime = arrival['at'];
                     var Arrivaltimeconvert = (new DateFormat.Hm().format(
                         DateTime.parse(arrivaltime)));
+                    print('2 segments time array2...');
+                    print(Arrivaltimeconvert);
                     OnwardJourney_ArrivaltimeArray.add(Arrivaltimeconvert);
                   }
                 }
+
+
+
                 //Second flight details
 
                 if (widget.Received_departure_Airports[1] == depiataCode) {
@@ -1573,9 +1584,14 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                     ReturnJourney_DeptimeArray.add(Deptimeconvert);
                   }
                 }
+                arrivalcode = arrival['iataCode'];
+                print('second arrival time...');
+                print(arrivalcode);
+                print(widget.Received_destination_Airports[1]);
                   if (widget.Received_destination_Airports[1] == arrivalcode) {
-                    print('.......First flight arrival');
+                    print('socond flight....1');
                     if (segmentValuesAray.length == 1) {
+                      print('socond flight....2');
                       ReturnJourney_arrivaliataCodelist.add(arrivalcode);
                       Multi_third_Journey_secondcarrierCodeArray.add(carrierCodestr);
                       print('Multi city second flight carrer---3');
@@ -1583,8 +1599,12 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                       var arrivaltime = arrival['at'];
                       var Arrivaltimeconvert = (new DateFormat.Hm().format(
                           DateTime.parse(arrivaltime)));
+
+                      print('arrival time2...');
+                      print(Arrivaltimeconvert);
                       ReturnJourney_ArrivaltimeArray.add(Arrivaltimeconvert);
                     } else if (segmentValuesAray.length == 2) {
+                      print('socond flight....3');
                       ReturnJourney_arrivaliataCodelist.add(arrivalcode);
                       Multi_third_Journey_secondcarrierCodeArray.add(carrierCodestr);
                       print('Multi city second flight carrer---4');
@@ -1592,9 +1612,9 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                       var arrivaltime = arrival['at'];
                       var Arrivaltimeconvert = (new DateFormat.Hm().format(
                           DateTime.parse(arrivaltime)));
+                      print('arrival time2...');
+                      print(Arrivaltimeconvert);
                       ReturnJourney_ArrivaltimeArray.add(Arrivaltimeconvert);
-                      print('rrrrr last...');
-                      print(OnwardJourney_ArrivaltimeArray);
                     }
                   }
                   //Third flight details
@@ -2219,6 +2239,18 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
     thirdJouney_thirdflight_airlinelogo.add(
         thirdflight_Airline_logo);
     }
+    }
+
+
+    //price
+    if(CurrencyCodestr == "USD"){
+      totalpricevalues = grand_totalPricevaluesArray[index].toString();
+      //print("I have \$$dollars."); // I have $42.
+      // totalpriceSignvalues = "\$$totalpricevalues";
+      totalpriceSignvalues = "\USD $totalpricevalues";
+    } else {
+      totalpricevalues = grand_totalPricevaluesArray[index].toString();
+      totalpriceSignvalues = "\ZAR $totalpricevalues";
     }
 
                                       return Padding(
