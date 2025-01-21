@@ -3023,108 +3023,194 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                                                                       )
                                                                   ),
                                                                   onTap: () async {
-                                                                    print('continue btn tapped....');
 
-                                                                    SharedPreferences prefs = await SharedPreferences.getInstance();
+     if (widget.Received_departure_Airports.length == 1 &&
+    widget.Received_destination_Airports.length == 1) {
+       SharedPreferences prefs = await SharedPreferences.getInstance();
+       print(widget.Received_departure_Airports.length);
+       int k = 0;
+       k = widget.Received_departure_Airports.length;
+       for (int i = 0; i < k; i++) {
+         print('Departure Item at index $i: ${widget.Received_departure_Airports[i]}');
+         // Increase index (optional, as 'i' automatically increases in a for loop)
+         departureAirports.add(widget.Received_departure_Airports[i]);
+         destinationAirports.add(widget.Received_destination_Airports[i]);
 
+       }
+       print('departure airport1111...');
+       print(departureAirports);
 
-                                                                    print('length.....');
-                                                                    print(widget.Received_departure_Airports.length);
-                                                                    int k = 0;
-                                                                    k = widget.Received_departure_Airports.length;
-                                                                    for (int i = 0; i < k; i++) {
-                                                                      print('Departure Item at index $i: ${widget.Received_departure_Airports[i]}');
-                                                                      // Increase index (optional, as 'i' automatically increases in a for loop)
-                                                                      departureAirports.add(widget.Received_departure_Airports[i]);
-                                                                      destinationAirports.add(widget.Received_destination_Airports[i]);
-
-                                                                    }
-                                                                    print('departure airport1111...');
-                                                                    print(departureAirports);
-
-                                                                    print('destination airport1111...');
-                                                                    print(destinationAirports);
+       print('destination airport1111...');
+       print(destinationAirports);
 
 
 
-                                                                    Navigator.push(
-                                                                      context,
-                                                                      MaterialPageRoute(
-                                                                        builder: (context) => Multi_city_Flight_Details(
-                                                                          Received_departure_Airports: departureAirports,
-                                                                          Received_destination_Airports: destinationAirports,
-                                                                        ), // Pass airport here
-                                                                      ),
-                                                                    );
+       Navigator.push(
+         context,
+         MaterialPageRoute(
+           builder: (context) => Multi_city_Flight_Details(
+             Received_departure_Airports: departureAirports,
+             Received_destination_Airports: destinationAirports,
+           ), // Pass airport here
+         ),
+       );
 
 
 
 
-                                                                    prefs.setString('flightid_key', flightoffer_ID_Array[index]);;
-                                                                    prefs.setString('source_key', sourceArray[index]);
-                                                                    prefs.setString('lastTicketing_Datekey', lastTicketingDateArray[index]);
-                                                                    prefs.setString('lastTicketingDate_Timekey', lastTicketingDateTimeArray[index]);
-                                                                    prefs.setString('numberOfBookableSeatskey', numberOfBookableSeatsArray[index].toString());
-                                                                    prefs.setString('carrierCodekey', OnwardJourney_carrierCodeArray1[index]);
-                                                                    prefs.setString('flight_optionkey', 'round-trip');
-                                                                    print('index value.....');
-                                                                    print(ReturnJourney_carrierCodeArray1.length);
+       prefs.setString('flightid_key', flightoffer_ID_Array[index]);;
+       prefs.setString('source_key', sourceArray[index]);
+       prefs.setString('lastTicketing_Datekey', lastTicketingDateArray[index]);
+       prefs.setString('lastTicketingDate_Timekey', lastTicketingDateTimeArray[index]);
+       prefs.setString('numberOfBookableSeatskey', numberOfBookableSeatsArray[index].toString());
+       prefs.setString('carrierCodekey', OnwardJourney_carrierCodeArray1[index]);
+       prefs.setString('flight_optionkey', 'round-trip');
+       print('index value.....');
+       print(ReturnJourney_carrierCodeArray1.length);
 
 
-                                                                    if(ReturnJourney_carrierCodeArray1.length == 0) {
-                                                                      print('empty calling....');
-                                                                    } else {
-                                                                      print('not empty ....');
+       if(ReturnJourney_carrierCodeArray1.length == 0) {
+         print('empty calling....');
+       } else {
+         print('not empty ....');
 
-                                                                      prefs.setString('return_carrierCodekey', ReturnJourney_carrierCodeArray1[index] ?? 'empty');
+         prefs.setString('return_carrierCodekey', ReturnJourney_carrierCodeArray1[index] ?? 'empty');
 
-                                                                    }
+       }
 
 
-                                                                    print('career code...');
-                                                                    print(OnwardJourney_carrierCodeArray1[index]);
-                                                                    // prefs.setString('durationkey', durationArray[index]);
-                                                                    String Itinerary_JsonData = jsonEncode(Round_trip_ItinerariArray[index]);
-                                                                    print('rnd trip Itinerarykey segJson...');
-                                                                    print(Itinerary_JsonData);
-                                                                    prefs.setString('Itinerarykey', Itinerary_JsonData);
-                                                                    String validatingAirlineCodesArrayData = jsonEncode(validatingAirlineCodesArrayList[index]);
-                                                                    prefs.setString('validatingAirlineCodeskey', validatingAirlineCodesArrayData);
-                                                                    print('validatingAirlineCodesArrayData......');
-                                                                    print(validatingAirlineCodesArrayData);
-                                                                    String travelerPricings = jsonEncode(Round_trip_travelerPricingslistArray[index]);
-                                                                    prefs.setString('Round_trip_travelerPricingskey', travelerPricings);
-                                                                    String Currency_Price = jsonEncode(Round_trip_Currency_Price_Array[index]);
-                                                                    prefs.setString('Round_trip_Currency_Pricekey', Currency_Price);
-                                                                    String fareRulesstr = jsonEncode(Round_trip_fareRulesArray[index]);
-                                                                    print('fareRulesstr...');
-                                                                    print(fareRulesstr);
-                                                                    prefs.setString('Round_trip_fareRuleskey', fareRulesstr);
-                                                                    prefs.setString('airlinekey', convertedAirlineArray[index]);
-                                                                    prefs.setString('logokey', AirlinelogoArray[index]);
-                                                                    //Return airline name and logo...
-                                                                    prefs.setString('return_airlinekey', Return_convertedAirlineArray[index]);
-                                                                    prefs.setString('return_logokey', Return_AirlinelogoArray[index]);
-                                                                    prefs.setString('return_journey_departure_time_key', OnwardJourney_DeptimeArray[index]);
-                                                                    prefs.setString('return_journey_arrival_time_key', OnwardJourney_DeptimeArray[index]);
-                                                                    //Baggage
-                                                                    // prefs.setInt('weightkey', weight) ?? 0;
-                                                                    // prefs.setInt('quantitykey', quantity) ?? 0;
-                                                                    Passengers_cnt = Aduld_cnt + children_cnt + infant_cnt;
-                                                                    prefs.setInt('Passengers_cntkey', Passengers_cnt) ?? 0;
-                                                                    prefs.setInt('Passengers_Adult_cntkey', Aduld_cnt) ?? 0;
-                                                                    prefs.setInt('Passengers_Child_cntkey', children_cnt) ?? 0;
-                                                                    prefs.setInt('Passengers_infant_cntkey', infant_cnt) ?? 0;
-                                                                    print('sent value');
-                                                                    print(Passengers_cnt);
-                                                                    //Currency code
-                                                                    prefs.setString('Rndcurrency_code_dropdownvaluekey', CurrencyCodestr);
-                                                                    print('sending Currency code value...');
-                                                                    print(CurrencyCodestr);
-                                                                    //Cabin Baggage
-                                                                    // prefs.setInt('Cabin_weightkey', Cabin_weight) ?? 0;
-                                                                    // prefs.setString('Cabin_quantitykey', Cabin_quantity) ?? "";
-                                                                  },
+       print('career code...');
+       print(OnwardJourney_carrierCodeArray1[index]);
+       // prefs.setString('durationkey', durationArray[index]);
+       String Itinerary_JsonData = jsonEncode(Round_trip_ItinerariArray[index]);
+       print('rnd trip Itinerarykey segJson...');
+       print(Itinerary_JsonData);
+       prefs.setString('Itinerarykey', Itinerary_JsonData);
+       String validatingAirlineCodesArrayData = jsonEncode(validatingAirlineCodesArrayList[index]);
+       prefs.setString('validatingAirlineCodeskey', validatingAirlineCodesArrayData);
+       print('validatingAirlineCodesArrayData......');
+       print(validatingAirlineCodesArrayData);
+       String travelerPricings = jsonEncode(Round_trip_travelerPricingslistArray[index]);
+       prefs.setString('Round_trip_travelerPricingskey', travelerPricings);
+       String Currency_Price = jsonEncode(Round_trip_Currency_Price_Array[index]);
+       prefs.setString('Round_trip_Currency_Pricekey', Currency_Price);
+       String fareRulesstr = jsonEncode(Round_trip_fareRulesArray[index]);
+       print('fareRulesstr...');
+       print(fareRulesstr);
+       prefs.setString('Round_trip_fareRuleskey', fareRulesstr);
+       prefs.setString('airlinekey', convertedAirlineArray[index]);
+       prefs.setString('logokey', AirlinelogoArray[index]);
+       //Return airline name and logo...
+       // prefs.setString('return_airlinekey', Return_convertedAirlineArray[index]);
+       // prefs.setString('return_logokey', Return_AirlinelogoArray[index]);
+       // prefs.setString('return_journey_departure_time_key', OnwardJourney_DeptimeArray[index]);
+       // prefs.setString('return_journey_arrival_time_key', OnwardJourney_DeptimeArray[index]);
+       //Baggage
+       // prefs.setInt('weightkey', weight) ?? 0;
+       // prefs.setInt('quantitykey', quantity) ?? 0;
+       Passengers_cnt = Aduld_cnt + children_cnt + infant_cnt;
+       prefs.setInt('Passengers_cntkey', Passengers_cnt) ?? 0;
+       prefs.setInt('Passengers_Adult_cntkey', Aduld_cnt) ?? 0;
+       prefs.setInt('Passengers_Child_cntkey', children_cnt) ?? 0;
+       prefs.setInt('Passengers_infant_cntkey', infant_cnt) ?? 0;
+       print('sent value');
+       print(Passengers_cnt);
+       //Currency code
+       prefs.setString('Rndcurrency_code_dropdownvaluekey', CurrencyCodestr);
+       print('sending Currency code value...');
+       print(CurrencyCodestr);
+       //Cabin Baggage
+       // prefs.setInt('Cabin_weightkey', Cabin_weight) ?? 0;
+       // prefs.setString('Cabin_quantitykey', Cabin_quantity) ?? "";
+     } else if (widget.Received_departure_Airports.length == 2 &&
+    widget.Received_destination_Airports.length == 2) {
+       SharedPreferences prefs = await SharedPreferences.getInstance();
+       print(widget.Received_departure_Airports.length);
+       int k = 0;
+       k = widget.Received_departure_Airports.length;
+       for (int i = 0; i < k; i++) {
+         print('Departure Item at index $i: ${widget.Received_departure_Airports[i]}');
+         // Increase index (optional, as 'i' automatically increases in a for loop)
+         departureAirports.add(widget.Received_departure_Airports[i]);
+         destinationAirports.add(widget.Received_destination_Airports[i]);
+
+       }
+       Navigator.push(
+         context,
+         MaterialPageRoute(
+           builder: (context) => Multi_city_Flight_Details(
+             Received_departure_Airports: departureAirports,
+             Received_destination_Airports: destinationAirports,
+           ), // Pass airport here
+         ),
+       );
+
+
+
+
+       prefs.setString('flightid_key', flightoffer_ID_Array[index]);;
+       prefs.setString('source_key', sourceArray[index]);
+       prefs.setString('lastTicketing_Datekey', lastTicketingDateArray[index]);
+       prefs.setString('lastTicketingDate_Timekey', lastTicketingDateTimeArray[index]);
+       prefs.setString('numberOfBookableSeatskey', numberOfBookableSeatsArray[index].toString());
+       //Career codes
+       prefs.setString('carrierCodekey', OnwardJourney_carrierCodeArray[index]);
+       prefs.setString('flight_optionkey', 'round-trip');
+       prefs.setString('secondJourney_carrierCodekey', SecondJourney_carrierCodeArray[index]);
+
+
+       // prefs.setString('durationkey', durationArray[index]);
+       String Itinerary_JsonData = jsonEncode(Round_trip_ItinerariArray[index]);
+       print('rnd trip Itinerarykey segJson...');
+       print(Itinerary_JsonData);
+       prefs.setString('Itinerarykey', Itinerary_JsonData);
+       String validatingAirlineCodesArrayData = jsonEncode(validatingAirlineCodesArrayList[index]);
+       prefs.setString('validatingAirlineCodeskey', validatingAirlineCodesArrayData);
+       print('validatingAirlineCodesArrayData......');
+       print(validatingAirlineCodesArrayData);
+       String travelerPricings = jsonEncode(Round_trip_travelerPricingslistArray[index]);
+       prefs.setString('Round_trip_travelerPricingskey', travelerPricings);
+       String Currency_Price = jsonEncode(Round_trip_Currency_Price_Array[index]);
+       prefs.setString('Round_trip_Currency_Pricekey', Currency_Price);
+       String fareRulesstr = jsonEncode(Round_trip_fareRulesArray[index]);
+       print('fareRulesstr...');
+       print(fareRulesstr);
+       prefs.setString('Round_trip_fareRuleskey', fareRulesstr);
+       prefs.setString('airlinekey', secondJouney_firstflight_airlineArray[index]);
+       prefs.setString('logokey', secondJouney_firstflight_airlinelogo[index]);
+       prefs.setString('secondJourney_airlinekey', secondJouney_firstflight_airlineArray[index]);
+       prefs.setString('secondeJourney_logokey', secondJouney_firstflight_airlinelogo[index]);
+       //Return airline name and logo...
+       // prefs.setString('return_airlinekey', Return_convertedAirlineArray[index]);
+       // prefs.setString('return_logokey', Return_AirlinelogoArray[index]);
+       // prefs.setString('return_journey_departure_time_key', OnwardJourney_DeptimeArray[index]);
+       // prefs.setString('return_journey_arrival_time_key', OnwardJourney_DeptimeArray[index]);
+       //Baggage
+       // prefs.setInt('weightkey', weight) ?? 0;
+       // prefs.setInt('quantitykey', quantity) ?? 0;
+       Passengers_cnt = Aduld_cnt + children_cnt + infant_cnt;
+       prefs.setInt('Passengers_cntkey', Passengers_cnt) ?? 0;
+       prefs.setInt('Passengers_Adult_cntkey', Aduld_cnt) ?? 0;
+       prefs.setInt('Passengers_Child_cntkey', children_cnt) ?? 0;
+       prefs.setInt('Passengers_infant_cntkey', infant_cnt) ?? 0;
+       print('sent value');
+       print(Passengers_cnt);
+       //Currency code
+       prefs.setString('Rndcurrency_code_dropdownvaluekey', CurrencyCodestr);
+       print('sending Currency code value...');
+       print(CurrencyCodestr);
+       //Cabin Baggage
+       // prefs.setInt('Cabin_weightkey', Cabin_weight) ?? 0;
+       // prefs.setString('Cabin_quantitykey', Cabin_quantity) ?? "";
+
+
+     } else if (widget.Received_departure_Airports.length == 3 &&
+    widget.Received_destination_Airports.length == 3) {
+
+     }
+
+
+                                                                                                                                      },
                                                                 ),
                                                               ],
                                                             ),

@@ -124,8 +124,14 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
   String airlinestr = '';
   String logostr = '';
   //return airline and logo variable declaration..
-  String return_airlinestr = '';
-  String return_logostr = '';
+  String multi_secondJourney_airlinestr = '';
+  String multi_secondJourney_logostr = '';
+  //Retriving second journey career codes
+  String multi_secondJourney_firstCareercode = '';
+  String multi_secondJourney_secondCareercode = '';
+
+
+
 
 
 
@@ -173,10 +179,12 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
     Careercodestr = prefs.getString('carrierCodekey') ?? '';
     airlinestr = prefs.getString('airlinekey') ?? '';
     logostr = prefs.getString('logokey') ?? '';
-    //Return airline and logo retrived...
-    return_airlinestr = prefs.getString('return_airlinekey') ?? '';
-    return_logostr = prefs.getString('return_logokey') ?? '';
-    return_Careercodestr = prefs.getString('return_carrierCodekey') ?? '';
+    //second flight airline and logo retrived...
+    multi_secondJourney_airlinestr = prefs.getString('secondJourney_airlinekey') ?? '';
+    multi_secondJourney_logostr = prefs.getString('secondeJourney_logokey') ?? '';
+    multi_secondJourney_firstCareercode = prefs.getString('carrierCodekey') ?? '';
+    multi_secondJourney_secondCareercode = prefs.getString('secondJourney_carrierCodekey') ?? '';
+
 
 
 
@@ -203,7 +211,9 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
     //   }
 
     // });
-    durationstr = prefs.getString('durationkey') ?? '';
+    // durationstr = prefs.getString('durationkey') ?? '';
+    // print('duration....');
+    // print(durationstr);
 
     // prefs.setString('carrierCodekey', OnwardJourney_carrierCodeArray[index]);
     // prefs.setString('durationkey', durationArray[index]);
@@ -1201,7 +1211,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
       ),
     );
 
-    print('round - trip Details array....');
+    print('multi - trip Details array....');
 
     print(response.statusCode);
     if (response.statusCode == 200) {
@@ -1307,13 +1317,38 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
             var arrivalstr = Arrival['iataCode'];
             print('arrivalstr.....');
             print(arrivalstr);
+            print(widget.Received_destination_Airports[0]);
 
 
             if (widget.Received_departure_Airports.length == 1 && widget.Received_destination_Airports.length == 1) {
 //departure flight arrival time
+            print('destination....');
               if(arrivalstr == widget.Received_destination_Airports[0]){
                 arrivalCode = Arrival['iataCode'];
                 print('arrivalCode...');
+                print(arrivalCode);
+                var Arrivaltime = Arrival['at'];
+                Arrivaltimeconvert =
+                (new DateFormat.Hm().format(DateTime.parse(Arrivaltime)));
+                Datestr =
+                (new DateFormat.yMd().format(DateTime.parse(Arrivaltime)));
+
+
+                print('arrival time...');
+                print(Arrivaltimeconvert);
+
+              }
+
+              Arrivalterminal = Arrival['terminal'] ?? "";
+              print('arrival terminal...');
+              print(Arrivalterminal);
+
+            } else if (widget.Received_departure_Airports.length == 2 && widget.Received_destination_Airports.length == 2) {
+
+              //departure flight arrival time
+              if(arrivalstr == widget.Received_destination_Airports[0]) {
+                arrivalCode = Arrival['iataCode'];
+                print('2nd arrivalCode...');
                 print(arrivalCode);
                 var Arrivaltime = Arrival['at'];
                 Arrivaltimeconvert =
@@ -1328,28 +1363,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
               Arrivalterminal = Arrival['terminal'] ?? "";
               print('arrival terminal...');
               print(Arrivalterminal);
-
-            } else if (widget.Received_departure_Airports.length == 2 && widget.Received_destination_Airports.length == 2) {
-
-              //departure flight arrival time
-              if(arrivalstr == widget.Received_destination_Airports[0]){
-                //arrivalCode = Arrival['iataCode'];
-                // print('arrivalCode...');
-                // print(arrivalCode);
-                var Arrivaltime = Arrival['at'];
-                Arrivaltimeconvert =
-                (new DateFormat.Hm().format(DateTime.parse(Arrivaltime)));
-                Datestr =
-                (new DateFormat.yMd().format(DateTime.parse(Arrivaltime)));
-
-
-
-              }
-
-              Arrivalterminal = Arrival['terminal'] ?? "";
-              print('arrival terminal...');
-              print(Arrivalterminal);
-              if(arrivalstr == widget.Received_destination_Airports[1]){
+              if(arrivalstr == widget.Received_destination_Airports[1]) {
                 arrivalCode = Arrival['iataCode'];
                 print('arrivalCode...');
                 print(arrivalCode);
@@ -1379,7 +1393,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
           }
         }
         //for(var Currency_Price in flightData){
-        for(var GrandtotalpriceArray in flightOffers){
+        for(var GrandtotalpriceArray in flightOffers) {
           var Currency_Pricestr = GrandtotalpriceArray['price'];
           print('price Currency_Pricestr...');
           print(Currency_Pricestr);
@@ -1579,8 +1593,8 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                           flight_departurests = 'Price per passenger, taxes and fees included';
                           return_Departuretextstr = 'Return To ' + ' '+  widget.Received_departure_Airports[0];
 
-                          // trimedDuration = durationstr.substring(2);
-                          //
+                         // trimedDuration = durationstr.substring(2);
+
                           print('currency code checking...');
                           print(CurrencyCodestr);
                           if(CurrencyCodestr == "USD"){
@@ -1686,7 +1700,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                     SizedBox(
                                       height: 100,
                                     ),
-                                    Text(return_arrival_time,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                    Text(Arrivaltimeconvert,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
                                     ),),
                                     Text(arrivalCode,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
                                     ),),
@@ -1729,7 +1743,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                     Align(
                                       alignment: Alignment.topLeft,
                                       child: Text(
-                                        Retrived_Rndtrp_Citynamestr,
+                                        widget.Received_departure_Airports.first,
                                         style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
                                     ),
 
@@ -1782,7 +1796,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                     Align(
                                       alignment: Alignment.topLeft,
                                       child: Text(
-                                        Retrived_Rndtrp_Destination_Citynamestr,
+                                        widget.Received_destination_Airports.first,
                                         style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
                                     ),
                                     Align(
@@ -1849,6 +1863,10 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                         SizedBox(
                           height: 15,
                         ),
+
+
+
+
                         Container(
                             height: 50,
                             width: 300,
@@ -1895,7 +1913,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                     SizedBox(
                                       height: 100,
                                     ),
-                                    Text(return_arrival_time,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                    Text(Arrivaltimeconvert,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
                                     ),),
                                     Text(arrivalCode,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
                                     ),),
@@ -1938,7 +1956,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                     Align(
                                       alignment: Alignment.topLeft,
                                       child: Text(
-                                        Retrived_Rndtrp_Citynamestr,
+                                        widget.Received_departure_Airports.first,
                                         style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
                                     ),
 
@@ -1976,7 +1994,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                             height: 45,
                                             width: 140,
                                             color: Colors.transparent,
-                                            child:  Text(airlinestr + "   -" + Careercodestr,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                            child:  Text(airlinestr + "   -" + multi_secondJourney_firstCareercode,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
                                             ),),
                                           )
                                         ],
@@ -1991,7 +2009,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                     Align(
                                       alignment: Alignment.topLeft,
                                       child: Text(
-                                        Retrived_Rndtrp_Destination_Citynamestr,
+                                        widget.Received_destination_Airports.first,
                                         style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
                                     ),
                                     Align(
@@ -2173,7 +2191,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                             width: 130,
                                             //margin: new EdgeInsets.symmetric(vertical: 5.0),
                                             decoration: BoxDecoration(
-                                                image: DecorationImage(image: NetworkImage(return_logostr),
+                                                image: DecorationImage(image: NetworkImage(multi_secondJourney_logostr),
                                                     fit: BoxFit.cover)
                                             ),
                                           ),
@@ -2182,7 +2200,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                             height: 45,
                                             width: 140,
                                             color: Colors.transparent,
-                                            child:  Text(return_airlinestr + "   -" + return_Careercodestr,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                            child:  Text(multi_secondJourney_airlinestr + "   -" + multi_secondJourney_secondCareercode,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
                                             ),),
                                           )
                                         ],
@@ -2296,142 +2314,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                   //     ],
                   //   ),
                   // ),
-                  Container(
-                    height: 60,
-                    width: 320,
-                    color: Colors.green,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Container(
-                          height: 50,
-                          width: 150,
-                          color: Colors.white,
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                              totalpriceSignvalues,
-                              style: TextStyle(fontSize: 16,fontWeight: FontWeight.w900,color:Colors.red),),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        InkWell(
-                          child: Container(
-                              height: 50,
-                              width: 150,
-                              color: Colors.blue,
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Text(
-                                    "Continue",
-                                    style: TextStyle(fontSize: 22.0,fontWeight: FontWeight.w900,color: Colors.white),
-                                    textAlign: TextAlign.center
-                                ),
-                              )
-                          ),
-                          onTap: () async {
-                            print('continue btn tapped....');
-                            SharedPreferences prefs = await SharedPreferences.getInstance();
-                            prefs.setString('totalpriceSignvalueskey', (totalpriceSignvalues));
-                            prefs.setString('pricekey', (totalpricevalues));
-                            prefs.setString('Additional_services_currencycodekey', (CurrencyCodestr));
 
-
-
-
-                            String SegmentData = jsonEncode(Convert_segmentArray);
-                            prefs.setString('segmentlistkey', SegmentData);
-                            prefs.setString('flight_offer_Array_key', (flight_offer_Array.toString()));
-                            // print('SegmentData...');
-                            // print(Convert_segmentArray);
-
-                            prefs.setString('flightid_key', flight_ID);
-                            prefs.setString('source_key', sourcestr);
-                            prefs.setString('lastTicketing_Datekey', lastTicketing_Datestr);
-                            prefs.setString('lastTicketingDate_Timekey', lastTicketingDate_Timestr);
-                            prefs.setString('numberOfBookableSeatskey', numberOfBookableSeatsstr);
-                            prefs.setString('carrierCodekey', Careercodestr);
-                            prefs.setString('durationkey', durationstr);
-                            prefs.setInt('Passengers_cntkey', Passengers_cnt);
-
-                            //Passengers_cnt = prefs.getInt('Passengers_cntkey') ?? 0;
-                            print('2 price passengers cnt');
-                            print(Passengers_cnt);
-                            //String segJson = jsonEncode(OnwardJourney_Segmentrray.toString());
-
-                            //Baggage
-                            prefs.setInt('weightkey', weight) ?? 0;
-                            prefs.setInt('quantitykey', quantity) ?? 0;
-
-                            String segJson = jsonEncode(Convert_segmentArray);
-                            prefs.setString('Segmentkey', segJson);
-                            //Convert_segmentArray
-                            //prefs.setString('Segmentkey', Convert_segmentArray.toString());
-                            // print('----------seg');
-                            // print(Convert_segmentArray);
-
-                            String convert_travelerPricingJson = jsonEncode(convert_travelerPricingsArray);
-                            prefs.setString('order_travelerPricingkey', convert_travelerPricingJson);
-                            //Convert_segmentArray
-                            //prefs.setString('Segmentkey', Convert_segmentArray.toString());
-                            // print('----------order_travelerPricingkey');
-                            // print(convert_travelerPricingsArray);
-
-
-
-
-                            // String Currency_Price = jsonEncode(Currency_Price_Array[index]);
-                            // prefs.setString('Currency_Pricekey', Currency_Price);
-                            print('Currency_Price_Array....');
-                            print(Currency_Price_Array.first);
-                            String convert_Currency_PriceArrayJson = jsonEncode(Currency_Price_Array.first);
-                            prefs.setString('convert_Currency_PriceArraykey', convert_Currency_PriceArrayJson);
-                            print('----------convert_Currency_PriceArrayJson');
-                            print(convert_Currency_PriceArrayJson);
-                            String fareRulesstr = jsonEncode(fareRulesArray);
-                            print('price fareRulesstr....');
-                            print(fareRulesstr);
-                            prefs.setString('fareRuleskey', fareRulesstr);
-                            prefs.setString('validatingAirlineCodeskey', validatingAirlineCodestr);
-
-
-                            //Traveller Type
-                            String TravellertypejsonParsing = jsonEncode(travelerTypeArray);
-                            print('TravellertypejsonParsing...');
-                            print(TravellertypejsonParsing);
-                            prefs.setString('TravellertypejsonParsingkey', TravellertypejsonParsing);
-
-                            String priceArray = jsonEncode(totalPricevaluesArray);
-                            // print('segJson...');
-                            // print(segJson);
-                            prefs.setString('priceArrayjsonParsingkey', priceArray);
-
-
-                            //
-                            //
-                            // String travelerPricings = jsonEncode(travelerPricingslistArray);
-                            // prefs.setString('travelerPricingskey', travelerPricings);
-                            // String Currency_Price = jsonEncode(Currency_Price_Array);
-                            // prefs.setString('Currency_Pricekey', Currency_Price);
-                            // String fareRulesstr = jsonEncode(fareRulesArray);
-                            // prefs.setString('fareRuleskey', fareRulesstr);
-                            // // prefs.setString('airlinekey', convertedAirlineArray.toString());
-                            // // prefs.setString('logokey', AirlinelogoArray[index]);
-                            //
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //       builder: (context) => Round_Trip_Add_OnsVC()),
-                            // );
-                          },
-                        ),
-                      ],
-                    ),
-                  )
                 ],
               ),
             )
@@ -2440,6 +2323,143 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
       ),
                                   ] else ...[
                           ],
+
+                                Container(
+                                  height: 60,
+                                  width: 320,
+                                  color: Colors.green,
+                                  child: Row(
+                                    children: [
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Container(
+                                        height: 50,
+                                        width: 150,
+                                        color: Colors.white,
+                                        child: Align(
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            totalpriceSignvalues,
+                                            style: TextStyle(fontSize: 16,fontWeight: FontWeight.w900,color:Colors.red),),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      InkWell(
+                                        child: Container(
+                                            height: 50,
+                                            width: 150,
+                                            color: Colors.blue,
+                                            child: Align(
+                                              alignment: Alignment.center,
+                                              child: Text(
+                                                  "Continue",
+                                                  style: TextStyle(fontSize: 22.0,fontWeight: FontWeight.w900,color: Colors.white),
+                                                  textAlign: TextAlign.center
+                                              ),
+                                            )
+                                        ),
+                                        onTap: () async {
+                                          print('continue btn tapped....');
+                                          SharedPreferences prefs = await SharedPreferences.getInstance();
+                                          prefs.setString('totalpriceSignvalueskey', (totalpriceSignvalues));
+                                          prefs.setString('pricekey', (totalpricevalues));
+                                          prefs.setString('Additional_services_currencycodekey', (CurrencyCodestr));
+
+
+
+
+                                          String SegmentData = jsonEncode(Convert_segmentArray);
+                                          prefs.setString('segmentlistkey', SegmentData);
+                                          prefs.setString('flight_offer_Array_key', (flight_offer_Array.toString()));
+                                          // print('SegmentData...');
+                                          // print(Convert_segmentArray);
+
+                                          prefs.setString('flightid_key', flight_ID);
+                                          prefs.setString('source_key', sourcestr);
+                                          prefs.setString('lastTicketing_Datekey', lastTicketing_Datestr);
+                                          prefs.setString('lastTicketingDate_Timekey', lastTicketingDate_Timestr);
+                                          prefs.setString('numberOfBookableSeatskey', numberOfBookableSeatsstr);
+                                          prefs.setString('carrierCodekey', Careercodestr);
+                                          prefs.setString('durationkey', durationstr);
+                                          prefs.setInt('Passengers_cntkey', Passengers_cnt);
+
+                                          //Passengers_cnt = prefs.getInt('Passengers_cntkey') ?? 0;
+                                          print('2 price passengers cnt');
+                                          print(Passengers_cnt);
+                                          //String segJson = jsonEncode(OnwardJourney_Segmentrray.toString());
+
+                                          //Baggage
+                                          prefs.setInt('weightkey', weight) ?? 0;
+                                          prefs.setInt('quantitykey', quantity) ?? 0;
+
+                                          String segJson = jsonEncode(Convert_segmentArray);
+                                          prefs.setString('Segmentkey', segJson);
+                                          //Convert_segmentArray
+                                          //prefs.setString('Segmentkey', Convert_segmentArray.toString());
+                                          // print('----------seg');
+                                          // print(Convert_segmentArray);
+
+                                          String convert_travelerPricingJson = jsonEncode(convert_travelerPricingsArray);
+                                          prefs.setString('order_travelerPricingkey', convert_travelerPricingJson);
+                                          //Convert_segmentArray
+                                          //prefs.setString('Segmentkey', Convert_segmentArray.toString());
+                                          // print('----------order_travelerPricingkey');
+                                          // print(convert_travelerPricingsArray);
+
+
+
+
+                                          // String Currency_Price = jsonEncode(Currency_Price_Array[index]);
+                                          // prefs.setString('Currency_Pricekey', Currency_Price);
+                                          print('Currency_Price_Array....');
+                                          print(Currency_Price_Array.first);
+                                          String convert_Currency_PriceArrayJson = jsonEncode(Currency_Price_Array.first);
+                                          prefs.setString('convert_Currency_PriceArraykey', convert_Currency_PriceArrayJson);
+                                          print('----------convert_Currency_PriceArrayJson');
+                                          print(convert_Currency_PriceArrayJson);
+                                          String fareRulesstr = jsonEncode(fareRulesArray);
+                                          print('price fareRulesstr....');
+                                          print(fareRulesstr);
+                                          prefs.setString('fareRuleskey', fareRulesstr);
+                                          prefs.setString('validatingAirlineCodeskey', validatingAirlineCodestr);
+
+
+                                          //Traveller Type
+                                          String TravellertypejsonParsing = jsonEncode(travelerTypeArray);
+                                          print('TravellertypejsonParsing...');
+                                          print(TravellertypejsonParsing);
+                                          prefs.setString('TravellertypejsonParsingkey', TravellertypejsonParsing);
+
+                                          String priceArray = jsonEncode(totalPricevaluesArray);
+                                          // print('segJson...');
+                                          // print(segJson);
+                                          prefs.setString('priceArrayjsonParsingkey', priceArray);
+
+
+                                          //
+                                          //
+                                          // String travelerPricings = jsonEncode(travelerPricingslistArray);
+                                          // prefs.setString('travelerPricingskey', travelerPricings);
+                                          // String Currency_Price = jsonEncode(Currency_Price_Array);
+                                          // prefs.setString('Currency_Pricekey', Currency_Price);
+                                          // String fareRulesstr = jsonEncode(fareRulesArray);
+                                          // prefs.setString('fareRuleskey', fareRulesstr);
+                                          // // prefs.setString('airlinekey', convertedAirlineArray.toString());
+                                          // // prefs.setString('logokey', AirlinelogoArray[index]);
+                                          //
+                                          // Navigator.push(
+                                          //   context,
+                                          //   MaterialPageRoute(
+                                          //       builder: (context) => Round_Trip_Add_OnsVC()),
+                                          // );
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
 
 
 
