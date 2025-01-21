@@ -22,6 +22,7 @@ import 'package:tourstravels/Singleton/SingletonAbisiniya.dart';
 import 'package:uuid/uuid.dart';
 import 'package:uuid/rng.dart';
 
+import '../Multi_city_Airport_pickup/Multi_city_price_details/Multi_city_price_detailsVC.dart';
 import '../OnwardJourney_price_DetailsVC.dart';
 import '../Round-trip_flight_price_details/Round_trip_price_detailsVC.dart';
 
@@ -44,6 +45,46 @@ class Flight_Multicity_Trip extends StatefulWidget {
 class _userDashboardState extends State<Flight_Multicity_Trip> {
   final baseDioSingleton = BaseSingleton();
 
+  // List to hold the departure and destination cities
+  List<Map<String, TextEditingController>> flights = [
+    {
+      "departure": TextEditingController(),
+      "destination": TextEditingController(),
+      "departureDate": TextEditingController(),
+
+    }
+  ];
+  // Add a new flight segment
+  void _addFlightSegment() {
+    setState(() {
+      flights.add({
+        "departure": TextEditingController(),
+        "destination": TextEditingController(),
+        "departureDate": TextEditingController(),
+
+      });
+    });
+  }
+
+  // List<Map<String, String>> flights = [
+  //   {
+  //     "departure": "New York",
+  //     "destination": "Los Angeles",
+  //     "departureDate": "2025-05-20",
+  //   },
+  // ];
+
+  //
+  // Date format
+  final DateFormat _dateFormat = DateFormat('yyyy-MM-dd');
+  String multicity_departure_airport = '';
+  String multicity_destination_airport = '';
+  String multicity_departure_Date = '';
+  List<String> departureAirports = [];
+  List<String> destinationAirports = [];
+  List<String> multicity_dates = [];
+
+  List<String> selected_dates = [];
   int bookingID = 0;
   int numberOfBookableSeats = 0;
   String totalpricevalues = '';
@@ -308,7 +349,7 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
   _retrieveValues() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      print(widget.Received_departure_Airports.first);
+      print(widget.Received_departure_Airports[0]);
       CurrencyCodestr = prefs.getString('currency_code_Rndtrp_dropdownvaluekey') ?? '';
       print('multi Currency code value21...');
       print(CurrencyCodestr);
@@ -2133,8 +2174,6 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
     widget.Received_destination_Airports.length == 1) {
       var Carrercodestr = OnwardJourney_carrierCodeArray1[index].toString();
       List newLst_airport = AirportListArray.first.where( (o) => o['airlineCode'] == Carrercodestr).toList();
-      print('jump code...');
-      //  print(newLst_airport);
       for(var airlinenamearray in newLst_airport){
         var Airline_name = airlinenamearray['airlineName'];
         convertedAirlineArray.add(Airline_name);
@@ -2144,31 +2183,25 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
 
     }  else if (widget.Received_departure_Airports.length == 2 &&
     widget.Received_destination_Airports.length == 2) {
-      print('2nd journey airline name and logo...');
       //if (segmentValuesAray.length == 1) {
     var firstflight_Carrercodestr = OnwardJourney_carrierCodeArray[index]
         .toString();
     List newLst_airport = AirportListArray.first.where((
     o) => o['airlineCode'] == firstflight_Carrercodestr).toList();
-    print('second journey jump code...');
     //  print(newLst_airport);
     for (var airlinenamearray in newLst_airport) {
     var firstflight_Airline_name = airlinenamearray['airlineName'];
     secondJouney_firstflight_airlineArray.add(firstflight_Airline_name);
-    print('airline name ...');
-    print(firstflight_Airline_name);
-    print(secondJouney_firstflight_airlineArray);
+
     var firstflight_Airline_logo = airlinenamearray['airlineLogo'];
     secondJouney_firstflight_airlinelogo.add(firstflight_Airline_logo);
-    print('secondJouney_firstflight_airlinelogo.....');
-    print(secondJouney_firstflight_airlinelogo);
+
 
     }
     //}
 
         //second flight airline name and airline logo
         //if (widget.Received_departure_Airports[1] == depiataCode) {
-          print('second flight second jouney...');
           var secondflight_Carrercodestr = SecondJourney_carrierCodeArray[index]
               .toString();
           List newLst_airport1 = AirportListArray.first.where((
@@ -2178,13 +2211,13 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
             var secondflight_Airline_name = airlinenamearray['airlineName'];
             secondJouney_secondflight_airlineArray.add(
                 secondflight_Airline_name);
-            print('secondJouney_secondflight_airlineArray...');
-            print(secondJouney_secondflight_airlineArray);
+            // print('secondJouney_secondflight_airlineArray...');
+            // print(secondJouney_secondflight_airlineArray);
             var secondflight_Airline_logo = airlinenamearray['airlineLogo'];
             secondJouney_secondflight_airlinelogo.add(
                 secondflight_Airline_logo);
-            print('secondJouney_secondflight_airlinelogo...2');
-            print(secondJouney_secondflight_airlinelogo);
+            // print('secondJouney_secondflight_airlinelogo...2');
+            // print(secondJouney_secondflight_airlinelogo);
           }
         //}
       }
@@ -2994,11 +3027,39 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
 
                                                                     SharedPreferences prefs = await SharedPreferences.getInstance();
 
+
+                                                                    print('length.....');
+                                                                    print(widget.Received_departure_Airports.length);
+                                                                    int k = 0;
+                                                                    k = widget.Received_departure_Airports.length;
+                                                                    for (int i = 0; i < k; i++) {
+                                                                      print('Departure Item at index $i: ${widget.Received_departure_Airports[i]}');
+                                                                      // Increase index (optional, as 'i' automatically increases in a for loop)
+                                                                      departureAirports.add(widget.Received_departure_Airports[i]);
+                                                                      destinationAirports.add(widget.Received_destination_Airports[i]);
+
+                                                                    }
+                                                                    print('departure airport1111...');
+                                                                    print(departureAirports);
+
+                                                                    print('destination airport1111...');
+                                                                    print(destinationAirports);
+
+
+
                                                                     Navigator.push(
                                                                       context,
                                                                       MaterialPageRoute(
-                                                                          builder: (context) => RoundtripJourney_Flight_Details()),
+                                                                        builder: (context) => Multi_city_Flight_Details(
+                                                                          Received_departure_Airports: departureAirports,
+                                                                          Received_destination_Airports: destinationAirports,
+                                                                        ), // Pass airport here
+                                                                      ),
                                                                     );
+
+
+
+
                                                                     prefs.setString('flightid_key', flightoffer_ID_Array[index]);;
                                                                     prefs.setString('source_key', sourceArray[index]);
                                                                     prefs.setString('lastTicketing_Datekey', lastTicketingDateArray[index]);
@@ -3046,11 +3107,6 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                                                                     prefs.setString('return_logokey', Return_AirlinelogoArray[index]);
                                                                     prefs.setString('return_journey_departure_time_key', OnwardJourney_DeptimeArray[index]);
                                                                     prefs.setString('return_journey_arrival_time_key', OnwardJourney_DeptimeArray[index]);
-
-
-
-
-
                                                                     //Baggage
                                                                     // prefs.setInt('weightkey', weight) ?? 0;
                                                                     // prefs.setInt('quantitykey', quantity) ?? 0;
@@ -3059,25 +3115,15 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                                                                     prefs.setInt('Passengers_Adult_cntkey', Aduld_cnt) ?? 0;
                                                                     prefs.setInt('Passengers_Child_cntkey', children_cnt) ?? 0;
                                                                     prefs.setInt('Passengers_infant_cntkey', infant_cnt) ?? 0;
-
-
-
                                                                     print('sent value');
                                                                     print(Passengers_cnt);
-
                                                                     //Currency code
                                                                     prefs.setString('Rndcurrency_code_dropdownvaluekey', CurrencyCodestr);
-
                                                                     print('sending Currency code value...');
                                                                     print(CurrencyCodestr);
-
                                                                     //Cabin Baggage
                                                                     // prefs.setInt('Cabin_weightkey', Cabin_weight) ?? 0;
                                                                     // prefs.setString('Cabin_quantitykey', Cabin_quantity) ?? "";
-
-
-
-
                                                                   },
                                                                 ),
                                                               ],
