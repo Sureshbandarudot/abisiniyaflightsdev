@@ -84,7 +84,27 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
   String Retrived_Rndtrp_Citynamestr = '';
   //String Retrived_Oneway_iatacodestr = '';
   String Depterminal = '';
+  var firstflightDepterminalArry = [];
   String Arrivalterminal = '';
+  var firstflightArravalterminalArry = [];
+  //Array duration...
+  var firstflightDurationArray = [];
+  var secondJourneyfirstflightDurationArray = [];
+  var secondJourneyfirstsecondDurationArray = [];
+  var thirdJourneyfirstflightDurationArray = [];
+  var thirdJourneyfirstsecondDurationArray = [];
+  var thirdJourneyfirstthirdDurationArray = [];
+  //Stops:
+  var firstJouney_strops = [];
+  var secondJourney_firstflightstops = [];
+  var secondJourney_secondflightstops = [];
+  var thirdJourney_firstflightstops = [];
+  var thirdJourney_secondflightstops = [];
+  var thirdJourney_thirdflightstops = [];
+
+
+
+
   //return
   String return_Depterminal = '';
   String return_Arrivalterminal = '';
@@ -1269,13 +1289,29 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
       flight_offer_Array.add(flightOffers);
       for(var itinerariesValues in flightOffers){
         var itinerariesArray = itinerariesValues['itineraries'];
-        print('itineraries segmentsvalues...');
+
         print(itinerariesArray);
         for(var segmentvalues in itinerariesArray){
+
+
           var SegmentArray = segmentvalues['segments'];
           print('price . SegmentArray...');
           print(SegmentArray);
+          // String duration = SegmentArray['duration'];
+          // print('duration........-');
+          // print(duration);
+          // firstflightDurationArray.add(duration);
+          // int stops = 0;
+          // stops = SegmentArray['numberOfStops'];
+          // print('stops...');
+          // print(stops);
+
           for(var DeparturArray in SegmentArray){
+
+            var carrierCodestr = DeparturArray['carrierCode'];
+            print('multi generated carrierCode...');
+            print(carrierCodestr);
+
             var Dep = DeparturArray['departure'] ?? "";
             var depiataCodestr = Dep['iataCode'];
             print('depiataCodestr..');
@@ -1284,10 +1320,19 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
             if (widget.Received_departure_Airports.length == 1 && widget.Received_destination_Airports.length == 1) {
 
               if(depiataCodestr == widget.Received_departure_Airports[0]){
+                var durationstr = DeparturArray['duration'];
+                print('multi generated carrierCode...');
+                print(durationstr);
+                firstflightDurationArray.add(durationstr);
+                int stops = 0;
+                stops = DeparturArray['numberOfStops'];
+                print('stops ...');
+                print(stops);
+                firstJouney_strops.add(stops);
+                print(firstJouney_strops);
                 depiataCode = Dep['iataCode'];
                 print('depiataCode.......');
                 print(depiataCode);
-
                 var departuretime = Dep['at'];
                 Deptimeconvert =
                 (new DateFormat.Hm().format(DateTime.parse(departuretime)));
@@ -1299,6 +1344,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
               Depterminal = Dep['terminal'] ?? "";
               print('dep terminal2...');
               print(Depterminal);
+              firstflightDepterminalArry.add(Depterminal);
             } else if (widget.Received_departure_Airports.length == 2 && widget.Received_destination_Airports.length == 2) {
 
               if(depiataCodestr == widget.Received_departure_Airports[0]){
@@ -1447,6 +1493,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
               Arrivalterminal = Arrival['terminal'] ?? "";
               print('arrival terminal...');
               print(Arrivalterminal);
+              firstflightArravalterminalArry.add(Arrivalterminal);
 
             } else if (widget.Received_departure_Airports.length == 2 && widget.Received_destination_Airports.length == 2) {
 
@@ -1763,12 +1810,20 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                           // }else{
                           //   print(' Cabinkg wise');
                           //   Cabin_Baggagestr = Cabin_weight.toString() + ' ' + 'KG';
+
                           // }
+                          if(widget.Received_destination_Airports.length == 1){
+                            Departuretextstr = 'Departure To ' + ' '+  widget.Received_destination_Airports[0];
+                          } else if (widget.Received_destination_Airports.length == 2) {
+                            secondJourney_secondflight_Departuretextstr = 'Departure To ' + ' '+  widget.Received_destination_Airports[1];
+
+                          } else if (widget.Received_destination_Airports.length == 3) {
+                            thirdJourney_thirdflight_departurests = 'Departure To ' + ' '+  widget.Received_destination_Airports[2];
+
+                          }
                           Departuretextstr = 'Departure To ' + ' '+  widget.Received_destination_Airports[0];
 
                           flight_departurests = 'Price per passenger, taxes and fees included';
-                          secondJourney_secondflight_Departuretextstr = 'Departure To ' + ' '+  widget.Received_destination_Airports[1];
-                          thirdJourney_thirdflight_departurests = 'Departure To ' + ' '+  widget.Received_destination_Airports[2];
 
                          // trimedDuration = durationstr.substring(2);
 
@@ -1796,7 +1851,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
       Container(
         margin: const EdgeInsets.only(
             left: 5.0, right: 5.0),
-        height: 520,
+        height: 450,
         width: 320,
         child: Column(
           children: [
@@ -1817,9 +1872,9 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                 style: TextStyle(fontSize: 14,fontWeight: FontWeight.w600),),
             ),
             Container(
-              height: 450,
+              height: 380,
               width: 320,
-              color: Colors.white54,
+              color: Colors.blue,
               child: Column(
                 children: [
                   Container(
@@ -1843,13 +1898,13 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                   ),
                   SizedBox(height: 2,),
                   Container(
-                    height: 380,
+                    height: 300,
                     width: 320,
-                    color: Colors.black12,
+                    color: Colors.green,
                     child: Column(
                       children: [
                         Container(
-                          height: 350,
+                          height: 300,
                           width: 320,
                           color: Colors.transparent,
                           child: Row(
@@ -1858,7 +1913,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                 margin: const EdgeInsets.only(left: 10.0, right: 0.0),
                                 height: 350,
                                 width: 80,
-                                color: Colors.transparent,
+                                color: Colors.orange,
                                 child: Column(
                                   children: [
                                     Text(depiataCode,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
@@ -1869,13 +1924,19 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                     ),),
 
                                     SizedBox(
-                                      height: 100,
+                                      height: 30,
+                                    ),
+                                    Text("Stops: ${firstJouney_strops.first}",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                    ),),
+
+                                    SizedBox(
+                                      height: 30,
                                     ),
 
-                                    Text(trimedDuration,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                    Text("Duration: ${firstflightDurationArray.first}",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
                                     ),),
                                     SizedBox(
-                                      height: 100,
+                                      height: 50,
                                     ),
                                     Text(Arrivaltimeconvert,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
                                     ),),
@@ -1888,7 +1949,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                 margin: const EdgeInsets.only(left: 0.0, right: 0.0),
                                 height: 350,
                                 width: 30,
-                                color: Colors.transparent,
+                                color: Colors.blueGrey,
                                 child:Container(
                                     width: 40,
                                     child: CircleAvatar(
@@ -1908,15 +1969,15 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
 
                                 height: 350,
                                 width: 200,
-                                color: Colors.transparent,
+                                color: Colors.red,
                                 child: Column(
                                   children: [
-                                    Align(
-                                      alignment: Alignment.topLeft,
-                                      child: Text(
-                                        Retrived_round_trip_dep_originiatacodestr,
-                                        style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
-                                    ),
+                                    // Align(
+                                    //   alignment: Alignment.topLeft,
+                                    //   child: Text(
+                                    //     Retrived_round_trip_dep_originiatacodestr,
+                                    //     style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+                                    // ),
                                     Align(
                                       alignment: Alignment.topLeft,
                                       child: Text(
@@ -1928,7 +1989,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                       height: 50,
                                       width: 220,
                                       color: Colors.transparent,
-                                      child: Text('Terminal:' + "   " + Depterminal,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black),),
+                                      child: Text('Terminal:' + "   " + firstflightDepterminalArry.first,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black),),
                                     ),
 
                                     Container(
@@ -1978,7 +2039,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                     ),
                                     Align(
                                       alignment: Alignment.topLeft,
-                                      child: Text('Terminal:' + "   " + Arrivalterminal,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black),),
+                                      child: Text('Terminal:' + "   " + firstflightArravalterminalArry.last,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black),),
                                     ),
                                   ],
                                 ),
