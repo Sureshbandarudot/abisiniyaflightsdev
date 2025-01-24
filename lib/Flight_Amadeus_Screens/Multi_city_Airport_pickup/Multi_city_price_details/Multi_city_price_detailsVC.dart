@@ -138,6 +138,24 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
   String arrivalCode = '';
   String Deptimeconvert = '';
   String Arrivaltimeconvert = '';
+  //Departure and arrival time arrays
+  var firstJourney_Departure_timeArray = [];
+  var secondJourney_firstflight_Departure_timeArray = [];
+  var secondJourney_secondflight_Departure_timeArray = [];
+  var thirdJourney_firstflight_Departure_timeArray = [];
+  var thirdJourney_secondflight_Departure_timeArray = [];
+  var thirdJourney_thirdflight_Departure_timeArray = [];
+
+  //Arrival time arrays
+  var firstJourney_Arrival_timeArray = [];
+  var secondJourney_firstflight_Arrival_timeArray = [];
+  var secondJourney_secondflight_Arrival_timeArray = [];
+  var thirdJourney_firstflight_Arrival_timeArray = [];
+  var thirdJourney_secondflight_Arrival_timeArray = [];
+  var thirdJourney_thirdflight_Arrival_timeArray = [];
+
+
+
   String trimedDuration = '';
   String CurrencyCodestr = '';
   String totalpriceSignvalues = '';
@@ -1347,6 +1365,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                 var departuretime = Dep['at'];
                 Deptimeconvert =
                 (new DateFormat.Hm().format(DateTime.parse(departuretime)));
+                firstJourney_Departure_timeArray.add(Deptimeconvert);
                 Datestr =
                 (new DateFormat.yMd().format(DateTime.parse(departuretime)));
               }
@@ -1377,6 +1396,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                 var departuretime = Dep['at'];
                 Deptimeconvert =
                 (new DateFormat.Hm().format(DateTime.parse(departuretime)));
+                secondJourney_firstflight_Departure_timeArray.add(Deptimeconvert);
                 Datestr =
                 (new DateFormat.yMd().format(DateTime.parse(departuretime)));
               }
@@ -1412,8 +1432,8 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                 (new DateFormat.Hm().format(DateTime.parse(departuretime)));
                 Datestr =
                 (new DateFormat.yMd().format(DateTime.parse(departuretime)));
-                print('return_departure_time....');
-                print(return_departure_time);
+
+                secondJourney_secondflight_Departure_timeArray.add(return_departure_time);
 
                 secondJourney_seconddepartureterminal = Dep['terminal'] ?? "";
                 print('secondJourney_seconddepartureterminal');
@@ -1513,6 +1533,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                 var Arrivaltime = Arrival['at'];
                 Arrivaltimeconvert =
                 (new DateFormat.Hm().format(DateTime.parse(Arrivaltime)));
+                firstJourney_Arrival_timeArray.add(Arrivaltimeconvert);
                 Datestr =
                 (new DateFormat.yMd().format(DateTime.parse(Arrivaltime)));
 
@@ -1540,7 +1561,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                 var Arrivaltime = Arrival['at'];
                 Arrivaltimeconvert =
                 (new DateFormat.Hm().format(DateTime.parse(Arrivaltime)));
-                arrivaltime.add(Arrivaltimeconvert);
+                secondJourney_firstflight_Arrival_timeArray.add(Arrivaltimeconvert);
                 Datestr =
                 (new DateFormat.yMd().format(DateTime.parse(Arrivaltime)));
 
@@ -1561,6 +1582,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                 return_arrival_time =
                 (new DateFormat.Hm().format(DateTime.parse(Arrivaltime)));
 
+                secondJourney_secondflight_Arrival_timeArray.add(return_arrival_time);
                 Datestr =
                 (new DateFormat.yMd().format(DateTime.parse(Arrivaltime)));
 
@@ -1956,7 +1978,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                     ),),
 
                                     SizedBox(height: 10,),
-                                    Text(Deptimeconvert,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                    Text(firstJourney_Departure_timeArray.first,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
                                     ),),
 
                                     SizedBox(
@@ -1974,7 +1996,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                     SizedBox(
                                       height: 50,
                                     ),
-                                    Text(Arrivaltimeconvert,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                    Text(firstJourney_Arrival_timeArray.first,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
                                     ),),
                                     Text(arrivalCode,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
                                     ),),
@@ -2175,7 +2197,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                     ),),
 
                                     SizedBox(height: 10,),
-                                    Text(Deptimeconvert,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                    Text(secondJourney_firstflight_Departure_timeArray.first,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
                                     ),),
 
                                     SizedBox(
@@ -2193,7 +2215,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                     SizedBox(
                                       height: 50,
                                     ),
-                                    Text(arrivaltime[0],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                    Text(secondJourney_firstflight_Arrival_timeArray.first,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
                                     ),),
                                     Text(secondJourneyarrivalarray[0],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
                                     ),),
@@ -2385,7 +2407,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                     ),),
 
                                     SizedBox(height: 10,),
-                                    Text(return_departure_time,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                    Text(secondJourney_secondflight_Departure_timeArray.first,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
                                     ),),
 
                                     SizedBox(
@@ -2403,7 +2425,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                     SizedBox(
                                       height: 50,
                                     ),
-                                    Text(Arrivaltimeconvert,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                    Text(secondJourney_secondflight_Arrival_timeArray.first,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
                                     ),),
                                     Text(arrivalCode,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
                                     ),),

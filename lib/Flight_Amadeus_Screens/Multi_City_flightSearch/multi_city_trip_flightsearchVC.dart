@@ -1518,13 +1518,13 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                     (new DateFormat.yMd().format(
                         DateTime.parse(departuretime)));
                     ReturnJourney_dateArray.add(Datestr);
-                    print('time3...');
+                    print('second journey second flight departure...');
                     print(Deptimeconvert);
                     ReturnJourney_DeptimeArray.add(Deptimeconvert);
                   } else if (segmentValuesAray.length == 2) {
                     ReturnJourney_depiataCodelist.add(depiataCode);
                     SecondJourney_carrierCodeArray.add(carrierCodestr);
-                    print('second journey 2nd flight...2');
+                    print('second journey first flight...2');
                     print(carrierCodestr);
                     print(SecondJourney_carrierCodeArray);
                     var departuretime = Dep['at'];
@@ -1534,7 +1534,7 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                     (new DateFormat.yMd().format(
                         DateTime.parse(departuretime)));
                     ReturnJourney_dateArray.add(Datestr);
-                    print('time3...');
+                    print('second journey second flight departure...');
                     print(Deptimeconvert);
                     ReturnJourney_DeptimeArray.add(Deptimeconvert);
                   } else if (segmentValuesAray.length == 3) {
