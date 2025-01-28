@@ -17,6 +17,8 @@ import 'package:tourstravels/My_Apartments/My_AprtmetsVC.dart';
 import 'package:tourstravels/My_Apartments/ViewApartmentVC.dart';
 import 'package:tourstravels/Singleton/SingletonAbisiniya.dart';
 
+import '../../Multi_City_flightSearch/Multi_city_additional services/multi_city_additionalSevicesVC.dart';
+
 class Multi_city_Flight_Details extends StatefulWidget {
   //const Flight_Multicity_Trip({super.key});
   final List<String> Received_departure_Airports;
@@ -1348,7 +1350,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
 
             if (widget.Received_departure_Airports.length == 1 && widget.Received_destination_Airports.length == 1) {
 
-              if(depiataCodestr == widget.Received_departure_Airports[0]){
+              if(depiataCodestr == widget.Received_departure_Airports[0]) {
                 var durationstr = DeparturArray['duration'];
                 print('multi generated carrierCode...');
                 print(durationstr);
@@ -1667,10 +1669,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
               (new DateFormat.Hm().format(DateTime.parse(Arrivaltime)));
               Datestr =
               (new DateFormat.yMd().format(DateTime.parse(Arrivaltime)));
-
-
             }
-
           }
         }
         //for(var Currency_Price in flightData){
@@ -1761,21 +1760,14 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                 quantity = includedCheckedBags['quantity'] ?? 0;
                 print('quantity...');
                 print(quantity);
-
               }
-
-
-
               weightUnitstr = includedCheckedBags['weightUnit'] ?? "";
               print('weightUnitstr...');
               print(weightUnitstr);
-
-
               cabintrvalue_Array.add(cabintrvalue);
             }
           }
         }
-
       }
     }
     else {
@@ -1932,7 +1924,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
             Container(
               height: 380,
               width: 320,
-              color: Colors.blue,
+              color: Colors.black12,
               child: Column(
                 children: [
                   Container(
@@ -1958,7 +1950,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                   Container(
                     height: 300,
                     width: 320,
-                    color: Colors.green,
+                    color: Colors.transparent,
                     child: Column(
                       children: [
                         Container(
@@ -1971,7 +1963,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                 margin: const EdgeInsets.only(left: 10.0, right: 0.0),
                                 height: 350,
                                 width: 80,
-                                color: Colors.orange,
+                                color: Colors.transparent,
                                 child: Column(
                                   children: [
                                     Text(depiataCode,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
@@ -2007,7 +1999,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                 margin: const EdgeInsets.only(left: 0.0, right: 0.0),
                                 height: 350,
                                 width: 30,
-                                color: Colors.blueGrey,
+                                color: Colors.transparent,
                                 child:Container(
                                     width: 40,
                                     child: CircleAvatar(
@@ -2027,7 +2019,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
 
                                 height: 350,
                                 width: 200,
-                                color: Colors.red,
+                                color: Colors.transparent,
                                 child: Column(
                                   children: [
                                     // Align(
@@ -2663,10 +2655,13 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                           prefs.setString('TravellertypejsonParsingkey', TravellertypejsonParsing);
 
                                           String priceArray = jsonEncode(totalPricevaluesArray);
-                                          // print('segJson...');
-                                          // print(segJson);
                                           prefs.setString('priceArrayjsonParsingkey', priceArray);
-
+                                                    print('continue btn tapped....');
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) => Multi_city_Add_OnsVC()),
+                                                    );
 
                                           //
                                           //
