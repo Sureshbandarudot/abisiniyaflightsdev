@@ -94,8 +94,8 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
   var secondJourneyfirstflightDurationArray = [];
   var secondJourneysecondflightDurationArray = [];
   var thirdJourneyfirstflightDurationArray = [];
-  var thirdJourneyfirstsecondDurationArray = [];
-  var thirdJourneyfirstthirdDurationArray = [];
+  var thirdJourneysecondflightDurationArray = [];
+  var thirdJourneythirdflightDurationArray = [];
   //Stops:
   var firstJouney_strops = [];
   var secondJourney_firstflightstops = [];
@@ -172,15 +172,30 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
   var thirdJourneyarrivalarray = [];
   String secondJourney_firstdepartureterminal = '';
   String secondJourney_seconddepartureterminal = '';
-
   var secondJourney_firstdepartureterminalArray = [];
   var secondJourney_seconddepartureterminalArray = [];
-
   String secondJourney_firstArrvailterminal = '';
   String secondJourney_secondArrivalterminal = '';
-
   var secondJourney_firstArrivalterminalArray = [];
   var secondJourney_secondArrivalterminalArray = [];
+
+  //Third journey flight details variables declarations
+  String thirdJourney_firstdepartureterminal = '';
+  String thirdJourney_seconddepartureterminal = '';
+  String thirdJourney_thirddepartureterminal = '';
+
+  var thirdJourney_firstdepartureterminalArray = [];
+  var thirdJourney_seconddepartureterminalArray = [];
+  var thirdJourney_thirddepartureterminalArray = [];
+
+  String thirdJourney_firstArrvailterminal = '';
+  String thirdJourney_secondArrivalterminal = '';
+  String thirdJourney_thirdArrivalterminal = '';
+
+  var thirdJourney_firstArrivalterminalArray = [];
+  var thirdJourney_secondArrivalterminalArray = [];
+  var thirdJourney_thirdArrivalterminalArray = [];
+
 
 
   //return airline and logo variable declaration..
@@ -265,15 +280,24 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
 
 
 //Multi city 3 flights data retriving...
-    multi_thirdJourney_firstflight_airlinestr = prefs.getString('thirdJouney_firstflight_airlineArray') ?? '';
-    multi_thirdJourney_firstflight_logostr = prefs.getString('thirdJouney_firstflight_airlinelogo') ?? '';
+    multi_thirdJourney_firstflight_airlinestr = prefs.getString('thirdjourney_firstflightAirlinekey') ?? '';
+    multi_thirdJourney_firstflight_logostr = prefs.getString('thirdjourney_firstflightArilinelogokey') ?? '';
 
-    multi_thirdJourney_secondflight_airlinestr = prefs.getString('thirdJouney_secondflight_airlineArray') ?? '';
-    multi_thirdJourney_secondflight_logostr = prefs.getString('thirdJouney_secondflight_airlinelogo') ?? '';
+    print('multi_thirdJourney_firstflight_airlinestr.......');
+    print(multi_thirdJourney_firstflight_airlinestr);
+    print('multi_thirdJourney_firstflight_logostr........');
+    print(multi_thirdJourney_firstflight_logostr);
+     multi_thirdJourney_firstCareercode = prefs.getString('thirdJourney_firstflight_carrierCodekey') ?? '';
 
-    multi_thirdJourney_thirdflight_airlinestr = prefs.getString('thirdJouney_thirdflight_airlineArray') ?? '';
-    multi_thirdJourney_thirdflight_logostr = prefs.getString('thirdJouney_thirdflight_airlinelogo') ?? '';
+    multi_thirdJourney_secondflight_airlinestr = prefs.getString('thirdJourney_secondflightairlinekey') ?? '';
+    multi_thirdJourney_secondflight_logostr = prefs.getString('thirdJourney_secondflightlogokey') ?? '';
 
+    multi_thirdJourney_thirdflight_airlinestr = prefs.getString('thirdJourney_thirdflightairlinekey') ?? '';
+    print('multi_thirdJourney_thirdflight_airlinestr...');
+    print(multi_thirdJourney_thirdflight_airlinestr);
+    multi_thirdJourney_thirdflight_logostr = prefs.getString('thirdJourney_thirdflightlogokey') ?? '';
+    print('multi_thirdJourney_thirdflight_logostr....');
+    print(multi_thirdJourney_thirdflight_logostr);
     multi_thirdJourney_firstCareercode = prefs.getString('thirdJourney_firstflight_carrierCodekey') ?? '';
     multi_thirdJourney_secondCareercode = prefs.getString('thirdJourney_secondflight_carrierCodekey') ?? '';
     multi_thirdJourney_thirdCareercode = prefs.getString('thirdJourney_thirdflight_carrierCodekey') ?? '';
@@ -1356,7 +1380,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                 print(durationstr);
                 firstflightDurationArray.add(durationstr);
                 int stops = 0;
-                stops = DeparturArray['numberOfStops'];
+                stops = DeparturArray['numberOfStops'] ?? 0;
                 print('stops ...');
                 print(stops);
                 firstJouney_strops.add(stops);
@@ -1385,7 +1409,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                 print(durationstr);
                 secondJourneyfirstflightDurationArray.add(durationstr);
                 int stops = 0;
-                stops = DeparturArray['numberOfStops'];
+                stops = DeparturArray['numberOfStops'] ?? 0;
                 print('stops11 ...');
                 print(stops);
                 secondJourney_firstflightstops.add(stops);
@@ -1419,7 +1443,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                 print(durationstr);
                 secondJourneysecondflightDurationArray.add(durationstr);
                 int stops = 0;
-                stops = DeparturArray['numberOfStops'];
+                stops = DeparturArray['numberOfStops'] ?? 0;
                 print('stops22 ...');
                 print(stops);
                 secondJourney_secondflightstops.add(stops);
@@ -1452,67 +1476,103 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
 
             } else if (widget.Received_departure_Airports.length == 3 && widget.Received_destination_Airports.length == 3) {
 
-              // if(depiataCodestr == widget.Received_departure_Airports[0]){
-              //   depiataCode = Dep['iataCode'];
-              //   print('third depiataCode.......');
-              //   print(depiataCode);
-              //   thirdJourneydeparturearray.add(depiataCode);
-              //
-              //   var departuretime = Dep['at'];
-              //   Deptimeconvert =
-              //   (new DateFormat.Hm().format(DateTime.parse(departuretime)));
-              //   Datestr =
-              //   (new DateFormat.yMd().format(DateTime.parse(departuretime)));
-              // }
-              //
-              // //departure flight terminel
-              // secondJourney_firstdepartureterminal = Dep['terminal'] ?? "";
-              // print('dep terminal2...');
-              // print(secondJourney_firstdepartureterminal);
-              // secondjourney_departure_terminals.add(secondJourney_firstdepartureterminal);
-              //
-              //
-              //
-              // //second flight
-              // if(depiataCodestr == widget.Received_departure_Airports[1]){
-              //   depiataCode = Dep['iataCode'];
-              //   print('depiataCode.......');
-              //   print(depiataCode);
-              //   thirdJourneydeparturearray.add(depiataCode);
-              //
-              //   var departuretime = Dep['at'];
-              //   return_departure_time =
-              //   (new DateFormat.Hm().format(DateTime.parse(departuretime)));
-              //   Datestr =
-              //   (new DateFormat.yMd().format(DateTime.parse(departuretime)));
-              //   print('return_departure_time....');
-              //   print(return_departure_time);
-              // }
-              // secondJourney_seconddepartureterminal = Dep['terminal'] ?? "";
-              // print('secondJourney_seconddepartureterminal');
-              // print(secondJourney_seconddepartureterminal);
-              // secondjourney_departure_terminals.add(secondJourney_seconddepartureterminal);
-              //
-              // // OnwardJourney_dateArray.add(Datestr);
-              // // OnwardJourney_DeptimeArray.add(Deptimeconvert);
-              // Depterminal = Dep['terminal'] ?? "";
-              // print('dep terminal4...');
-              // print(Depterminal);
-              //
-              // //third flight deatails
-              // if(depiataCodestr == widget.Received_departure_Airports[2]){
-              //   depiataCode = Dep['iataCode'];
-              //   print('depiataCode.......');
-              //   print(depiataCode);
-              //   thirdJourneydeparturearray.add(depiataCode);
-              //   var departuretime = Dep['at'];
-              //   return_departure_time =
-              //   (new DateFormat.Hm().format(DateTime.parse(departuretime)));
-              //   Datestr =
-              //   (new DateFormat.yMd().format(DateTime.parse(departuretime)));
-              //   print('return_departure_time....');
-              //   print(return_departure_time);
-              // }
+              if(depiataCodestr == widget.Received_departure_Airports[0]){
+                var durationstr = DeparturArray['duration'];
+                print('multi generated carrierCode...');
+                print(durationstr);
+                thirdJourneyfirstflightDurationArray.add(durationstr);
+                int stops = 0;
+                stops = DeparturArray['numberOfStops'] ?? 0;
+                print('stops11 ...');
+                print(stops);
+                thirdJourney_firstflightstops.add(stops);
+                print(thirdJourney_firstflightstops);
+                depiataCode = Dep['iataCode'];
+                print('depiataCode111.......');
+                print(depiataCode);
+                thirdJourneydeparturearray.add(depiataCode);
+
+                var departuretime = Dep['at'];
+                Deptimeconvert =
+                (new DateFormat.Hm().format(DateTime.parse(departuretime)));
+                thirdJourney_firstflight_Departure_timeArray.add(Deptimeconvert);
+                Datestr =
+                (new DateFormat.yMd().format(DateTime.parse(departuretime)));
+              }
+
+              //departure flight terminel
+              thirdJourney_firstdepartureterminal = Dep['terminal'] ?? "";
+              print('dep terminal2...');
+              print(thirdJourney_firstdepartureterminal);
+              thirdJourney_firstdepartureterminalArray.add(thirdJourney_firstdepartureterminal);
+
+
+
+             // second flight departure
+              if(depiataCodestr == widget.Received_departure_Airports[1]){
+
+                var durationstr = DeparturArray['duration'];
+                print('multi generated carrierCode...');
+                print(durationstr);
+                thirdJourneysecondflightDurationArray.add(durationstr);
+                int stops = 0;
+                stops = DeparturArray['numberOfStops'] ?? 0;
+                print('stops22 ...');
+                print(stops);
+                thirdJourney_secondflightstops.add(stops);
+                print(thirdJourney_secondflightstops);
+                depiataCode = Dep['iataCode'];
+                print('depiataCode21111.......');
+                print(depiataCode);
+                thirdJourneydeparturearray.add(depiataCode);
+
+                var departuretime = Dep['at'];
+                return_departure_time =
+                (new DateFormat.Hm().format(DateTime.parse(departuretime)));
+                Datestr =
+                (new DateFormat.yMd().format(DateTime.parse(departuretime)));
+
+                thirdJourney_secondflight_Departure_timeArray.add(return_departure_time);
+
+                thirdJourney_seconddepartureterminal = Dep['terminal'] ?? "";
+                print('thirdJourney_seconddepartureterminal');
+                print(thirdJourney_seconddepartureterminal);
+                thirdJourney_seconddepartureterminalArray.add(thirdJourney_seconddepartureterminal);
+              }
+              //third flight details
+              if(depiataCodestr == widget.Received_departure_Airports[2]){
+
+                var durationstr = DeparturArray['duration'];
+                print('multi generated carrierCode...');
+                print(durationstr);
+                thirdJourneythirdflightDurationArray.add(durationstr);
+                int stops = 0;
+                stops = DeparturArray['numberOfStops'] ?? 0;
+                print('stops22 ...');
+                print(stops);
+                thirdJourney_thirdflightstops.add(stops);
+                print(thirdJourney_thirdflightstops);
+                depiataCode = Dep['iataCode'];
+                print('depiataCode21111.......');
+                print(depiataCode);
+                thirdJourneydeparturearray.add(depiataCode);
+
+                var departuretime = Dep['at'];
+                return_departure_time =
+                (new DateFormat.Hm().format(DateTime.parse(departuretime)));
+                Datestr =
+                (new DateFormat.yMd().format(DateTime.parse(departuretime)));
+
+                thirdJourney_thirdflight_Departure_timeArray.add(return_departure_time);
+
+                thirdJourney_thirddepartureterminal = Dep['terminal'] ?? "";
+                print('thirdJourney_seconddepartureterminal');
+                print(thirdJourney_thirddepartureterminal);
+                thirdJourney_thirddepartureterminalArray.add(thirdJourney_thirddepartureterminal);
+              }
+
+
+
             }
           }
 
@@ -1605,70 +1665,112 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
               // OnwardJourney_DeptimeArray.add(Deptimeconvert);
             } else if (widget.Received_departure_Airports.length == 3 && widget.Received_destination_Airports.length == 3) {
 
-              //departure flight arrival time
-              if(arrivalstr == widget.Received_destination_Airports[0]) {
+              if(arrivalstr == widget.Received_destination_Airports[0]){
+                var durationstr = Arrival['duration'];
+                print('multi generated carrierCode...');
+                print(durationstr);
+                thirdJourneyfirstflightDurationArray.add(durationstr);
+                int stops = 0;
+                stops = Arrival['numberOfStops'] ?? 0;
+                print('stops11 ...');
+                print(stops);
+                // thirdJourney_firstflightstops.add(stops);
+                // print(thirdJourney_firstflightstops);
                 arrivalCode = Arrival['iataCode'];
-                print('2nd arrivalCode...');
+                print('3rd flight arrival code...');
                 print(arrivalCode);
                 thirdJourneyarrivalarray.add(arrivalCode);
-                print('arrival value...');
-                print(thirdJourneyarrivalarray[0]);
+                print('thirdJourneyarrivalarray......');
+                print(thirdJourneyarrivalarray);
+
                 var Arrivaltime = Arrival['at'];
+
                 Arrivaltimeconvert =
                 (new DateFormat.Hm().format(DateTime.parse(Arrivaltime)));
-                arrivaltime.add(Arrivaltimeconvert);
-                Datestr =
-                (new DateFormat.yMd().format(DateTime.parse(Arrivaltime)));
+                print('Arrivaltimeconvert.32');
+                print(Arrivaltimeconvert);
+                thirdJourney_firstflight_Arrival_timeArray.add(Arrivaltimeconvert);
+                print('thirdJourney_firstflight_Arrival_timeArray....');
+                print(thirdJourney_firstflight_Arrival_timeArray.first);
+
+                // var arrivaltime = Arrival['at'];
+                // arrivaltime =
+                // (new DateFormat.Hm().format(DateTime.parse(arrivaltime)));
+                // thirdJourney_firstflight_Arrival_timeArray.add(arrivaltime);
+                // Datestr =
+                // (new DateFormat.yMd().format(DateTime.parse(arrivaltime)));
               }
 
-              Arrivalterminal = Arrival['terminal'] ?? "";
-              print('arrival terminal...');
-              print(Arrivalterminal);
-              if(arrivalstr == widget.Received_destination_Airports[1]) {
+              //departure flight terminel
+              thirdJourney_firstArrvailterminal = Arrival['terminal'] ?? "";
+              print('dep terminal2...');
+              print(thirdJourney_firstArrvailterminal);
+              thirdJourney_firstArrivalterminalArray.add(thirdJourney_firstArrvailterminal);
+
+
+
+              //second flight departure
+              if(arrivalstr == widget.Received_destination_Airports[1]){
+
+                var durationstr = Arrival['duration'];
+                print('multi generated carrierCode...');
+                print(durationstr);
+                thirdJourneysecondflightDurationArray.add(durationstr);
+                int stops = 0;
+                stops = Arrival['numberOfStops'] ?? 0;
+                print('stops22 ...');
+                print(stops);
+                thirdJourney_secondflightstops.add(stops);
+                print(thirdJourney_secondflightstops);
                 arrivalCode = Arrival['iataCode'];
-                print('arrivalCode...');
-                thirdJourneyarrivalarray.add(arrivalCode);
-                var Arrivaltime = Arrival['at'];
-                return_arrival_time =
-                (new DateFormat.Hm().format(DateTime.parse(Arrivaltime)));
+                print('depiataCode21111.......');
+                print(depiataCode);
+                thirdJourneydeparturearray.add(arrivalCode);
 
-                Datestr =
-                (new DateFormat.yMd().format(DateTime.parse(Arrivaltime)));
+                var arrivaltime = Arrival['at'];
+                arrivaltime =
+                (new DateFormat.Hm().format(DateTime.parse(arrivaltime)));
+                // Datestr =
+                // (new DateFormat.yMd().format(DateTime.parse(arrivaltime)));
 
+                thirdJourney_secondflight_Arrival_timeArray.add(arrivaltime);
+
+                thirdJourney_secondArrivalterminal = Arrival['terminal'] ?? "";
+                print('thirdJourney_secondArrivalterminal');
+                print(thirdJourney_secondArrivalterminal);
+                thirdJourney_secondArrivalterminalArray.add(thirdJourney_secondArrivalterminal);
               }
-              // print('arrivalCode...');
-              // print(arrivalCode);
-              return_Arrivalterminal = Arrival['terminal'] ?? "";
-              print('return_Arrivalterminal...');
-              print(return_Arrivalterminal);
-              var Arrivaltime = Arrival['at'];
-              Arrivaltimeconvert =
-              (new DateFormat.Hm().format(DateTime.parse(Arrivaltime)));
-              Datestr =
-              (new DateFormat.yMd().format(DateTime.parse(Arrivaltime)));
-
+              // //third flight details
               if(arrivalstr == widget.Received_destination_Airports[2]) {
+                var durationstr = Arrival['duration'];
+                print('multi generated carrierCode...');
+                print(durationstr);
+                thirdJourneythirdflightDurationArray.add(durationstr);
+                int stops = 0;
+                stops = Arrival['numberOfStops'] ?? 0;
+                print('stops22 ...');
+                print(stops);
+                thirdJourney_thirdflightstops.add(stops);
+                print(thirdJourney_thirdflightstops);
                 arrivalCode = Arrival['iataCode'];
-                print('arrivalCode...');
+                print('depiataCode21111.......');
+                print(arrivalCode);
                 thirdJourneyarrivalarray.add(arrivalCode);
-                var Arrivaltime = Arrival['at'];
-                return_arrival_time =
-                (new DateFormat.Hm().format(DateTime.parse(Arrivaltime)));
-
-                Datestr =
-                (new DateFormat.yMd().format(DateTime.parse(Arrivaltime)));
-
+                var arrivaltime = Arrival['at'];
+                arrivaltime =
+                (new DateFormat.Hm().format(DateTime.parse(arrivaltime)));
+                print('arrivaltime....');
+                print(arrivaltime);
+                // Datestr =
+                // (new DateFormat.yMd().format(DateTime.parse(arrivaltime)));
+                thirdJourney_thirdflight_Arrival_timeArray.add(arrivaltime);
+                thirdJourney_thirddepartureterminal = Arrival['terminal'] ?? "";
+                print('thirdJourney_seconddepartureterminal');
+                print(thirdJourney_thirdArrivalterminal);
+                thirdJourney_thirdArrivalterminalArray.add(thirdJourney_thirdArrivalterminal);
               }
-              // print('arrivalCode...');
-              // print(arrivalCode);
-              return_Arrivalterminal = Arrival['terminal'] ?? "";
-              print('return_Arrivalterminal...');
-              print(return_Arrivalterminal);
-              //var Arrivaltime = Arrival['at'];
-              Arrivaltimeconvert =
-              (new DateFormat.Hm().format(DateTime.parse(Arrivaltime)));
-              Datestr =
-              (new DateFormat.yMd().format(DateTime.parse(Arrivaltime)));
+
+
             }
           }
         }
@@ -1853,15 +1955,15 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                             print('kg wise');
                             Baggagestr = weight.toString() + ' ' + 'kg per person';
                           }
-                          // if(Cabin_quantity != ''){
-                          //   print('Cabin_quantity wise');
-                          //   Cabin_Baggagestr = Cabin_quantity.toString() + ' ' + 'Piece';
-                          //
-                          // }else{
-                          //   print(' Cabinkg wise');
-                          //   Cabin_Baggagestr = Cabin_weight.toString() + ' ' + 'KG';
+                          if(Cabin_quantity != ''){
+                            print('Cabin_quantity wise');
+                            Cabin_Baggagestr = Cabin_quantity.toString() + ' ' + 'Piece';
 
-                          // }
+                          }else{
+                            print(' Cabinkg wise');
+                            Cabin_Baggagestr = Cabin_weight.toString() + ' ' + 'KG';
+
+                          }
                           if(widget.Received_destination_Airports.length == 1){
                             Departuretextstr = 'Departure To ' + ' '+  widget.Received_destination_Airports[0];
                           } else if (widget.Received_destination_Airports.length == 2) {
@@ -2543,7 +2645,654 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                           //else ...[
                           else if(widget.Received_departure_Airports.length == 3 && widget.Received_destination_Airports.length == 3) ...[
       //3 flights are operating User Interface
-                          ],
+
+
+        Container(
+          margin: const EdgeInsets.only(
+              left: 5.0, right: 5.0),
+          height: 460,
+          width: 320,
+          child: Column(
+            children: [
+
+              SizedBox(
+                height: 5,
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  Departuretextstr,
+                  style: TextStyle(fontSize: 18,fontWeight: FontWeight.w800,color: Colors.black),),
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  flight_departurests,
+                  style: TextStyle(fontSize: 14,fontWeight: FontWeight.w600),),
+              ),
+              Container(
+                height: 400,
+                width: 320,
+                color: Colors.black12,
+                child: Column(
+                  children: [
+                    Container(
+                      height: 65,
+                      width: 320,
+                      color: Colors.grey,
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 15,
+                          ),
+
+
+
+
+                          Container(
+                              height: 50,
+                              width: 300,
+                              child: Text(thirdJourneydeparturearray[0] + ' ---> ' + thirdJourneyarrivalarray[0],style: TextStyle(fontSize: 18,fontWeight: FontWeight.w800,color: Colors.black
+                              )
+                              )
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 2,),
+                    Container(
+                      height: 320,
+                      width: 320,
+                      color: Colors.transparent,
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 300,
+                            width: 320,
+                            color: Colors.transparent,
+                            child: Row(
+                              children: [
+                                Container(
+                                  margin: const EdgeInsets.only(left: 10.0, right: 0.0),
+                                  height: 300,
+                                  width: 80,
+                                  color: Colors.transparent,
+                                  child: Column(
+                                    children: [
+                                      Text(thirdJourneydeparturearray[0],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                      ),),
+
+                                      SizedBox(height: 10,),
+                                      Text(thirdJourney_firstflight_Departure_timeArray.first,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                      ),),
+
+                                      SizedBox(
+                                        height: 30,
+                                      ),
+                                      Text("Stops: ${thirdJourney_firstflightstops.first}",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                      ),),
+
+                                      SizedBox(
+                                        height: 30,
+                                      ),
+
+                                      Text("Duration: ${thirdJourneyfirstflightDurationArray.first}",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                      ),),
+                                      SizedBox(
+                                        height: 50,
+                                      ),
+                                      Text(thirdJourney_firstflight_Arrival_timeArray.first,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                      ),),
+                                      Text(thirdJourneyarrivalarray[0],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                      ),),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.only(left: 0.0, right: 0.0),
+                                  height: 350,
+                                  width: 30,
+                                  color: Colors.transparent,
+                                  child:Container(
+                                      width: 40,
+                                      child: CircleAvatar(
+                                        backgroundColor: Colors.transparent,
+                                        radius: 50.0,
+                                        child: Image.asset(
+                                            "images/flight-path-icon.png",
+                                            height: 300.0,
+                                            width: 300.0,
+                                            fit: BoxFit.fill
+                                        ),
+                                      )
+                                  ),
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.only(left: 0.0, right: 0.0),
+
+                                  height: 350,
+                                  width: 200,
+                                  color: Colors.transparent,
+                                  child: Column(
+                                    children: [
+                                      // Align(
+                                      //   alignment: Alignment.topLeft,
+                                      //   child: Text(
+                                      //     Retrived_round_trip_dep_originiatacodestr,
+                                      //     style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+                                      // ),
+                                      Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Text(
+                                          widget.Received_departure_Airports.first,
+                                          style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+                                      ),
+
+                                      Container(
+                                        height: 50,
+                                        width: 220,
+                                        color: Colors.transparent,
+                                        child: Text('Terminal:' + "   " + thirdJourney_firstdepartureterminalArray[0],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black),),
+                                      ),
+
+                                      Container(
+                                        alignment: FractionalOffset.centerLeft,
+
+                                        height: 135,
+                                        width: 200,
+                                        color: Colors.transparent,
+                                        child: Column(
+                                          children: [
+                                            SizedBox(
+                                              width: 0,
+                                            ),
+                                            Container(
+                                              alignment: FractionalOffset.centerLeft,
+
+                                              height: 70,
+                                              width: 130,
+                                              //margin: new EdgeInsets.symmetric(vertical: 5.0),
+                                              decoration: BoxDecoration(
+                                                  image: DecorationImage(image: NetworkImage(multi_thirdJourney_firstflight_logostr),
+                                                      fit: BoxFit.cover)
+                                              ),
+                                            ),
+                                            SizedBox(width: 0,),
+                                            Container(
+                                              height: 45,
+                                              width: 140,
+                                              color: Colors.transparent,
+                                              child:  Text(multi_thirdJourney_firstflight_airlinestr + "   -" + multi_thirdJourney_firstCareercode,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                              ),),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Text(
+                                          Retrived_round_trip_dep_Destinationiatacodestr,
+                                          style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+                                      ),
+                                      Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Text(
+                                          widget.Received_destination_Airports.first,
+                                          style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+                                      ),
+                                      Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Text('Terminal:' + "   " + thirdJourney_firstArrivalterminalArray[0],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black),),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+        //second flight
+        Container(
+          margin: const EdgeInsets.only(
+              left: 5.0, right: 5.0),
+          height: 455,
+          width: 320,
+          child: Column(
+            children: [
+
+              SizedBox(
+                height: 5,
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  secondJourney_secondflight_Departuretextstr,
+                  style: TextStyle(fontSize: 18,fontWeight: FontWeight.w800,color: Colors.black),),
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  flight_departurests,
+                  style: TextStyle(fontSize: 14,fontWeight: FontWeight.w600),),
+              ),
+              Container(
+                height: 400,
+                width: 320,
+                color: Colors.transparent,
+                child: Column(
+                  children: [
+                    Container(
+                      height: 65,
+                      width: 320,
+                      color: Colors.grey,
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Container(
+                              height: 50,
+                              width: 300,
+                              child: Text(thirdJourneydeparturearray[1] + '---> ' + thirdJourneyarrivalarray.first,style: TextStyle(fontSize: 18,fontWeight: FontWeight.w800,color: Colors.black
+                              )
+                              )
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 2,),
+                    Container(
+                      height: 300,
+                      width: 320,
+                      color: Colors.black12,
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 300,
+                            width: 320,
+                            color: Colors.transparent,
+                            child: Row(
+                              children: [
+                                Container(
+                                  margin: const EdgeInsets.only(left: 10.0, right: 0.0),
+                                  height: 300,
+                                  width: 80,
+                                  color: Colors.transparent,
+                                  child: Column(
+                                    children: [
+                                      Text(thirdJourneydeparturearray[1],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                      ),),
+
+                                      // SizedBox(height: 10,),
+                                      // Text(thirdJourney_secondflight_Departure_timeArray.first,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                      // ),),
+
+                                      SizedBox(
+                                        height: 30,
+                                      ),
+                                      Text("Stops: ${thirdJourney_secondflightstops.first}",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                      ),),
+
+                                      SizedBox(
+                                        height: 30,
+                                      ),
+
+                                      Text("Duration: ${thirdJourneysecondflightDurationArray.first}",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                      ),),
+                                      SizedBox(
+                                        height: 50,
+                                      ),
+                                      Text(thirdJourney_secondflight_Arrival_timeArray.first,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                      ),),
+                                      Text(arrivalCode,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                      ),),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.only(left: 0.0, right: 0.0),
+                                  height: 350,
+                                  width: 30,
+                                  color: Colors.transparent,
+                                  child:Container(
+                                      width: 40,
+                                      child: CircleAvatar(
+                                        backgroundColor: Colors.transparent,
+                                        radius: 50.0,
+                                        child: Image.asset(
+                                            "images/flight-path-icon.png",
+                                            height: 300.0,
+                                            width: 300.0,
+                                            fit: BoxFit.fill
+                                        ),
+                                      )
+                                  ),
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.only(left: 0.0, right: 0.0),
+
+                                  height: 350,
+                                  width: 200,
+                                  color: Colors.transparent,
+                                  child: Column(
+                                    children: [
+                                      // Align(
+                                      //   alignment: Alignment.topLeft,
+                                      //   child: Text(
+                                      //     Retrived_round_trip_dep_originiatacodestr,
+                                      //     style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+                                      // ),
+                                      Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Text(
+                                          Retrived_Rndtrp_Citynamestr,
+                                          style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+                                      ),
+
+                                      Container(
+                                        height: 50,
+                                        width: 220,
+                                        color: Colors.transparent,
+                                        child: Text('Terminal2:' + "   " + thirdJourney_seconddepartureterminalArray[0],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black),),
+                                      ),
+
+                                      Container(
+                                        alignment: FractionalOffset.centerLeft,
+
+                                        height: 135,
+                                        width: 200,
+                                        color: Colors.transparent,
+                                        child: Column(
+                                          children: [
+                                            SizedBox(
+                                              width: 0,
+                                            ),
+                                            Container(
+                                              alignment: FractionalOffset.centerLeft,
+
+                                              height: 70,
+                                              width: 130,
+                                              //margin: new EdgeInsets.symmetric(vertical: 5.0),
+                                              decoration: BoxDecoration(
+                                                  image: DecorationImage(image: NetworkImage(multi_thirdJourney_secondflight_logostr),
+                                                      fit: BoxFit.cover)
+                                              ),
+                                            ),
+                                            SizedBox(width: 0,),
+                                            Container(
+                                              height: 45,
+                                              width: 140,
+                                              color: Colors.transparent,
+                                              child:  Text(multi_thirdJourney_secondflight_airlinestr + "   -" + multi_thirdJourney_secondCareercode,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                              ),),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Text(
+                                          Retrived_round_trip_dep_Destinationiatacodestr,
+                                          style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+                                      ),
+                                      Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Text(
+                                          Retrived_Rndtrp_Destination_Citynamestr,
+                                          style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+                                      ),
+                                      Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Text('Terminal:' + "   " + thirdJourney_secondArrivalterminalArray[0],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black),),
+                                      ),
+                                    ],
+                                  ),
+
+
+
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+
+
+
+        //third flight
+        Container(
+          margin: const EdgeInsets.only(
+              left: 5.0, right: 5.0),
+          height: 455,
+          width: 320,
+          child: Column(
+            children: [
+
+              SizedBox(
+                height: 5,
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  secondJourney_secondflight_Departuretextstr,
+                  style: TextStyle(fontSize: 18,fontWeight: FontWeight.w800,color: Colors.black),),
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  flight_departurests,
+                  style: TextStyle(fontSize: 14,fontWeight: FontWeight.w600),),
+              ),
+              Container(
+                height: 400,
+                width: 320,
+                color: Colors.transparent,
+                child: Column(
+                  children: [
+                    Container(
+                      height: 65,
+                      width: 320,
+                      color: Colors.grey,
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Container(
+                              height: 50,
+                              width: 300,
+                              // child: Text(thirdJourneydeparturearray[2] + '---> ' + thirdJourneyarrivalarray[2],style: TextStyle(fontSize: 18,fontWeight: FontWeight.w800,color: Colors.black
+                              // )
+                              // )
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 2,),
+                    Container(
+                      height: 300,
+                      width: 320,
+                      color: Colors.black12,
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 300,
+                            width: 320,
+                            color: Colors.transparent,
+                            child: Row(
+                              children: [
+                                Container(
+                                  margin: const EdgeInsets.only(left: 10.0, right: 0.0),
+                                  height: 300,
+                                  width: 80,
+                                  color: Colors.transparent,
+                                  child: Column(
+                                    children: [
+                                      Text(thirdJourneydeparturearray[2],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                      ),),
+
+                                      SizedBox(height: 10,),
+                                      Text(thirdJourney_thirdflight_Departure_timeArray.first,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                      ),),
+
+                                      SizedBox(
+                                        height: 30,
+                                      ),
+                                      Text("Stops: ${thirdJourney_thirdflightstops.first}",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                      ),),
+
+                                      SizedBox(
+                                        height: 30,
+                                      ),
+
+                                      Text("Duration: ${thirdJourneythirdflightDurationArray.first}",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                      ),),
+                                      SizedBox(
+                                        height: 50,
+                                      ),
+                                      Text(thirdJourney_thirdflight_Arrival_timeArray.first,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                      ),),
+                                      Text(arrivalCode,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                      ),),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.only(left: 0.0, right: 0.0),
+                                  height: 350,
+                                  width: 30,
+                                  color: Colors.transparent,
+                                  child:Container(
+                                      width: 40,
+                                      child: CircleAvatar(
+                                        backgroundColor: Colors.transparent,
+                                        radius: 50.0,
+                                        child: Image.asset(
+                                            "images/flight-path-icon.png",
+                                            height: 300.0,
+                                            width: 300.0,
+                                            fit: BoxFit.fill
+                                        ),
+                                      )
+                                  ),
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.only(left: 0.0, right: 0.0),
+
+                                  height: 350,
+                                  width: 200,
+                                  color: Colors.transparent,
+                                  child: Column(
+                                    children: [
+                                      // Align(
+                                      //   alignment: Alignment.topLeft,
+                                      //   child: Text(
+                                      //     Retrived_round_trip_dep_originiatacodestr,
+                                      //     style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+                                      // ),
+                                      Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Text(
+                                          Retrived_Rndtrp_Citynamestr,
+                                          style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+                                      ),
+
+                                      Container(
+                                        height: 50,
+                                        width: 220,
+                                        color: Colors.transparent,
+                                        child: Text('Terminal2:' + "   " + thirdJourney_thirddepartureterminalArray[0],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black),),
+                                      ),
+
+                                      Container(
+                                        alignment: FractionalOffset.centerLeft,
+
+                                        height: 135,
+                                        width: 200,
+                                        color: Colors.transparent,
+                                        child: Column(
+                                          children: [
+                                            SizedBox(
+                                              width: 0,
+                                            ),
+                                            Container(
+                                              alignment: FractionalOffset.centerLeft,
+
+                                              height: 70,
+                                              width: 130,
+                                              //margin: new EdgeInsets.symmetric(vertical: 5.0),
+                                              decoration: BoxDecoration(
+                                                  image: DecorationImage(image: NetworkImage(multi_thirdJourney_thirdflight_logostr),
+                                                      fit: BoxFit.cover)
+                                              ),
+                                            ),
+                                            SizedBox(width: 0,),
+                                            Container(
+                                              height: 45,
+                                              width: 140,
+                                              color: Colors.transparent,
+                                              child:  Text(multi_thirdJourney_thirdflight_airlinestr + "   -" + multi_thirdJourney_thirdCareercode,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                              ),),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Text(
+                                          Retrived_round_trip_dep_Destinationiatacodestr,
+                                          style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+                                      ),
+                                      Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Text(
+                                          Retrived_Rndtrp_Destination_Citynamestr,
+                                          style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+                                      ),
+                                      Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Text('Terminal:' + "   " + thirdJourney_thirdArrivalterminalArray[0],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black),),
+                                      ),
+                                    ],
+                                  ),
+
+
+
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+
+
+
+
+
+                                ],
 
                                 Container(
                                   height: 60,

@@ -2306,7 +2306,6 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
     // 3 flights
     else if (widget.Received_departure_Airports.length == 3 && //if we are using 3 flights
         widget.Received_destination_Airports.length == 3) {
-      print('3 rd journey');
       var firstflight_Carrercodestr = Multi_third_Journey_firstcarrierCodeArray[index]
           .toString();
       List newLst_airport = AirportListArray.first.where((
@@ -2315,7 +2314,6 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
       for (var airlinenamearray in newLst_airport) {
         var firstflight_Airline_name = airlinenamearray['airlineName'];
         thirdJouney_firstflight_airlineArray.add(firstflight_Airline_name);
-        print(thirdJouney_firstflight_airlineArray);
         var firstflight_Airline_logo = airlinenamearray['airlineLogo'];
         thirdJouney_firstflight_airlinelogo.add(firstflight_Airline_logo);
       }
@@ -2340,7 +2338,6 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
 
     //second flight airline name and airline logo
     //if (widget.Received_departure_Airports[1] == depiataCode) {
-    print('3rd journey third flight...');
     var thirdflight_Carrercodestr = Multi_third_Journey_thirdcarrierCodeArray[index]
         .toString();
     List newLst_airport2 = AirportListArray.first.where((
@@ -2561,14 +2558,15 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                                                               children: [
                                                                 Text('Second Flight Details                           ',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
                                                                 ),),
+                                                                Text(ReturnJourney_DeptimeArray[index].toString() + '----------------------------------> ' + ReturnJourney_ArrivaltimeArray[index].toString() ,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                ),),
 
-
-                                                                if (thirdJourney_second_arrival_timeArray.first == '') ...[
-                                                                  Text(ReturnJourney_DeptimeArray[index].toString() + '----------------------------------> ' + ReturnJourney_ArrivaltimeArray.last.toString() ,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
-                                                                  ),),
-                                                                ] else ...[
-                                                                  Text(ReturnJourney_DeptimeArray[index].toString() + '----------------------------------> ' + thirdJourney_second_arrival_timeArray.last.toString() ,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
-                                                                  ),),                                                                     ],
+                                                                // if (thirdJourney_second_arrival_timeArray.first == '') ...[
+                                                                //   Text(ReturnJourney_DeptimeArray[index].toString() + '----------------------------------> ' + ReturnJourney_ArrivaltimeArray.last.toString() ,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                //   ),),
+                                                                // ] else ...[
+                                                                //   Text(ReturnJourney_DeptimeArray[index].toString() + '----------------------------------> ' + thirdJourney_second_arrival_timeArray.last.toString() ,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                //   ),),                                                                     ],
 
 
 
@@ -3243,6 +3241,7 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
 
      } else if (widget.Received_departure_Airports.length == 3 &&
     widget.Received_destination_Airports.length == 3) {
+       print('sending 3 flights data...');
 
        SharedPreferences prefs = await SharedPreferences.getInstance();
        print(widget.Received_departure_Airports.length);
@@ -3265,6 +3264,33 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
          ),
        );
 
+       prefs.setString('thirdjourney_firstflightAirlinekey', thirdJouney_firstflight_airlineArray[index]);
+       prefs.setString('thirdjourney_firstflightArilinelogokey', thirdJouney_firstflight_airlinelogo[index]);
+       prefs.setString('thirdJourney_secondflightairlinekey', thirdJouney_secondflight_airlineArray[index]);
+       prefs.setString('thirdJourney_secondflightlogokey', thirdJouney_secondflight_airlinelogo[index]);
+prefs.setString('thirdJourney_thirdflightairlinekey', thirdJouney_thirdflight_airlineArray[index]);
+       prefs.setString('thirdJourney_thirdflightlogokey', thirdJouney_thirdflight_airlinelogo[index]);
+       prefs.setString('thirdJourney_firstflight_carrierCodekey', Multi_third_Journey_firstcarrierCodeArray[index]);
+       prefs.setString('thirdJourney_secondflight_carrierCodekey', Multi_third_Journey_secondcarrierCodeArray[index]);
+       prefs.setString('thirdJourney_thirdflight_carrierCodekey', Multi_third_Journey_thirdcarrierCodeArray[index]);
+
+
+
+       // prefs.setString('thirdJourney_thirdflightairlinekey', thirdJouney_thirdflight_airlineArray[index]);
+       // prefs.setString('thirdJourney_thirdflightlogokey', thirdJouney_thirdflight_airlinelogo[index]);
+       // print('thirdJouney_thirdflight_airlinelogo....1');
+       // print(thirdJouney_firstflight_airlinelogo);
+       // print(thirdJouney_firstflight_airlineArray);
+       // print('thirdJouney_thirdflight_airlinelogo....2');
+       //
+       // print(thirdJouney_secondflight_airlinelogo);
+       // print(thirdJouney_secondflight_airlineArray);
+       // print('thirdJouney_thirdflight_airlinelogo....3');
+       //
+       // print(thirdJouney_thirdflight_airlinelogo);
+       // print(thirdJouney_thirdflight_airlineArray);
+       //
+       //
 
 
 
@@ -3275,9 +3301,6 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
        prefs.setString('numberOfBookableSeatskey', numberOfBookableSeatsArray[index].toString());
        //prefs.setString('carrierCodekey', OnwardJourney_carrierCodeArray[index]);
        prefs.setString('flight_optionkey', 'round-trip');
-       prefs.setString('thirdJourney_firstflight_carrierCodekey', Multi_third_Journey_firstcarrierCodeArray[index]);
-       prefs.setString('thirdJourney_secondflight_carrierCodekey', Multi_third_Journey_secondcarrierCodeArray[index]);
-       prefs.setString('thirdJourney_thirdflight_carrierCodekey', Multi_third_Journey_thirdcarrierCodeArray[index]);
 
 
        // prefs.setString('durationkey', durationArray[index]);
@@ -3299,12 +3322,6 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
        prefs.setString('Round_trip_fareRuleskey', fareRulesstr);
        // prefs.setString('airlinekey', secondJouney_firstflight_airlineArray[index]);
        // prefs.setString('logokey', secondJouney_firstflight_airlinelogo[index]);
-       prefs.setString('thirdJourney_firstflight__airlinekey', thirdJouney_firstflight_airlineArray[index]);
-       prefs.setString('thirdJourney_firstflightflight_logokey', thirdJouney_firstflight_airlinelogo[index]);
-       prefs.setString('thirdJourney_secondflight__airlinekey', thirdJouney_secondflight_airlineArray[index]);
-       prefs.setString('thirdJourney_secondflight_logokey', thirdJouney_secondflight_airlinelogo[index]);
-       prefs.setString('thirdJourney_thirdflight_airlinekey', thirdJouney_thirdflight_airlineArray[index]);
-       prefs.setString('thirdJourney_thirdflight_logokey', thirdJouney_thirdflight_airlinelogo[index]);
 
 
        //Return airline name and logo...
