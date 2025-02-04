@@ -169,7 +169,14 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
   var secondJourneydeparturearray = [];
   var secondJourneyarrivalarray = [];
   var thirdJourneydeparturearray = [];
+  //if 3 flights are operating
+  var thirdJourney_second_flight_departurearray = [];
+  var thirdJourney_third_flight_departurearray = [];
   var thirdJourneyarrivalarray = [];
+  var thirdJourney_second_flight_arrivalarray = [];
+  var thirdJourney_third_flight_arrivalarray = [];
+
+
   String secondJourney_firstdepartureterminal = '';
   String secondJourney_seconddepartureterminal = '';
   var secondJourney_firstdepartureterminalArray = [];
@@ -1524,16 +1531,13 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                 depiataCode = Dep['iataCode'];
                 print('depiataCode21111.......');
                 print(depiataCode);
-                thirdJourneydeparturearray.add(depiataCode);
-
+                thirdJourney_second_flight_departurearray.add(depiataCode);
                 var departuretime = Dep['at'];
                 return_departure_time =
                 (new DateFormat.Hm().format(DateTime.parse(departuretime)));
                 Datestr =
                 (new DateFormat.yMd().format(DateTime.parse(departuretime)));
-
                 thirdJourney_secondflight_Departure_timeArray.add(return_departure_time);
-
                 thirdJourney_seconddepartureterminal = Dep['terminal'] ?? "";
                 print('thirdJourney_seconddepartureterminal');
                 print(thirdJourney_seconddepartureterminal);
@@ -1724,8 +1728,8 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                 print(thirdJourney_secondflightstops);
                 arrivalCode = Arrival['iataCode'];
                 print('depiataCode21111.......');
-                print(depiataCode);
-                thirdJourneydeparturearray.add(arrivalCode);
+                print(arrivalCode);
+                thirdJourney_second_flight_arrivalarray.add(arrivalCode);
 
                 var arrivaltime = Arrival['at'];
                 arrivaltime =
@@ -2902,7 +2906,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                           Container(
                               height: 50,
                               width: 300,
-                              child: Text(thirdJourneydeparturearray[1] + '---> ' + thirdJourneyarrivalarray.first,style: TextStyle(fontSize: 18,fontWeight: FontWeight.w800,color: Colors.black
+                              child: Text(thirdJourney_second_flight_departurearray.first + '---> ' + thirdJourney_second_flight_arrivalarray.first,style: TextStyle(fontSize: 18,fontWeight: FontWeight.w800,color: Colors.black
                               )
                               )
                           ),
@@ -2929,12 +2933,12 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                   color: Colors.transparent,
                                   child: Column(
                                     children: [
-                                      Text(thirdJourneydeparturearray[1],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                      Text(thirdJourney_second_flight_departurearray.first,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
                                       ),),
 
-                                      // SizedBox(height: 10,),
-                                      // Text(thirdJourney_secondflight_Departure_timeArray.first,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
-                                      // ),),
+                                      SizedBox(height: 10,),
+                                      Text(thirdJourney_secondflight_Departure_timeArray.first,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                      ),),
 
                                       SizedBox(
                                         height: 30,
@@ -2953,7 +2957,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                       ),
                                       Text(thirdJourney_secondflight_Arrival_timeArray.first,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
                                       ),),
-                                      Text(arrivalCode,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
+                                      Text(thirdJourney_second_flight_arrivalarray.first,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
                                       ),),
                                     ],
                                   ),
@@ -3002,7 +3006,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                         height: 50,
                                         width: 220,
                                         color: Colors.transparent,
-                                        child: Text('Terminal2:' + "   " + thirdJourney_seconddepartureterminalArray[0],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black),),
+                                        child: Text('Terminal:' + "   " + thirdJourney_seconddepartureterminalArray[0],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black),),
                                       ),
 
                                       Container(
@@ -3117,9 +3121,9 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                           Container(
                               height: 50,
                               width: 300,
-                              // child: Text(thirdJourneydeparturearray[2] + '---> ' + thirdJourneyarrivalarray[2],style: TextStyle(fontSize: 18,fontWeight: FontWeight.w800,color: Colors.black
-                              // )
-                              // )
+                              child: Text(thirdJourneydeparturearray[1] + '---> ' + thirdJourneyarrivalarray[1],style: TextStyle(fontSize: 18,fontWeight: FontWeight.w800,color: Colors.black
+                              )
+                              )
                           ),
                         ],
                       ),
@@ -3217,7 +3221,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                         height: 50,
                                         width: 220,
                                         color: Colors.transparent,
-                                        child: Text('Terminal2:' + "   " + thirdJourney_thirddepartureterminalArray[0],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black),),
+                                        child: Text('Terminal:' + "   " + thirdJourney_thirddepartureterminalArray[0],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black),),
                                       ),
 
                                       Container(

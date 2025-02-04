@@ -2558,15 +2558,15 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                                                               children: [
                                                                 Text('Second Flight Details                           ',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
                                                                 ),),
-                                                                Text(ReturnJourney_DeptimeArray[index].toString() + '----------------------------------> ' + ReturnJourney_ArrivaltimeArray[index].toString() ,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
-                                                                ),),
+                                                                // Text(ReturnJourney_DeptimeArray[index].toString() + '----------------------------------> ' + ReturnJourney_ArrivaltimeArray[index].toString() ,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                // ),),
 
-                                                                // if (thirdJourney_second_arrival_timeArray.first == '') ...[
-                                                                //   Text(ReturnJourney_DeptimeArray[index].toString() + '----------------------------------> ' + ReturnJourney_ArrivaltimeArray.last.toString() ,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
-                                                                //   ),),
-                                                                // ] else ...[
-                                                                //   Text(ReturnJourney_DeptimeArray[index].toString() + '----------------------------------> ' + thirdJourney_second_arrival_timeArray.last.toString() ,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
-                                                                //   ),),                                                                     ],
+                                                                if (ReturnJourney_ArrivaltimeArray.last.toString() != "") ...[
+                                                                  Text(ReturnJourney_DeptimeArray[index].toString() + '----------------------------------> ' + ReturnJourney_ArrivaltimeArray.last.toString() ,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                  ),),
+                                                                ] else ...[
+                                                                  Text(ReturnJourney_DeptimeArray[index].toString() + '----------------------------------> ' + thirdJourney_second_arrival_timeArray.last.toString() ,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                                                  ),),                                                                     ],
 
 
 
@@ -2825,7 +2825,8 @@ class _userDashboardState extends State<Flight_Multicity_Trip> {
                                                                   ),),
                                                                 ] else ...[
                                                                   Text(ReturnJourney_DeptimeArray[index].toString() + '----------------------------------> ' + thirdJourney_second_arrival_timeArray.last.toString() ,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
-                                                                  ),),                                                                  ],
+                                                                  ),),
+                                                                ],
 
 
                                                                 Text(ReturnJourney_depiataCodelist[index].toString() + '           '+ segmentValuesAraycnt[index] + ' ' + 'Segments' +'             '+  ReturnJourney_arrivaliataCodelist[index].toString(),style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
