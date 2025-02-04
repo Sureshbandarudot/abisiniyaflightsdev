@@ -1538,6 +1538,8 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                 Datestr =
                 (new DateFormat.yMd().format(DateTime.parse(departuretime)));
                 thirdJourney_secondflight_Departure_timeArray.add(return_departure_time);
+                print('thirdJourney_secondflight_Departure_timeArray........');
+                print(thirdJourney_secondflight_Departure_timeArray);
                 thirdJourney_seconddepartureterminal = Dep['terminal'] ?? "";
                 print('thirdJourney_seconddepartureterminal');
                 print(thirdJourney_seconddepartureterminal);
@@ -1738,6 +1740,8 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                 // (new DateFormat.yMd().format(DateTime.parse(arrivaltime)));
 
                 thirdJourney_secondflight_Arrival_timeArray.add(arrivaltime);
+                print('thirdJourney_secondflight_Arrival_timeArray........');
+                print(thirdJourney_secondflight_Arrival_timeArray);
 
                 thirdJourney_secondArrivalterminal = Arrival['terminal'] ?? "";
                 print('thirdJourney_secondArrivalterminal');
@@ -1968,16 +1972,22 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                             Cabin_Baggagestr = Cabin_weight.toString() + ' ' + 'KG';
 
                           }
-                          if(widget.Received_destination_Airports.length == 1){
+
+                          if (widget.Received_departure_Airports.length == 1 && widget.Received_destination_Airports.length == 1) {
                             Departuretextstr = 'Departure To ' + ' '+  widget.Received_destination_Airports[0];
-                          } else if (widget.Received_destination_Airports.length == 2) {
+
+                          } else if (widget.Received_departure_Airports.length == 2 && widget.Received_destination_Airports.length == 2) {
+                            Departuretextstr = 'Departure To ' + ' '+  widget.Received_destination_Airports[0];
                             secondJourney_secondflight_Departuretextstr = 'Departure To ' + ' '+  widget.Received_destination_Airports[1];
 
-                          } else if (widget.Received_destination_Airports.length == 3) {
+                          } else if (widget.Received_departure_Airports.length == 3 && widget.Received_destination_Airports.length == 3) {
+                            Departuretextstr = 'Departure To ' + ' '+  widget.Received_destination_Airports[0];
+                            secondJourney_secondflight_Departuretextstr = 'Departure To ' + ' '+  widget.Received_destination_Airports[1];
                             thirdJourney_thirdflight_departurests = 'Departure To ' + ' '+  widget.Received_destination_Airports[2];
 
                           }
-                          Departuretextstr = 'Departure To ' + ' '+  widget.Received_destination_Airports[0];
+
+
 
                           flight_departurests = 'Price per passenger, taxes and fees included';
 
@@ -2955,7 +2965,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                       SizedBox(
                                         height: 50,
                                       ),
-                                      Text(thirdJourney_secondflight_Arrival_timeArray.first,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                      Text(thirdJourney_secondflight_Arrival_timeArray.last,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
                                       ),),
                                       Text(thirdJourney_second_flight_arrivalarray.first,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.black
                                       ),),
@@ -3094,7 +3104,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
               Align(
                 alignment: Alignment.topLeft,
                 child: Text(
-                  secondJourney_secondflight_Departuretextstr,
+                  thirdJourney_thirdflight_departurests,
                   style: TextStyle(fontSize: 18,fontWeight: FontWeight.w800,color: Colors.black),),
               ),
               Align(
@@ -3152,7 +3162,7 @@ class _userDashboardState extends State<Multi_city_Flight_Details> {
                                       ),),
 
                                       SizedBox(height: 10,),
-                                      Text(thirdJourney_thirdflight_Departure_timeArray.first,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
+                                      Text(thirdJourney_thirdflight_Departure_timeArray.last,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.black
                                       ),),
 
                                       SizedBox(
