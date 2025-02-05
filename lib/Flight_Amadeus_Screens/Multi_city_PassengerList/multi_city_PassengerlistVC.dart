@@ -7,6 +7,7 @@ import 'dart:convert';
 
 import '../../../Auth/Register.dart';
 import '../../../Singleton/SingletonAbisiniya.dart';
+import 'multi_city_Passengenrlist_DetailsPageVC.dart';
 
 
 
@@ -2837,16 +2838,16 @@ class _SOFState extends State<Multi_city_passengerlistVC> {
           prefs.setString('local_Flight_tokenkey', Abiniyatokenvalue);
 
 
-          // Navigator.of(context, rootNavigator: true).pop();
-          // Navigator.of(context)
-          //     .push(new MaterialPageRoute(builder: (context) => Rnd_ByrecordLocator_Passenger_DetailsVC()));
-          // setState((){
-          //   //Navigator.pop(context);
-          // });
-          //loginshowAlertDialog(context);
-          //LoginshowAlertDialog(context);
+          Navigator.of(context, rootNavigator: true).pop();
+          Navigator.of(context)
+              .push(new MaterialPageRoute(builder: (context) => Multi_city_ByrecordLocator_Passenger_DetailsVC()));
+          setState((){
+            //Navigator.pop(context);
+          });
+          // loginshowAlertDialog(context);
+          // LoginshowAlertDialog(context);
           // _postData();
-          //showAlertdialog(context);
+          // showAlertdialog(context);
         });
         //_postData();
         //showAlertDialog(context);
