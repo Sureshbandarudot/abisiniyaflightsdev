@@ -18,6 +18,7 @@ import 'package:tourstravels/My_Apartments/ViewApartmentVC.dart';
 import 'package:tourstravels/Singleton/SingletonAbisiniya.dart';
 
 import '../../Multi_city_PassengerList/multi_city_PassengerlistVC.dart';
+import 'Multi_city_seatMapVC.dart';
 class Multi_city_Add_OnsVC extends StatefulWidget {
   const Multi_city_Add_OnsVC({super.key});
 
@@ -2409,11 +2410,11 @@ class _userDashboardState extends State<Multi_city_Add_OnsVC> {
                                                         print('navigate to seatmap...');
                                                         SharedPreferences prefs = await SharedPreferences.getInstance();
                                                         prefs.setString('seatmapkey', 'seatmap');
-                                                        // Navigator.push(
-                                                        //   context,
-                                                        //   MaterialPageRoute(
-                                                        //       builder: (context) => Round_Trip_SeatMapVC()),
-                                                        // );
+                                                        Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (context) => Multi_city_Trip_SeatMapVC()),
+                                                        );
                                                       } else if(Baggage_Addstr != '' && seatmapstatus != '') {
                                                         print('selected seat and  baggage....');
                                                         print(totalpricevalues);
