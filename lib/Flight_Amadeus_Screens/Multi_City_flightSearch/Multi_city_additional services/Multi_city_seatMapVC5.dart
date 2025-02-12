@@ -22,16 +22,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tourstravels/Singleton/SingletonAbisiniya.dart';
 
 import '../../Multi_city_PassengerList/multi_city_PassengerlistVC.dart';
-import 'Multi_city_seatMapVC2.dart';
-
+import 'Multi_city_seatMapVC4.dart';
+import 'Multi_city_seatMapVC6.dart';
 
 
 void main() {
-  runApp(const Multi_city_Trip_SeatMapVC());
+  runApp(const Multi_city_journey_seatmapVC5());
 }
 
-class Multi_city_Trip_SeatMapVC extends StatelessWidget {
-  const Multi_city_Trip_SeatMapVC({super.key});
+class Multi_city_journey_seatmapVC5 extends StatelessWidget {
+  const Multi_city_journey_seatmapVC5({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -55,10 +55,6 @@ class BusLayout extends StatefulWidget {
 }
 
 class _BusLayoutState extends State<BusLayout> {
-  List<String> seatMaps = ['SeatMap 1', 'SeatMap 2', 'SeatMap 3', 'SeatMap 4'];
-
-  int currentIndex = 0;
-
   // Set<SeatNumber> selectedSeats = {};
   bool isLoading = false;
 
@@ -233,6 +229,11 @@ class _BusLayoutState extends State<BusLayout> {
   var travelerIdArray = [];
   String travelerTypestr = '';
   var travelerTypeArray = [];
+  //Seat variables
+  String firstSeat = '';
+  String secondSeat = '';
+  String thirdSeat = '';
+  String fourthSeat = '';
 
 
 
@@ -240,8 +241,17 @@ class _BusLayoutState extends State<BusLayout> {
   _retrieveValues() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
+    //Retrived seats from first seatmap
+    firstSeat = prefs.getString('selected_firstseatkey') ?? '';
+    print('third firstseatnumber..');
+    secondSeat = prefs.getString('selected_secondseatkey') ?? '';
+    thirdSeat = prefs.getString('selected_thirdseatkey') ?? '';
+    fourthSeat = prefs.getString('selected_fourthseatkey') ?? '';
+    print(firstSeat);
+    print(secondSeat);
+    print(thirdSeat);
+    print(fourthSeat);
     CurrencyCodestr = prefs.getString('currency_code_dropdownvaluekey') ?? '';
-
     flight_ID = prefs.getString('flightid_key') ?? '';
     //prefs.setInt('Passengers_cntkey', Passengers_cnt) ?? 0;
     Passengers_cnt = prefs.getInt('Passengers_cntkey') ?? 0;
@@ -363,10 +373,25 @@ class _BusLayoutState extends State<BusLayout> {
       }
     });
 
+    // seatmap_convert_travelerPricingsArray[0]['fareDetailsBySegment']![0]["additionalServices"] = {
+    //   "chargeableSeatNumber": selectedseat
+    // };
     seatmap_convert_travelerPricingsArray[0]['fareDetailsBySegment']![0]["additionalServices"] = {
+      "chargeableSeatNumber": firstSeat
+    };
+    seatmap_convert_travelerPricingsArray[0]['fareDetailsBySegment']![1]["additionalServices"] = {
+      "chargeableSeatNumber": secondSeat
+    };
+    seatmap_convert_travelerPricingsArray[0]['fareDetailsBySegment']![2]["additionalServices"] = {
+      "chargeableSeatNumber": thirdSeat
+    };
+    seatmap_convert_travelerPricingsArray[0]['fareDetailsBySegment']![3]["additionalServices"] = {
+      "chargeableSeatNumber": fourthSeat
+    };
+    seatmap_convert_travelerPricingsArray[0]['fareDetailsBySegment']![4]["additionalServices"] = {
       "chargeableSeatNumber": selectedseat
     };
-    print('round trip convert_travelerPricingsArray....');
+    print('third flight round trip convert_travelerPricingsArray....');
     print(seatmap_convert_travelerPricingsArray);
 
     prefs.setString('travelerPricingskey', travelerPricings);
@@ -707,9 +732,7 @@ class _BusLayoutState extends State<BusLayout> {
         String type = decksData['type'];
         print('type....');
         print(type);
-        currentIndex = (currentIndex + 1) % seatMaps.length;  // Move to the next seatmap, loop back to the start if at the end
-
-        //if (seatID == '1'){
+        if (seatID == '5'){
           var decksArray = decksData['decks'];
           // print('decksArray array data...');
           // print(decksArray);
@@ -929,7 +952,7 @@ class _BusLayoutState extends State<BusLayout> {
               }
             }
           }
-        //}
+        }
       }
       print('seatLabelList....');
       print(seatLabelList);
@@ -1281,7 +1304,7 @@ class _BusLayoutState extends State<BusLayout> {
     // print('seatid cnt');
     // print(seatID_cnt.length + 1);
 
-    if(seatID_cnt.length == 1) {
+    if(seatID_cnt.length == 5) {
       continuebtn_txt = 'Continue';
 
 
@@ -1326,14 +1349,14 @@ class _BusLayoutState extends State<BusLayout> {
             // SharedPreferences prefs = await SharedPreferences.getInstance();
             // prefs.setString('logoutkey', ('LogoutDashboard'));
             // prefs.setString('Property_type', ('Apartment'));
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //       builder: (context) => Round_Trip_Add_OnsVC()),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Multi_city_journey_seatmapVC4()),
+            );
           },
         ),
-        title: Text('Multi city 1st  Seat Selection',textAlign: TextAlign.center,
+        title: Text('multi city 5th flight Seat Selection',textAlign: TextAlign.center,
             style: TextStyle(color:Colors.white,fontFamily: 'Baloo', fontWeight: FontWeight.w900,fontSize: 20)),
       ),
 
@@ -1519,7 +1542,7 @@ class _BusLayoutState extends State<BusLayout> {
 
                                                           _postData_seatmap_Price();
                                                           SharedPreferences prefs = await SharedPreferences.getInstance();
-                                                          prefs.setString('selected_firstseatkey', selectedseat);
+                                                          prefs.setString('selected_fifthseatkey', selectedseat);
 
                                                           // if(seatID_cnt.length == 1) {
                                                           //   _postData_seatmap_Price();
@@ -1829,10 +1852,9 @@ class _BusLayoutState extends State<BusLayout> {
                         //       builder: (context) => ConnectedFlight_firstSegment()),
                         // );
 
-                        prefs.setString('selected_firstseatkey', (selectedseat));
-                        print('selected seat value1...');
+                        prefs.setString('selected_fifthseatkey', (selectedseat));
+                        print('connected selected seat value1...');
                         print(selectedseat);
-
                         if(selectedseat == ''){
 
                           final snackBar = SnackBar(
@@ -1842,50 +1864,32 @@ class _BusLayoutState extends State<BusLayout> {
                         } else {
                           print('seatID_cnt length.');
                           print(seatID_cnt.length);
-                          if(seatID_cnt.length == 1) {
+                          if(seatID_cnt.length == 5) {
                             //continuebtn_txt = 'Continue';
 
-                            prefs.setString('selected_firstseatkey', (selectedseat));
-                            print('selected seat value0...');
-                            print(selectedseat);
-
-                            Navigator.push (
+                            Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => Multi_city_passengerlistVC()),
                             );
 
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //       builder: (context) => Backward_journey_seatmap()),
-                            // );
-
                           } else {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //       builder: (context) => Backward_journey_seatmap()),
-                            // );
-                            continuebtn_txt = 'Next';
+                            //continuebtn_txt = 'Next';
 
-                            prefs.setString('selected_firstseatkey', (selectedseat));
+                            prefs.setString('selected_fifthseatkey', (selectedseat));
                             print('selected seat value0...');
                             print(selectedseat);
 
                             Navigator.push (
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Multi_city_journey_seatmapVC2()),
+                                  builder: (context) => Multi_city_journey_seatmapVC6()),
                             );
-
+                            //Rnd_trp_fourth_flight_journey_seatmap
                           }
                         }
-
                         prefs.setString('totalpriceSignvalueskey', (totalpriceSignvalues));
                         prefs.setString('pricekey', (totalpricevalues));
-
-
                         String SegmentData = jsonEncode(Convert_segmentArray);
                         prefs.setString('segmentlistkey', SegmentData);
                         prefs.setString('flight_offer_Array_key', (flight_offer_Array.toString()));

@@ -23,15 +23,15 @@ import 'package:tourstravels/Singleton/SingletonAbisiniya.dart';
 
 import '../../Multi_city_PassengerList/multi_city_PassengerlistVC.dart';
 import 'Multi_city_seatMapVC2.dart';
-
+import 'Multi_city_seatMapVC4.dart';
 
 
 void main() {
-  runApp(const Multi_city_Trip_SeatMapVC());
+  runApp(const Multi_city_journey_seatmapVC3());
 }
 
-class Multi_city_Trip_SeatMapVC extends StatelessWidget {
-  const Multi_city_Trip_SeatMapVC({super.key});
+class Multi_city_journey_seatmapVC3 extends StatelessWidget {
+  const Multi_city_journey_seatmapVC3({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -55,10 +55,6 @@ class BusLayout extends StatefulWidget {
 }
 
 class _BusLayoutState extends State<BusLayout> {
-  List<String> seatMaps = ['SeatMap 1', 'SeatMap 2', 'SeatMap 3', 'SeatMap 4'];
-
-  int currentIndex = 0;
-
   // Set<SeatNumber> selectedSeats = {};
   bool isLoading = false;
 
@@ -233,12 +229,24 @@ class _BusLayoutState extends State<BusLayout> {
   var travelerIdArray = [];
   String travelerTypestr = '';
   var travelerTypeArray = [];
+  //Seat variables
+  String firstSeat = '';
+  String secondSeat = '';
 
 
 
   late final  segmentDataArray;
   _retrieveValues() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    //Retrived seats from first seatmap
+    firstSeat = prefs.getString('selected_firstseatkey') ?? '';
+    print('third firstseatnumber..');
+    secondSeat = prefs.getString('selected_secondseatkey') ?? '';
+    print(firstSeat);
+    print(secondSeat);
+
+
 
     CurrencyCodestr = prefs.getString('currency_code_dropdownvaluekey') ?? '';
 
@@ -363,10 +371,19 @@ class _BusLayoutState extends State<BusLayout> {
       }
     });
 
+    // seatmap_convert_travelerPricingsArray[0]['fareDetailsBySegment']![0]["additionalServices"] = {
+    //   "chargeableSeatNumber": selectedseat
+    // };
     seatmap_convert_travelerPricingsArray[0]['fareDetailsBySegment']![0]["additionalServices"] = {
+      "chargeableSeatNumber": firstSeat
+    };
+    seatmap_convert_travelerPricingsArray[0]['fareDetailsBySegment']![1]["additionalServices"] = {
+      "chargeableSeatNumber": secondSeat
+    };
+    seatmap_convert_travelerPricingsArray[0]['fareDetailsBySegment']![2]["additionalServices"] = {
       "chargeableSeatNumber": selectedseat
     };
-    print('round trip convert_travelerPricingsArray....');
+    print('third flight round trip convert_travelerPricingsArray....');
     print(seatmap_convert_travelerPricingsArray);
 
     prefs.setString('travelerPricingskey', travelerPricings);
@@ -707,9 +724,7 @@ class _BusLayoutState extends State<BusLayout> {
         String type = decksData['type'];
         print('type....');
         print(type);
-        currentIndex = (currentIndex + 1) % seatMaps.length;  // Move to the next seatmap, loop back to the start if at the end
-
-        //if (seatID == '1'){
+        if (seatID == '3'){
           var decksArray = decksData['decks'];
           // print('decksArray array data...');
           // print(decksArray);
@@ -929,7 +944,7 @@ class _BusLayoutState extends State<BusLayout> {
               }
             }
           }
-        //}
+        }
       }
       print('seatLabelList....');
       print(seatLabelList);
@@ -1281,7 +1296,7 @@ class _BusLayoutState extends State<BusLayout> {
     // print('seatid cnt');
     // print(seatID_cnt.length + 1);
 
-    if(seatID_cnt.length == 1) {
+    if(seatID_cnt.length == 3) {
       continuebtn_txt = 'Continue';
 
 
@@ -1326,14 +1341,14 @@ class _BusLayoutState extends State<BusLayout> {
             // SharedPreferences prefs = await SharedPreferences.getInstance();
             // prefs.setString('logoutkey', ('LogoutDashboard'));
             // prefs.setString('Property_type', ('Apartment'));
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //       builder: (context) => Round_Trip_Add_OnsVC()),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Multi_city_journey_seatmapVC2()),
+            );
           },
         ),
-        title: Text('Multi city 1st  Seat Selection',textAlign: TextAlign.center,
+        title: Text('Multi city 3rd flight Seat Selection',textAlign: TextAlign.center,
             style: TextStyle(color:Colors.white,fontFamily: 'Baloo', fontWeight: FontWeight.w900,fontSize: 20)),
       ),
 
@@ -1519,7 +1534,7 @@ class _BusLayoutState extends State<BusLayout> {
 
                                                           _postData_seatmap_Price();
                                                           SharedPreferences prefs = await SharedPreferences.getInstance();
-                                                          prefs.setString('selected_firstseatkey', selectedseat);
+                                                          prefs.setString('selected_thirdseatkey', selectedseat);
 
                                                           // if(seatID_cnt.length == 1) {
                                                           //   _postData_seatmap_Price();
@@ -1829,10 +1844,9 @@ class _BusLayoutState extends State<BusLayout> {
                         //       builder: (context) => ConnectedFlight_firstSegment()),
                         // );
 
-                        prefs.setString('selected_firstseatkey', (selectedseat));
-                        print('selected seat value1...');
+                        prefs.setString('selected_thirdseatkey', (selectedseat));
+                        print('connected selected seat value1...');
                         print(selectedseat);
-
                         if(selectedseat == ''){
 
                           final snackBar = SnackBar(
@@ -1842,43 +1856,29 @@ class _BusLayoutState extends State<BusLayout> {
                         } else {
                           print('seatID_cnt length.');
                           print(seatID_cnt.length);
-                          if(seatID_cnt.length == 1) {
+                          if(seatID_cnt.length == 3) {
                             //continuebtn_txt = 'Continue';
 
-                            prefs.setString('selected_firstseatkey', (selectedseat));
-                            print('selected seat value0...');
-                            print(selectedseat);
-
-                            Navigator.push (
+                            Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => Multi_city_passengerlistVC()),
                             );
 
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //       builder: (context) => Backward_journey_seatmap()),
-                            // );
-
                           } else {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //       builder: (context) => Backward_journey_seatmap()),
-                            // );
-                            continuebtn_txt = 'Next';
+                            //continuebtn_txt = 'Next';
 
-                            prefs.setString('selected_firstseatkey', (selectedseat));
+                            prefs.setString('selected_thirdseatkey', (selectedseat));
                             print('selected seat value0...');
                             print(selectedseat);
 
                             Navigator.push (
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Multi_city_journey_seatmapVC2()),
+                                  builder: (context) => Multi_city_journey_seatmapVC4()),
                             );
 
+                            //Rnd_trp_fourth_flight_journey_seatmap
                           }
                         }
 
